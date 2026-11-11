@@ -1,40 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomText extends StatelessWidget {
-  const CustomText(
-    this.text, {
+  const CustomText({
     super.key,
-    this.style,
+    required this.text,
     this.color,
     this.fontSize,
     this.fontWeight,
-    this.maxLines,
     this.textAlign,
-    this.overflow,
+    this.maxLines,
+    this.padding,
   });
-
   final String text;
-  final TextStyle? style;
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
-  final int? maxLines;
   final TextAlign? textAlign;
-  final TextOverflow? overflow;
+  final int? maxLines;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
-    final base = style ?? DefaultTextStyle.of(context).style;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final responsiveFontSize =
+        fontSize ??
+        (screenWidth > 600.w
+            ? 16.sp
+            : screenWidth > 400.w
+            ? 14.sp
+            : 12.sp);
 
-    return Text(
-      text,
-      maxLines: maxLines,
-      textAlign: textAlign,
-      overflow: overflow ?? (maxLines != null ? TextOverflow.ellipsis : null),
-      style: base.copyWith(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontFamily: 'Inter',
+          color: Colors.black ?? Color(0xff777E96),
+          fontSize: responsiveFontSize,
+          fontWeight: fontWeight,
+        ),
+        overflow: TextOverflow.ellipsis,
+        maxLines: maxLines ?? 3,
+        textAlign: textAlign,
       ),
     );
   }
