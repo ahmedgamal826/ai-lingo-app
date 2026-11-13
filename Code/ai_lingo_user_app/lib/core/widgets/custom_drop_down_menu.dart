@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_dimensions.dart';
 
-/// Reusable single-selection dropdown. Generic <T> so it works with
+/// Reusable single-selection dropdown. Generic `T` so it works with
 /// String, enums, or any model.
 class CustomDropDownMenu<T> extends StatelessWidget {
   const CustomDropDownMenu({
@@ -49,7 +49,8 @@ class CustomDropDownMenu<T> extends StatelessWidget {
           const SizedBox(height: AppDimensions.spaceSm),
         ],
         DropdownButtonFormField<T>(
-          value: value,
+          key: ValueKey(value),
+          initialValue: value,
           isExpanded: true,
           validator: validator,
           dropdownColor: AppColors.white,
