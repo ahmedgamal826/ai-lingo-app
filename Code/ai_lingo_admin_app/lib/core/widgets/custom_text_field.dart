@@ -1,60 +1,65 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_dimensions.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
-    this.controller,
-    this.hintText,
-    this.label,
-    this.prefixIcon,
-    this.suffixIcon,
+    required this.controller,
+    required this.label,
+    this.hint,
+    this.icon,
     this.obscureText = false,
     this.keyboardType,
+    this.textInputAction,
     this.validator,
-    this.readOnly = false,
-    this.onChanged,
-    this.onTap,
-    this.maxLines = 1,
-    this.enabled = true,
+    this.onSubmitted,
+    this.autofillHints,
   });
 
-  final TextEditingController? controller;
-  final String? hintText;
-  final String? label;
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
+  final TextEditingController controller;
+  final String label;
+  final String? hint;
+  final IconData? icon;
   final bool obscureText;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
-  final bool readOnly;
-  final ValueChanged<String>? onChanged;
-  final VoidCallback? onTap;
-  final int maxLines;
-  final bool enabled;
+  final VoidCallback? onSubmitted;
+  final Iterable<String>? autofillHints;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextField();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  late bool _obscure = widget.obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      validator: validator,
-      readOnly: readOnly,
-      enabled: enabled,
-      maxLines: maxLines,
-      onTap: onTap,
-      onChanged: onChanged,
+      controller: widget.controller,
+      obscureText: _obscure,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      validator: widget.validator,
+      autofillHints: widget.autofillHints,
+      onFieldSubmitted:
+          widget.onSubmitted == null ? null : (_) => widget.onSubmitted!(),
       decoration: InputDecoration(
-        hintText: hintText,
-        labelText: label,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.paddingMd,
-          vertical: AppDimensions.paddingMd,
-        ),
+        labelText: widget.label,
+        hintText: widget.hint,
+        prefixIcon: widget.icon == null ? null : Icon(widget.icon),
+        suffixIcon: widget.obscureText
+            ? IconButton(
+                tooltip: _obscure ? 'Show password' : 'Hide password',
+                icon: Icon(
+                  _obscure
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                ),
+                onPressed: () => setState(() => _obscure = !_obscure),
+              )
+            : null,
       ),
     );
   }
