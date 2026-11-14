@@ -45,4 +45,14 @@ class AppStrings {
   static const String youKeepClimbing = 'You · Keep climbing!';
   static const String ptsSuffix = 'pts';
   static const String quizSuffix = 'quiz';
+
+  // Practice / Scenarios
+  static const String practiceTitle = 'Practice';
+  static const String practiceSubtitle = 'YOUR SAFE SPACE TO SPEAK';
+  static const String tabScenarios = 'Scenarios';
+  static const String tabWeeklyTest = 'Weekly Test';
+  static const String pickNextConversation = 'Pick your next conversation';
+  static const String levelBadgeB1 = 'B1 · Intermediate';
+  static const String scenariosFooter =
+      'No pressure. Just progress, one reply at a time.';
 }

@@ -24,6 +24,10 @@ class AppAssets {
   static const String briefcaseBusiness = '$iconsPath/briefcase-business.svg';
   static const String bookmark = '$iconsPath/bookmark.svg';
   static const String volume2 = '$iconsPath/volume-2.svg';
+  static const String plane = '$iconsPath/plane.svg';
+  static const String shoppingBag = '$iconsPath/shopping-bag.svg';
+  static const String coffee = '$iconsPath/coffee.svg';
+  static const String usersRoundIcon = '$iconsPath/users-round.svg';
 
   // Bottom navigation
   static const String house = '$iconsPath/house.svg';

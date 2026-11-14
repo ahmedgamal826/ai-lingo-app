@@ -11,6 +11,7 @@ import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../viewmodels/home_cubit.dart';
 import '../viewmodels/home_state.dart';
 import '../../leaderboard/views/leaderboard_view.dart';
+import '../../scenarios/views/scenarios_view.dart';
 import '../widgets/daily_momentum_card.dart';
 import '../widgets/home_scale.dart';
 import '../widgets/home_section_header.dart';
@@ -141,7 +142,17 @@ class _HomeViewBody extends StatelessWidget {
           bottomNavigationBar: CustomBottomNavBar(
             currentIndex: state.selectedNavIndex,
             items: HomeView._navItems,
-            onTap: context.read<HomeCubit>().selectTab,
+            onTap: (index) {
+              if (index == 1) {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ScenariosView(),
+                  ),
+                );
+                return;
+              }
+              context.read<HomeCubit>().selectTab(index);
+            },
           ),
         );
       },

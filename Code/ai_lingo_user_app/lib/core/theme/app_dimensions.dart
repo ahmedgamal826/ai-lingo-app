@@ -49,6 +49,9 @@ class AppDimensions {
   static const double radiusXxl = 20;
   static const double radiusButton = 14;
   static const double cardPaddingSm = 13;
+  static const double scenarioCardRadius = 18;
+  static const double scenarioCardPadding = 14;
+  static const double scenarioIconTile = 40;
 
   // Icon sizes
   static const double iconXs = 13;

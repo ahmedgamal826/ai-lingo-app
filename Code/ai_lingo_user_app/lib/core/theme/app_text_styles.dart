@@ -235,4 +235,35 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.primary,
   );
+
+  static TextStyle get practiceAppBarTitle => const TextStyle(
+    fontFamily: fontFamily,
+    fontSize: AppFontSizes.font22,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textPrimary,
+  );
+
+  static TextStyle get levelFilterLabel => const TextStyle(
+    fontFamily: fontFamily,
+    fontSize: AppFontSizes.font13,
+    fontWeight: FontWeight.w400,
+    height: _lineHeight,
+    color: AppColors.textSecondary,
+  );
+
+  static TextStyle get scenarioCardTitle => const TextStyle(
+    fontFamily: fontFamily,
+    fontSize: AppFontSizes.font13,
+    fontWeight: FontWeight.w700,
+    height: _lineHeight,
+    color: AppColors.textPrimary,
+  );
+
+  static TextStyle get scenarioCardMeta => const TextStyle(
+    fontFamily: fontFamily,
+    fontSize: AppFontSizes.font10,
+    fontWeight: FontWeight.w400,
+    height: _lineHeight,
+    color: AppColors.primary,
+  );
 }
