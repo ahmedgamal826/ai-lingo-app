@@ -25,10 +25,7 @@ class CustomErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.error_outline,
-              size: AppDimensions.iconLg * 1.5,
-            ),
+            const Icon(Icons.error_outline, size: AppDimensions.iconLg * 1.5),
             const SizedBox(height: AppDimensions.spaceMd),
             CustomText(
               message ?? AppStrings.somethingWentWrong,

@@ -25,10 +25,7 @@ class CustomLoading extends StatelessWidget {
           SizedBox(
             width: size,
             height: size,
-            child: CircularProgressIndicator(
-              strokeWidth: 2.5,
-              color: color,
-            ),
+            child: CircularProgressIndicator(strokeWidth: 2.5, color: color),
           ),
           if (message != null) ...[
             const SizedBox(height: AppDimensions.spaceMd),
