@@ -43,31 +43,36 @@ class CustomBottomNavBar extends StatelessWidget {
       color: AppColors.white,
       child: SafeArea(
         top: false,
-        child: Container(
+        child: SizedBox(
           height: AppDimensions.bottomNavHeight,
-          decoration: const BoxDecoration(
-            color: AppColors.white,
-            border: Border(
-              top: BorderSide(color: AppColors.indicatorInactive, width: 1),
+          child: DecoratedBox(
+            decoration: const BoxDecoration(
+              color: AppColors.white,
+              border: Border(
+                top: BorderSide(color: AppColors.indicatorInactive, width: 1),
+              ),
             ),
-          ),
-          padding: const EdgeInsets.fromLTRB(
-            AppDimensions.paddingSm + 2,
-            10,
-            AppDimensions.paddingSm + 2,
-            6,
-          ),
-          child: Row(
-            children: [
-              for (var i = 0; i < items.length; i++)
-                Expanded(
-                  child: _BottomNavTile(
-                    item: items[i],
-                    selected: i == currentIndex,
-                    onTap: () => onTap(i),
-                  ),
-                ),
-            ],
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppDimensions.paddingSm + 2,
+                10,
+                AppDimensions.paddingSm + 2,
+                6,
+              ),
+              child: Row(
+                children: [
+                  for (var i = 0; i < items.length; i++)
+                    Expanded(
+                      child: _BottomNavTile(
+                        key: ValueKey<String>('nav_${items[i].label}'),
+                        item: items[i],
+                        selected: i == currentIndex,
+                        onTap: () => onTap(i),
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -77,6 +82,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
 class _BottomNavTile extends StatelessWidget {
   const _BottomNavTile({
+    super.key,
     required this.item,
     required this.selected,
     required this.onTap,
@@ -89,59 +95,59 @@ class _BottomNavTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = selected ? AppColors.primary : AppColors.textSecondary;
-
-    return InkWell(
-      onTap: onTap,
-      splashColor: AppColors.primaryLight,
-      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _buildIcon(color),
-          const SizedBox(height: 5),
-          CustomText(
-            item.label,
-            style:
-                (selected
-                        ? AppTextStyles.navLabelActive
-                        : AppTextStyles.navLabel)
-                    .copyWith(color: color),
-            maxLines: 1,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 3),
-          SizedBox(
-            height: AppDimensions.navIndicatorSize,
-            child: selected
-                ? Container(
-                    width: AppDimensions.navIndicatorSize,
-                    height: AppDimensions.navIndicatorSize,
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                    ),
-                  )
-                : null,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildIcon(Color color) {
     final asset = selected
         ? (item.activeIconAsset ?? item.iconAsset)
         : item.iconAsset;
-    if (asset != null) {
-      return SvgPicture.asset(
-        asset,
-        width: AppDimensions.navIconSize,
-        height: AppDimensions.navIconSize,
-        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-      );
-    }
 
-    final iconData = selected ? (item.activeIcon ?? item.icon!) : item.icon!;
-    return Icon(iconData, size: AppDimensions.navIconSize, color: color);
+    return RepaintBoundary(
+      child: InkWell(
+        onTap: onTap,
+        splashColor: AppColors.primaryLight,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            if (asset != null)
+              SvgPicture.asset(
+                asset,
+                width: AppDimensions.navIconSize,
+                height: AppDimensions.navIconSize,
+                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+              )
+            else
+              Icon(
+                selected ? (item.activeIcon ?? item.icon!) : item.icon!,
+                size: AppDimensions.navIconSize,
+                color: color,
+              ),
+            const SizedBox(height: 5),
+            CustomText(
+              item.label,
+              style:
+                  (selected
+                          ? AppTextStyles.navLabelActive
+                          : AppTextStyles.navLabel)
+                      .copyWith(color: color),
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 3),
+            SizedBox(
+              height: AppDimensions.navIndicatorSize,
+              child: selected
+                  ? Container(
+                      width: AppDimensions.navIndicatorSize,
+                      height: AppDimensions.navIndicatorSize,
+                      decoration: const BoxDecoration(
+                        color: AppColors.primary,
+                        shape: BoxShape.circle,
+                      ),
+                    )
+                  : null,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

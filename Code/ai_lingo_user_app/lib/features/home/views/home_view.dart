@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
@@ -11,7 +10,6 @@ import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../viewmodels/home_cubit.dart';
 import '../viewmodels/home_state.dart';
 import '../../leaderboard/views/leaderboard_view.dart';
-import '../../scenarios/views/scenarios_view.dart';
 import '../widgets/daily_momentum_card.dart';
 import '../widgets/home_scale.dart';
 import '../widgets/home_section_header.dart';
@@ -19,39 +17,28 @@ import '../widgets/learner_overview_header.dart';
 import '../widgets/learning_statistics_row.dart';
 import '../widgets/saved_word_preview_card.dart';
 import '../widgets/scenario_suggestion_card.dart';
+import 'main_shell_view.dart';
 
 /// Home screen View — UI only.
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, this.showBottomNav = true});
 
-  static const List<BottomNavItem> _navItems = [
-    BottomNavItem(label: AppStrings.navHome, iconAsset: AppAssets.house),
-    BottomNavItem(
-      label: AppStrings.navPractice,
-      iconAsset: AppAssets.messagesSquare,
-    ),
-    BottomNavItem(
-      label: AppStrings.navVocabulary,
-      iconAsset: AppAssets.bookOpen,
-    ),
-    BottomNavItem(
-      label: AppStrings.navProgress,
-      iconAsset: AppAssets.chartNoAxesColumn,
-    ),
-    BottomNavItem(label: AppStrings.navProfile, iconAsset: AppAssets.userRound),
-  ];
+  /// When false, the root [MainShellView] owns the bottom navigation bar.
+  final bool showBottomNav;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => HomeCubit(),
-      child: const _HomeViewBody(),
+      child: _HomeViewBody(showBottomNav: showBottomNav),
     );
   }
 }
 
 class _HomeViewBody extends StatelessWidget {
-  const _HomeViewBody();
+  const _HomeViewBody({required this.showBottomNav});
+
+  final bool showBottomNav;
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +78,14 @@ class _HomeViewBody extends StatelessWidget {
                       levelLabel: state.levelLabel,
                       rankLabel: state.rankLabel,
                       unreadCount: state.unreadCount,
-                      onLeaderboardTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
+                      onLeaderboardTap: () async {
+                        final tab = await Navigator.of(context).push<int>(
+                          MaterialPageRoute<int>(
                             builder: (_) => const LeaderboardView(),
                           ),
                         );
+                        if (!context.mounted || tab == null) return;
+                        MainShellController.maybeOf(context)?.selectTab(tab);
                       },
                     ),
                     SizedBox(height: sectionGap),
@@ -139,21 +128,13 @@ class _HomeViewBody extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: CustomBottomNavBar(
-            currentIndex: state.selectedNavIndex,
-            items: HomeView._navItems,
-            onTap: (index) {
-              if (index == 1) {
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const ScenariosView(),
-                  ),
-                );
-                return;
-              }
-              context.read<HomeCubit>().selectTab(index);
-            },
-          ),
+          bottomNavigationBar: showBottomNav
+              ? CustomBottomNavBar(
+                  currentIndex: state.selectedNavIndex,
+                  items: MainShellView.navItems,
+                  onTap: context.read<HomeCubit>().selectTab,
+                )
+              : null,
         );
       },
     );

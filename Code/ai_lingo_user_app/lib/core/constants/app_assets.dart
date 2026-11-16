@@ -41,4 +41,20 @@ class AppAssets {
   static const String goldMedal = '$iconsPath/gold_medal.png';
   static const String silverMedal = '$iconsPath/silver_medal.png';
   static const String bronzeMedal = '$iconsPath/bronze_medal.png';
+
+  // Weekly Test
+  static const String lockKeyhole = '$iconsPath/lock-keyhole.svg';
+  static const String clipboardCheck = '$iconsPath/clipboard-check.svg';
+  static const String calendarDays = '$iconsPath/calendar-days.svg';
+  static const String timer = '$iconsPath/timer.svg';
+  static const String rotateCcw = '$iconsPath/rotate-ccw.svg';
+  static const String info = '$iconsPath/info.svg';
+  static const String circleCheck = '$iconsPath/circle_check.svg';
+  static const String flag = '$iconsPath/flag.svg';
+
+  // Conversation
+  static const String hint = '$iconsPath/hint.svg';
+  static const String mic = '$iconsPath/mic.svg';
+  static const String send = '$iconsPath/send.svg';
+  static const String moreHorizontal = '$iconsPath/more-horizontal.svg';
 }

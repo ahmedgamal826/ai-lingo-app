@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'core/constants/app_strings.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_text_styles.dart';
-import 'features/home/views/home_view.dart';
+import 'features/home/views/main_shell_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +54,7 @@ class AiLingoApp extends StatelessWidget {
           displayColor: AppColors.textPrimary,
         ),
       ),
-      home: const HomeView(),
+      home: const MainShellView(),
     );
   }
 }
