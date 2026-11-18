@@ -10,6 +10,7 @@ import '../widgets/quiz_dropdown.dart';
 import '../widgets/quiz_scaffold.dart';
 import '../widgets/quiz_svg_icon.dart';
 import '../widgets/quiz_text_field.dart';
+import 'quiz_schedule_view.dart';
 
 /// Preview question / Edit question: one screen, two modes.
 ///
@@ -116,6 +117,15 @@ class _QuizQuestionViewState extends State<QuizQuestionView> {
       MaterialPageRoute<void>(
         builder: (_) =>
             QuizQuestionView.edit(week: widget.week, title: widget.title),
+      ),
+    );
+  }
+
+  void _openSchedule() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            QuizScheduleView(week: widget.week, title: widget.title),
       ),
     );
   }
@@ -241,8 +251,9 @@ class _QuizQuestionViewState extends State<QuizQuestionView> {
               Expanded(
                 child: QuizActionButton.primary(
                   label: isEdit ? 'Save Question' : 'Next',
-                  // TODO: "Next" opens Schedule Weekly Test (next batch).
-                  onTap: isEdit ? () => Navigator.of(context).maybePop() : () {},
+                  onTap: isEdit
+                      ? () => Navigator.of(context).maybePop()
+                      : _openSchedule,
                 ),
               ),
             ],

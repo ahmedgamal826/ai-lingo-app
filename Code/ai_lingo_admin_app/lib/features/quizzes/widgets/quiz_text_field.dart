@@ -13,6 +13,8 @@ class QuizTextField extends StatelessWidget {
     required this.controller,
     this.hint,
     this.suffixIconName,
+    this.onSuffixTap,
+    this.readOnly = false,
     this.minLines,
     this.maxLines = 1,
     this.keyboardType,
@@ -24,6 +26,11 @@ class QuizTextField extends StatelessWidget {
 
   /// Optional SVG name from `assets/icons/` shown at the end (e.g. 'calendar').
   final String? suffixIconName;
+
+  /// Called when the field (or its suffix icon) is tapped. Use with [readOnly]
+  /// for fields that open a picker instead of the keyboard.
+  final VoidCallback? onSuffixTap;
+  final bool readOnly;
   final int? minLines;
   final int maxLines;
   final TextInputType? keyboardType;
@@ -49,6 +56,8 @@ class QuizTextField extends StatelessWidget {
         SizedBox(height: 6.h),
         TextField(
           controller: controller,
+          readOnly: readOnly,
+          onTap: readOnly ? onSuffixTap : null,
           minLines: minLines,
           maxLines: maxLines,
           keyboardType: keyboardType,
@@ -68,12 +77,16 @@ class QuizTextField extends StatelessWidget {
             ),
             suffixIcon: suffixIconName == null
                 ? null
-                : Padding(
-              padding: EdgeInsets.only(right: 14.w),
-              child: QuizSvgIcon(
-                suffixIconName!,
-                size: 18.w,
-                color: AppColors.textSecondary,
+                : GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onSuffixTap,
+              child: Padding(
+                padding: EdgeInsets.only(right: 14.w),
+                child: QuizSvgIcon(
+                  suffixIconName!,
+                  size: 18.w,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ),
             suffixIconConstraints: const BoxConstraints(),

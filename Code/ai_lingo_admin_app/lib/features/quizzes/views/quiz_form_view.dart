@@ -9,6 +9,7 @@ import '../widgets/quiz_info_box.dart';
 import '../widgets/quiz_scaffold.dart';
 import '../widgets/quiz_text_field.dart';
 import 'quiz_question_view.dart';
+
 /// Create quiz / Edit quiz: one form, two modes.
 ///
 /// `QuizFormView.create()` for a new quiz,
@@ -66,6 +67,40 @@ class _QuizFormViewState extends State<QuizFormView> {
     super.dispose();
   }
 
+  Future<void> _pickWeek() async {
+    final current = int.tryParse(_week.text.trim()) ?? 1;
+    final picked = await showModalBottomSheet<int>(
+      context: context,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: ListView.builder(
+            itemCount: 52,
+            itemBuilder: (_, i) {
+              final week = i + 1;
+              return ListTile(
+                title: Text('Week $week'),
+                selected: week == current,
+                onTap: () => Navigator.of(sheetContext).pop(week),
+              );
+            },
+          ),
+        );
+      },
+    );
+    if (picked != null) setState(() => _week.text = '$picked');
+  }
+
+  void _continueToQuestions() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => QuizQuestionView.preview(
+          week: 'Week ${_week.text}',
+          title: _title.text,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isEdit = widget.isEdit;
@@ -100,7 +135,8 @@ class _QuizFormViewState extends State<QuizFormView> {
                   label: 'Week',
                   controller: _week,
                   suffixIconName: 'calendar',
-                  keyboardType: TextInputType.number,
+                  readOnly: true,
+                  onSuffixTap: _pickWeek,
                 ),
               ),
               SizedBox(width: 12.w),
@@ -153,16 +189,7 @@ class _QuizFormViewState extends State<QuizFormView> {
           SizedBox(height: 24.h),
           QuizActionButton.primary(
             label: isEdit ? 'Save Changes' : 'Continue to Questions',
-            onTap: isEdit
-                ? () {}
-                : () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => QuizQuestionView.preview(
-                  week: 'Week ${_week.text}',
-                  title: _title.text,
-                ),
-              ),
-            ),
+            onTap: isEdit ? () {} : _continueToQuestions,
           ),
           SizedBox(height: 12.h),
           QuizActionButton.light(label: 'Save as Draft', onTap: () {}),

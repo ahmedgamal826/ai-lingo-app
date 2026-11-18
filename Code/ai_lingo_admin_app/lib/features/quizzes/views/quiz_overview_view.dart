@@ -11,6 +11,7 @@ import '../widgets/quiz_scaffold.dart';
 import '../widgets/quiz_stats_card.dart';
 import 'quiz_form_view.dart';
 import 'quiz_question_view.dart';
+import 'quiz_results_view.dart';
 
 /// Quiz overview (detail) screen.
 class QuizOverviewView extends StatelessWidget {
@@ -91,8 +92,12 @@ class QuizOverviewView extends StatelessWidget {
             QuizActionButton.primary(
               label: 'View Results & Scores',
               iconName: 'trophy',
-              // TODO: opens Test Results (next batch).
-              onTap: () {},
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      QuizResultsView(week: quiz.week, title: quiz.title),
+                ),
+              ),
             ),
           ],
           SizedBox(height: 12.h),
