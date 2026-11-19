@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../theme/app_colors.dart';
 import '../theme/app_dimensions.dart';
 
 class BottomNavItem {
@@ -7,11 +9,13 @@ class BottomNavItem {
     required this.label,
     required this.icon,
     this.activeIcon,
+    this.iconAsset,
   });
 
   final String label;
   final IconData icon;
   final IconData? activeIcon;
+  final String? iconAsset;
 }
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -26,6 +30,23 @@ class CustomBottomNavBar extends StatelessWidget {
   final List<BottomNavItem> items;
   final ValueChanged<int> onTap;
 
+  Widget _buildItemIcon(BottomNavItem item, {required bool selected}) {
+    final color = selected ? AppColors.primary : AppColors.textSecondary;
+    if (item.iconAsset != null) {
+      return SvgPicture.asset(
+        item.iconAsset!,
+        width: 20,
+        height: 20,
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+      );
+    }
+    return Icon(
+      selected ? (item.activeIcon ?? item.icon) : item.icon,
+      size: 20,
+      color: color,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
@@ -35,8 +56,8 @@ class CustomBottomNavBar extends StatelessWidget {
       destinations: [
         for (final item in items)
           NavigationDestination(
-            icon: Icon(item.icon),
-            selectedIcon: Icon(item.activeIcon ?? item.icon),
+            icon: _buildItemIcon(item, selected: false),
+            selectedIcon: _buildItemIcon(item, selected: true),
             label: item.label,
           ),
       ],
