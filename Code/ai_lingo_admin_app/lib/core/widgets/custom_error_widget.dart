@@ -25,20 +25,17 @@ class CustomErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.error_outline,
-              size: AppDimensions.iconLg * 1.5,
-            ),
+            const Icon(Icons.error_outline, size: AppDimensions.iconLg * 1.5),
             const SizedBox(height: AppDimensions.spaceMd),
             CustomText(
-              message ?? AppStrings.somethingWentWrong,
+              text: message ?? AppStrings.somethingWentWrong,
               textAlign: TextAlign.center,
             ),
             if (onRetry != null) ...[
               const SizedBox(height: AppDimensions.spaceLg),
-              CustomButton(
-                title: retryLabel ?? AppStrings.retry,
-                onPressed: onRetry,
+              CustomDarkButton(
+                text: retryLabel ?? AppStrings.retry,
+                onTap: onRetry,
                 width: 160,
               ),
             ],
