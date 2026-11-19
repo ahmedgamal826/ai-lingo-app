@@ -25,13 +25,13 @@ class WelcomeRow extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 18.r,
-          backgroundColor: AppColors.primaryLight,
+          backgroundColor: AppColors.purpleLight,
           child: Text(
             initials,
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.w700,
-              color: AppColors.primary,
+              color: AppColors.purple,
             ),
           ),
         ),

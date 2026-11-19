@@ -71,7 +71,7 @@ class QuizOverviewView extends StatelessWidget {
                 subtitle: '20 questions · 100 total points',
               ),
               QuizDetailRow(
-                iconName: 'clock',
+                iconName: 'timer',
                 title: '20 minutes · 1 attempt',
               ),
               QuizDetailRow(
@@ -91,7 +91,7 @@ class QuizOverviewView extends StatelessWidget {
             SizedBox(height: 12.h),
             QuizActionButton.primary(
               label: 'View Results & Scores',
-              iconName: 'trophy',
+              iconName: 'chart-column',
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute<void>(
                   builder: (_) =>

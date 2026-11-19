@@ -4,16 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/widgets/custom_card.dart';
+import 'dashboard_svg_icon.dart';
 
 class QuickActionTile extends StatelessWidget {
   const QuickActionTile({
     super.key,
-    required this.icon,
+    required this.iconName,
     required this.label,
     this.onTap,
   });
 
-  final IconData icon;
+  /// SVG name from `assets/icons/` (e.g. 'plus').
+  final String iconName;
   final String label;
   final VoidCallback? onTap;
 
@@ -27,7 +29,11 @@ class QuickActionTile extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: AppDimensions.iconMd, color: AppColors.primary),
+          DashboardSvgIcon(
+            iconName,
+            size: AppDimensions.iconMd,
+            color: AppColors.primary,
+          ),
           SizedBox(height: 6.h),
           Text(
             label,

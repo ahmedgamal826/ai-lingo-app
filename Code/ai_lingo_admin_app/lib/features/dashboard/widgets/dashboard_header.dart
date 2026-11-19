@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
+import 'dashboard_svg_icon.dart';
 
 class DashboardHeader extends StatelessWidget {
   const DashboardHeader({super.key, this.onBellTap});
@@ -38,10 +39,7 @@ class DashboardHeader extends StatelessWidget {
         ),
         IconButton(
           onPressed: onBellTap,
-          icon: const Icon(
-            Icons.notifications_none_rounded,
-            color: AppColors.primary,
-          ),
+          icon: DashboardSvgIcon('bell', size: 22.w, color: AppColors.primary),
         ),
       ],
     );

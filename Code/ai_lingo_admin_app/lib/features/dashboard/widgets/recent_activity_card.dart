@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../models/dashboard_models.dart';
+import 'dashboard_svg_icon.dart';
 
 /// One white card that contains all the activity rows.
 class RecentActivityCard extends StatelessWidget {
@@ -46,11 +47,16 @@ class _ActivityRow extends StatelessWidget {
           Container(
             width: 36.w,
             height: 36.w,
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
               borderRadius: BorderRadius.circular(10.r),
             ),
-            child: Icon(activity.icon, size: 18.w, color: AppColors.primary),
+            child: DashboardSvgIcon(
+              activity.iconName,
+              size: 18.w,
+              color: AppColors.primary,
+            ),
           ),
           SizedBox(width: 12.w),
           Expanded(
@@ -76,7 +82,11 @@ class _ActivityRow extends StatelessWidget {
               ],
             ),
           ),
-          Icon(Icons.chevron_right, size: 18.w, color: AppColors.textSecondary),
+          DashboardSvgIcon(
+            'chevron-right',
+            size: 18.w,
+            color: AppColors.textSecondary,
+          ),
         ],
       ),
     );

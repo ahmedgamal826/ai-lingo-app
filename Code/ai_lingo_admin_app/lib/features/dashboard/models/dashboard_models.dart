@@ -1,17 +1,17 @@
-import 'package:flutter/widgets.dart';
-
 /// One statistic card (e.g. Total Users).
 class DashboardStat {
   const DashboardStat({
     required this.title,
     required this.value,
-    required this.icon,
+    required this.iconName,
     this.caption,
   });
 
   final String title;
   final String value;
-  final IconData icon;
+
+  /// SVG name from `assets/icons/` (e.g. 'users-round').
+  final String iconName;
   final String? caption;
 }
 
@@ -20,10 +20,12 @@ class DashboardActivity {
   const DashboardActivity({
     required this.title,
     required this.subtitle,
-    required this.icon,
+    required this.iconName,
   });
 
   final String title;
   final String subtitle;
-  final IconData icon;
+
+  /// SVG name from `assets/icons/` (e.g. 'clipboard-check').
+  final String iconName;
 }
