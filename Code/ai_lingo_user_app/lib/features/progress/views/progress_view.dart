@@ -6,6 +6,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../../../core/widgets/custom_card.dart';
+import '../../vocabulary/views/vocabulary_view.dart';
 
 /// Progress screen built with the project's existing shared widgets.
 class ProgressView extends StatefulWidget {
@@ -392,7 +393,18 @@ class _ProgressViewState extends State<ProgressView> {
         ),
         bottomNavigationBar: CustomBottomNavBar(
           currentIndex: _selectedIndex,
-          onTap: (index) => setState(() => _selectedIndex = index),
+          onTap: (index) {
+            if (index == 2) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const VocabularyView()),
+              );
+              return;
+            }
+            if (index == 3) {
+              setState(() => _selectedIndex = 3);
+            }
+          },
           items: [
             BottomNavItem(
               label: 'Home',
