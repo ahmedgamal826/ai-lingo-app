@@ -31,17 +31,25 @@ class CustomErrorWidget extends StatelessWidget {
             ),
             const SizedBox(height: AppDimensions.spaceMd),
             CustomText(
-              message ?? AppStrings.somethingWentWrong,
+              text: message ?? AppStrings.somethingWentWrong,
               textAlign: TextAlign.center,
             ),
             if (onRetry != null) ...[
               const SizedBox(height: AppDimensions.spaceLg),
-              CustomButton(
-                title: retryLabel ?? AppStrings.retry,
-                onPressed: onRetry,
+              CustomDarkButton(
+                text: retryLabel ?? AppStrings.retry,
+                onTap: onRetry,
                 width: 160,
               ),
             ],
+            // if (onRetry != null) ...[
+            //   const SizedBox(height: AppDimensions.spaceLg),
+            //   CustomDarkButton(
+            //     title: retryLabel ?? AppStrings.retry,
+            //     onPressed: onRetry,
+            //     width: 160,
+            //   ),
+            // ],
           ],
         ),
       ),
