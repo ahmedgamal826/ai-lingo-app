@@ -1,3 +1,4 @@
+import 'package:ai_lingo_user_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,6 +12,8 @@ class CustomText extends StatelessWidget {
     this.textAlign,
     this.maxLines,
     this.padding,
+    this.height,
+    this.letterSpacing,
   });
   final String text;
   final Color? color;
@@ -19,6 +22,10 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final EdgeInsetsGeometry? padding;
+
+  /// Line height multiplier (e.g. 1.4 = 140%).
+  final double? height;
+  final double? letterSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +44,12 @@ class CustomText extends StatelessWidget {
         text,
         style: TextStyle(
           fontFamily: 'Inter',
-          color: Colors.black ?? Color(0xff777E96),
+          // Before: `Colors.black ?? ...` -> the `color` parameter was ignored.
+          color: color ?? AppColors.textPrimary,
           fontSize: responsiveFontSize,
           fontWeight: fontWeight,
+          height: height,
+          letterSpacing: letterSpacing,
         ),
         overflow: TextOverflow.ellipsis,
         maxLines: maxLines ?? 3,
