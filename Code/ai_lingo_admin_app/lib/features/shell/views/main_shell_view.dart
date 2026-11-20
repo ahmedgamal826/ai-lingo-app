@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+import '../../../core/constants/app_assets.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/widgets/custom_bottom_nav_bar.dart';
+import '../../../core/widgets/placeholder_tab_page.dart';
+import '../../complaints/views/complaints_view.dart';
+
+/// Root admin shell with persistent bottom navigation.
+class MainShellView extends StatefulWidget {
+  const MainShellView({super.key});
+
+  static const List<BottomNavItem> navItems = [
+    BottomNavItem(
+      label: AppStrings.navDashboard,
+      iconAsset: AppAssets.layoutGrid,
+    ),
+    BottomNavItem(
+      label: AppStrings.navQuizzes,
+      iconAsset: AppAssets.clipboardCheck,
+    ),
+    BottomNavItem(
+      label: AppStrings.navComplaints,
+      iconAsset: AppAssets.messagesSquare,
+    ),
+    BottomNavItem(
+      label: AppStrings.navNotifications,
+      iconAsset: AppAssets.bell,
+    ),
+    BottomNavItem(label: AppStrings.navProfile, iconAsset: AppAssets.userRound),
+  ];
+
+  @override
+  State<MainShellView> createState() => _MainShellViewState();
+}
+
+class _MainShellViewState extends State<MainShellView> {
+  int _selectedIndex = 2;
+
+  late final List<Widget> _pages = [
+    const PlaceholderTabPage(title: AppStrings.navDashboard),
+    const PlaceholderTabPage(title: AppStrings.navQuizzes),
+    const ComplaintsView(),
+    const PlaceholderTabPage(title: AppStrings.navNotifications),
+    const PlaceholderTabPage(title: AppStrings.navProfile),
+  ];
+
+  void _selectTab(int index) {
+    if (index == _selectedIndex) return;
+    if (index < 0 || index >= _pages.length) return;
+    setState(() => _selectedIndex = index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(index: _selectedIndex, children: _pages),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: _selectedIndex,
+        items: MainShellView.navItems,
+        onTap: _selectTab,
+      ),
+    );
+  }
+}
