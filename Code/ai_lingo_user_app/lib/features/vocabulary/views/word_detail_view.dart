@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'edit_word_view.dart';
+
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
@@ -20,6 +22,7 @@ class WordDetailView extends StatefulWidget {
     this.source = 'Saved from Restaurant · Nov 9, 2026',
     this.relatedExpressions = const ['Make room for', 'Provide for', 'Host'],
     this.isFavorite = true,
+    this.onWordUpdated,
   });
 
   final String word;
@@ -30,6 +33,7 @@ class WordDetailView extends StatefulWidget {
   final String source;
   final List<String> relatedExpressions;
   final bool isFavorite;
+  final ValueChanged<EditedVocabularyWord>? onWordUpdated;
 
   @override
   State<WordDetailView> createState() => _WordDetailViewState();
@@ -37,30 +41,36 @@ class WordDetailView extends StatefulWidget {
 
 class _WordDetailViewState extends State<WordDetailView> {
   late bool _isFavorite = widget.isFavorite;
+  late String _word = widget.word;
+  late String _phonetic = widget.phonetic;
+  late String _partOfSpeech = widget.partOfSpeech;
+  late String _meaning = widget.meaning;
+  late String _example = widget.example;
 
-  void _editWord() {
-    final meaningController = TextEditingController(text: widget.meaning);
-    showDialog<void>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Edit Word'),
-        content: TextField(
-          controller: meaningController,
-          maxLines: 3,
-          decoration: const InputDecoration(labelText: 'Meaning'),
+  Future<void> _editWord() async {
+    final updated = await Navigator.push<EditedVocabularyWord>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => EditWordView(
+          word: _word,
+          phonetic: _phonetic,
+          partOfSpeech: _partOfSpeech,
+          meaning: _meaning,
+          example: _example,
+          isFavorite: _isFavorite,
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Save'),
-          ),
-        ],
       ),
-    ).whenComplete(meaningController.dispose);
+    );
+    if (updated == null || !mounted) return;
+    setState(() {
+      _word = updated.word;
+      _phonetic = updated.phonetic;
+      _partOfSpeech = updated.partOfSpeech;
+      _meaning = updated.meaning;
+      _example = updated.example;
+      _isFavorite = updated.isFavorite;
+    });
+    widget.onWordUpdated?.call(updated);
   }
 
   Future<void> _deleteWord() async {
@@ -68,7 +78,7 @@ class _WordDetailViewState extends State<WordDetailView> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Delete Word'),
-        content: Text('Delete "${widget.word}" from your vocabulary?'),
+        content: Text('Delete "${_word}" from your vocabulary?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
@@ -144,7 +154,7 @@ class _WordDetailViewState extends State<WordDetailView> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.word,
+                            _word,
                             style: const TextStyle(
                               color: AppColors.textPrimary,
                               fontSize: AppFontSizes.font26,
@@ -166,7 +176,7 @@ class _WordDetailViewState extends State<WordDetailView> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      widget.phonetic,
+                      _phonetic,
                       style: const TextStyle(
                         color: AppColors.primary,
                         fontSize: AppFontSizes.font12,
@@ -176,7 +186,7 @@ class _WordDetailViewState extends State<WordDetailView> {
                     Row(
                       children: [
                         _pill(
-                          widget.partOfSpeech,
+                          _partOfSpeech,
                           background: AppColors.primaryLight,
                           foreground: AppColors.primary,
                         ),
@@ -211,7 +221,7 @@ class _WordDetailViewState extends State<WordDetailView> {
               ),
               const SizedBox(height: 12),
               Text(
-                widget.meaning,
+                _meaning,
                 style: const TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: AppFontSizes.font15,
@@ -237,7 +247,7 @@ class _WordDetailViewState extends State<WordDetailView> {
                     ),
                     const SizedBox(height: 9),
                     Text(
-                      widget.example,
+                      _example,
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: AppFontSizes.font13,
