@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/Core/shared/custom_text.dart';
-import 'package:ai_lingo_user_app/core/Theme/app_colors.dart';
+import '../theme/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'custom_text.dart';
@@ -31,7 +31,7 @@ class CustomDarkButton extends StatelessWidget {
         height: height.h,
         width: width ?? 350,
         decoration: BoxDecoration(
-          color: Color(0xff5B6CFF),
+          color: AppColors.primary,
           borderRadius: BorderRadius.circular(borderRadius.r),
         ),
         child: Center(
@@ -71,13 +71,13 @@ class CustomLightButton extends StatelessWidget {
         width: width ?? 350,
 
         decoration: BoxDecoration(
-          color: Color(0xffEEF0FF),
+          color: AppColors.primaryLight,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Center(
           child: CustomText(
             text: text,
-            color: Color(0xff5B6CFF),
+            color: AppColors.primary,
             fontSize: 14.sp,
           ),
         ),
@@ -109,13 +109,13 @@ class CustomRedButton extends StatelessWidget {
         height: height.h,
         width: width ?? 350,
         decoration: BoxDecoration(
-          color: Color(0xffFFF0F3),
+          color: AppColors.errorLight,
           borderRadius: BorderRadius.circular(borderRadius.r),
         ),
         child: Center(
           child: CustomText(
             text: text,
-            color: Color(0xffD45B70),
+            color: AppColors.danger,
             fontSize: 14.sp,
           ),
         ),

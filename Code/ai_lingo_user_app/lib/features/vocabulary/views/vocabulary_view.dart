@@ -10,6 +10,7 @@ import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_icon_button.dart';
 import '../../progress/views/progress_view.dart';
 import 'word_detail_view.dart';
+import 'add_word_view.dart';
 
 class VocabularyView extends StatefulWidget {
   const VocabularyView({super.key});
@@ -72,60 +73,27 @@ class _VocabularyViewState extends State<VocabularyView> {
     super.dispose();
   }
 
-  void _showAddWordDialog() {
-    final wordController = TextEditingController();
-    final meaningController = TextEditingController();
-    showDialog<void>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Add new word'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: wordController,
-              decoration: const InputDecoration(hintText: 'Word'),
-              textCapitalization: TextCapitalization.words,
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: meaningController,
-              decoration: const InputDecoration(hintText: 'Meaning'),
-            ),
-          ],
+  Future<void> _openAddWordPage() async {
+    final result = await Navigator.push<AddedVocabularyWord>(
+      context,
+      MaterialPageRoute(builder: (_) => const AddWordView()),
+    );
+
+    if (result == null || !mounted) return;
+
+    setState(() {
+      _words.insert(
+        0,
+        _VocabularyWord(
+          word: result.word,
+          phonetic: '${result.phonetic.isEmpty ? '' : result.phonetic} · ${result.partOfSpeech}',
+          meaning: result.meaning,
+          example: result.example,
+          favorite: result.isFavorite,
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              final newWord = wordController.text.trim();
-              final meaning = meaningController.text.trim();
-              if (newWord.isEmpty || meaning.isEmpty) return;
-              setState(() {
-                _words.insert(
-                  0,
-                  _VocabularyWord(
-                    word: newWord,
-                    phonetic: '· new word',
-                    meaning: meaning,
-                    example: 'Tap to add an example sentence.',
-                  ),
-                );
-                _selectedFilter = 0;
-                _searchController.clear();
-              });
-              Navigator.pop(dialogContext);
-            },
-            child: const Text('Add'),
-          ),
-        ],
-      ),
-    ).whenComplete(() {
-      wordController.dispose();
-      meaningController.dispose();
+      );
+      _selectedFilter = 0;
+      _searchController.clear();
     });
   }
 
@@ -192,7 +160,7 @@ class _VocabularyViewState extends State<VocabularyView> {
             ),
             actions: [
               CustomIconButton(
-                onPressed: _showAddWordDialog,
+                onPressed: _openAddWordPage,
                 tooltip: 'Add word',
                 icon: Icons.add,
                 color: AppColors.primary,
@@ -237,7 +205,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: _showAddWordDialog,
+                                  onTap: _openAddWordPage,
                                   child: const Text(
                                     'Add word +',
                                     style: TextStyle(
@@ -251,6 +219,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                             ),
                           ],
                         ),
+                        Container(height: 16,),
                         ..._visibleWords.map(
                           (word) => _buildWordCard(word),
                         ),
