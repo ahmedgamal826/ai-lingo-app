@@ -9,6 +9,7 @@ import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_icon_button.dart';
 import '../../progress/views/progress_view.dart';
+import 'word_detail_view.dart';
 
 class VocabularyView extends StatefulWidget {
   const VocabularyView({super.key});
@@ -250,7 +251,6 @@ class _VocabularyViewState extends State<VocabularyView> {
                             ),
                           ],
                         ),
-                        Container(height: 16,),
                         ..._visibleWords.map(
                           (word) => _buildWordCard(word),
                         ),
@@ -400,6 +400,43 @@ class _VocabularyViewState extends State<VocabularyView> {
     );
   }
 
+  void _openWordDetail(_VocabularyWord word) {
+    // Keep the richer Figma copy for the reference word; all other entries
+    // use the data already stored in their Vocabulary card.
+    final isAccommodate = word.word.toLowerCase() == 'accommodate';
+    final phoneticParts = word.phonetic.split('·');
+    final phonetic = isAccommodate
+        ? '/əˈkɒmədeɪt/'
+        : phoneticParts.first.trim();
+    final partOfSpeech = isAccommodate
+        ? 'Verb'
+        : (phoneticParts.length > 1 ? phoneticParts[1].trim() : 'Word');
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => WordDetailView(
+          word: word.word,
+          phonetic: phonetic,
+          partOfSpeech: partOfSpeech,
+          meaning: isAccommodate
+              ? 'To provide someone with a place to stay, or to meet their needs.'
+              : word.meaning,
+          example: isAccommodate
+              ? '“The restaurant can accommodate a group of twelve.”'
+              : word.example,
+          source: isAccommodate
+              ? 'Saved from Restaurant · Nov 9, 2026'
+              : 'Saved to Vocabulary',
+          isFavorite: word.favorite,
+          relatedExpressions: isAccommodate
+              ? const ['Make room for', 'Provide for', 'Host']
+              : const [],
+        ),
+      ),
+    );
+  }
+
   Widget _buildWordCard(_VocabularyWord word) {
     // Figma card frame: 350 x 102. The height includes the card's padding.
     return Padding(
@@ -410,6 +447,7 @@ class _VocabularyViewState extends State<VocabularyView> {
           backgroundColor: AppColors.white,
           elevation: 0,
           borderRadius: BorderRadius.circular(13),
+          onTap: () => _openWordDetail(word),
           padding: const EdgeInsets.fromLTRB(12, 8, 10, 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

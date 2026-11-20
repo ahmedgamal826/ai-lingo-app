@@ -13,23 +13,38 @@ class CustomDarkButton extends StatelessWidget {
     this.onTap,
     required this.text,
     this.width,
+    this.leading,
+    this.height = 50,
+    this.borderRadius = 8,
   });
   final VoidCallback? onTap;
   final String text;
   final double? width;
+  final Widget? leading;
+  final double height;
+  final double borderRadius;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50.h,
-        width: 170 ?? 350,
+        height: height.h,
+        width: width ?? 350,
         decoration: BoxDecoration(
           color: Color(0xff5B6CFF),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(borderRadius.r),
         ),
         child: Center(
-          child: CustomText(text: text, color: Colors.white, fontSize: 14.sp),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (leading != null) ...[
+                leading!,
+                SizedBox(width: 7.w),
+              ],
+              CustomText(text: text, color: Colors.white, fontSize: 14.sp),
+            ],
+          ),
         ),
       ),
     );
@@ -77,21 +92,25 @@ class CustomRedButton extends StatelessWidget {
     this.onTap,
     required this.text,
     this.width,
+    this.height = 50,
+    this.borderRadius = 8,
   });
   final VoidCallback? onTap;
   final String text;
   final double? width;
+  final double height;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50.h,
+        height: height.h,
         width: width ?? 350,
         decoration: BoxDecoration(
           color: Color(0xffFFF0F3),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(borderRadius.r),
         ),
         child: Center(
           child: CustomText(
