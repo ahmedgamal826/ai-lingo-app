@@ -32,9 +32,9 @@ class _HomeViewBody extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomText(state.title),
+                  CustomText(text: state.title),
                   const SizedBox(height: AppDimensions.spaceMd),
-                  CustomText(state.subtitle),
+                  CustomText(text: state.subtitle),
                 ],
               );
             },

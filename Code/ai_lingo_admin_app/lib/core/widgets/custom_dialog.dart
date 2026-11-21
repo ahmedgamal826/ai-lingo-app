@@ -18,8 +18,8 @@ class CustomDialog {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: CustomText(title),
-          content: CustomText(message),
+          title: CustomText(text: title),
+          content: CustomText(text: message),
           actionsPadding: const EdgeInsets.fromLTRB(
             AppDimensions.paddingMd,
             0,
@@ -50,8 +50,8 @@ class CustomDialog {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: CustomText(title),
-          content: CustomText(message),
+          title: CustomText(text: title),
+          content: CustomText(text: message),
           actions: [
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(),
