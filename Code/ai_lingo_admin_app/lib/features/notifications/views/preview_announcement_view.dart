@@ -7,6 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_text.dart';
 import '../../../core/widgets/custom_button.dart';
+import 'announcement_sent_view.dart';
 
 class PreviewAnnouncementView extends StatelessWidget {
   const PreviewAnnouncementView({
@@ -213,8 +214,13 @@ class PreviewAnnouncementView extends StatelessWidget {
                         ),
                         width: double.infinity,
                         onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Sending announcements is not connected yet.')),
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => AnnouncementSentView(
+                                title: title,
+                                message: message,
+                              ),
+                            ),
                           );
                         },
                       ),
