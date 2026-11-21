@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/app_strings.dart';
-import 'features/home/views/home_view.dart';
+import 'features/notifications/views/notifications_view.dart';
 
 void main() {
   runApp(const AiLingoAdminApp());
@@ -24,7 +24,7 @@ class AiLingoAdminApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const HomeView(),
+      child: const NotificationsView(),
     );
   }
 }

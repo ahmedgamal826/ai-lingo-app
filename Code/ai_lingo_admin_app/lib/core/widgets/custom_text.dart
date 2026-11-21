@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../theme/app_colors.dart';
+
 class CustomText extends StatelessWidget {
   const CustomText({
     super.key,
@@ -37,7 +39,7 @@ class CustomText extends StatelessWidget {
         text,
         style: TextStyle(
           fontFamily: 'Inter',
-          color: Colors.black ?? Color(0xff777E96),
+          color: color ?? AppColors.textPrimary,
           fontSize: responsiveFontSize,
           fontWeight: fontWeight,
         ),
