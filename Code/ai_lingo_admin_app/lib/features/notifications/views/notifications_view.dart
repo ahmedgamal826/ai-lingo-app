@@ -8,6 +8,7 @@ import '../../../core/theme/app_dimensions.dart';
 import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_text.dart';
+import 'broadcast_announcement_view.dart';
 
 class NotificationsView extends StatefulWidget {
   const NotificationsView({super.key});
@@ -149,13 +150,13 @@ class _NotificationsViewState extends State<NotificationsView> {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () => setState(() {
-              for (final item in _notifications) {
-                item.unread = false;
-              }
-            }),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const BroadcastAnnouncementView(),
+              ),
+            ),
             child: SvgPicture.asset(
-              AppAssets.icon('check-check.svg'),
+              AppAssets.icon('plus.svg'),
               width: 20.w,
               height: 20.w,
               colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
