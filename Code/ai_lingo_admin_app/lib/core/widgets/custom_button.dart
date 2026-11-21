@@ -13,11 +13,15 @@ class CustomDarkButton extends StatelessWidget {
     required this.text,
     this.width,
     this.icon,
+    this.iconWidget,
+    this.borderRadius = 12.0,
   });
   final VoidCallback? onTap;
   final String text;
   final double? width;
   final IconData? icon;
+  final Widget? iconWidget;
+  final double borderRadius;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -27,14 +31,14 @@ class CustomDarkButton extends StatelessWidget {
         width: width ?? 350,
         decoration: BoxDecoration(
           color: Color(0xff5B6CFF),
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Center(
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (icon != null) ...[
-                Icon(icon, size: 16.w, color: Colors.white),
+              if (iconWidget != null || icon != null) ...[
+                iconWidget ?? Icon(icon, size: 16.w, color: Colors.white),
                 SizedBox(width: 8.w),
               ],
               CustomText(text: text, color: Colors.white, fontSize: 14.sp),

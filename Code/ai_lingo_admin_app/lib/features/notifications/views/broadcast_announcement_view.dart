@@ -9,6 +9,7 @@ import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_text.dart';
 import '../../../core/widgets/custom_drop_down_menu.dart';
 import '../../../core/widgets/custom_button.dart';
+import 'preview_announcement_view.dart';
 
 class BroadcastAnnouncementView extends StatefulWidget {
   const BroadcastAnnouncementView({super.key});
@@ -174,8 +175,8 @@ class _BroadcastAnnouncementViewState extends State<BroadcastAnnouncementView> {
                                 ),
                                 SizedBox(height: 4.h),
                                 CustomText(
-                                  text: 'This announcement will appear in every learner’s \n notifications.',
-                                  fontSize: 10.sp,
+                                  text: 'This announcement will appear in every learner’s notifications.',
+                                  fontSize: 9.sp,
                                   color: AppColors.textSecondary,
                                   maxLines: 2,
                                 ),
@@ -206,33 +207,14 @@ class _BroadcastAnnouncementViewState extends State<BroadcastAnnouncementView> {
   }
 
   void _showPreview() {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
-        title: CustomText(
-          text: 'Preview Announcement',
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => PreviewAnnouncementView(
+          title: _titleController.text,
+          message: _messageController.text,
+          category: _category,
+          priority: _priority,
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(text: _titleController.text, fontSize: 14.sp, fontWeight: FontWeight.w600),
-            SizedBox(height: 8.h),
-            CustomText(text: _messageController.text, fontSize: 12.sp, color: AppColors.textSecondary),
-            SizedBox(height: 10.h),
-            CustomText(text: '$_category · $_priority', fontSize: 10.sp, color: AppColors.primary),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
       ),
     );
   }
