@@ -9,6 +9,7 @@ import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_icon_button.dart';
 import '../../progress/views/progress_view.dart';
+import 'add_word_view.dart';
 import 'word_detail_view.dart';
 import 'edit_word_view.dart';
 
@@ -72,6 +73,37 @@ class _VocabularyViewState extends State<VocabularyView> {
     _searchController.dispose();
     super.dispose();
   }
+
+  Future<void> _openAddWordPage() async {
+    final result = await Navigator.push<AddedVocabularyWord>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const AddWordView(),
+      ),
+    );
+
+    if (result == null || !mounted) return;
+
+    setState(() {
+      _words.insert(
+        0,
+        _VocabularyWord(
+          word: result.word,
+          phonetic: result.phonetic.isEmpty
+              ? result.partOfSpeech.toLowerCase()
+              : '${result.phonetic} · ${result.partOfSpeech.toLowerCase()}',
+          meaning: result.meaning,
+          example: result.example,
+          favorite: result.isFavorite,
+        ),
+      );
+
+      _selectedFilter = 0;
+      _searchController.clear();
+    });
+  }
+
+
 
   void _showAddWordDialog() {
     final wordController = TextEditingController();
@@ -192,12 +224,18 @@ class _VocabularyViewState extends State<VocabularyView> {
               ],
             ),
             actions: [
-              CustomIconButton(
-                onPressed: _showAddWordDialog,
+              IconButton(
+                onPressed: _openAddWordPage,
                 tooltip: 'Add word',
-                icon: Icons.add,
-                color: AppColors.primary,
-                size: 23,
+                icon: SvgPicture.asset(
+                  AppAssets.icon('plus.svg'),
+                  width: 23,
+                  height: 23,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.primary,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               const SizedBox(width: 10),
             ],
@@ -252,6 +290,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                             ),
                           ],
                         ),
+                        Container(height: 16),
                         ..._visibleWords.map(
                           (word) => _buildWordCard(word),
                         ),
@@ -298,7 +337,11 @@ class _VocabularyViewState extends State<VocabularyView> {
               icon: Icons.menu_book_outlined,
               iconAsset: AppAssets.icon('book-open.svg'),
             ),
-            const BottomNavItem(label: 'Progress', icon: Icons.bar_chart),
+            BottomNavItem(
+              label: 'Progress',
+              icon: Icons.bar_chart,
+              iconAsset: AppAssets.icon('Progress.svg'),
+            ),
             BottomNavItem(
               label: 'Profile',
               icon: Icons.person_outline,

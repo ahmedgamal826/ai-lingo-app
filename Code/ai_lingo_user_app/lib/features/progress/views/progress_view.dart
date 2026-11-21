@@ -423,6 +423,7 @@ class _ProgressViewState extends State<ProgressView> {
             BottomNavItem(
               label: 'Progress',
               icon: Icons.bar_chart_outlined,
+              iconAsset: AppAssets.icon('Progress.svg'),
             ),
             BottomNavItem(
               label: 'Profile',
