@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'edit_word_view.dart';
+import 'delete_word_confirmation_view.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
@@ -22,7 +23,7 @@ class WordDetailView extends StatefulWidget {
     this.source = 'Saved from Restaurant · Nov 9, 2026',
     this.relatedExpressions = const ['Make room for', 'Provide for', 'Host'],
     this.isFavorite = true,
-    this.onWordUpdated,
+    this.onWordUpdated, this.onWordDeleted,
   });
 
   final String word;
@@ -34,6 +35,7 @@ class WordDetailView extends StatefulWidget {
   final List<String> relatedExpressions;
   final bool isFavorite;
   final ValueChanged<EditedVocabularyWord>? onWordUpdated;
+  final VoidCallback? onWordDeleted;
 
   @override
   State<WordDetailView> createState() => _WordDetailViewState();
@@ -74,24 +76,19 @@ class _WordDetailViewState extends State<WordDetailView> {
   }
 
   Future<void> _deleteWord() async {
-    final shouldDelete = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Delete Word'),
-        content: Text('Delete "${_word}" from your vocabulary?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('Delete'),
-          ),
-        ],
+    final shouldDelete = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DeleteWordConfirmationView(word: _word),
       ),
     );
-    if (shouldDelete == true && mounted) Navigator.pop(context);
+
+    // Only leave Word Detail after the user confirms the deletion.
+    // Choosing "Keep Learning This Word" returns to Word Detail unchanged.
+    if (shouldDelete == true && mounted) {
+      widget.onWordDeleted?.call();
+      Navigator.pop(context);
+    }
   }
 
   @override

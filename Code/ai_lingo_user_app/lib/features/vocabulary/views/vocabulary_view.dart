@@ -443,6 +443,11 @@ class _VocabularyViewState extends State<VocabularyView> {
               word.favorite = updated.isFavorite;
             });
           },
+          onWordDeleted: () {
+            setState(() {
+              _words.remove(word);
+            });
+          },
         ),
       ),
     );
