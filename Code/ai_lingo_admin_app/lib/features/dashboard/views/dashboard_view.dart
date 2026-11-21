@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../quizzes/views/quiz_form_view.dart';
 import '../models/dashboard_models.dart';
 import '../widgets/dashboard_header.dart';
 import '../widgets/dashboard_section_title.dart';
@@ -13,7 +14,18 @@ import '../widgets/welcome_row.dart';
 /// Admin dashboard tab. No Scaffold here: the app shell (with the bottom
 /// navigation) will wrap it.
 class DashboardView extends StatelessWidget {
-  const DashboardView({super.key});
+  const DashboardView({
+    super.key,
+    this.onCreateQuiz,
+    this.onBroadcast,
+    this.onComplaints,
+  });
+
+  /// Optional overrides. If [onCreateQuiz] is null, the dashboard opens the
+  /// Create Quiz screen itself.
+  final VoidCallback? onCreateQuiz;
+  final VoidCallback? onBroadcast;
+  final VoidCallback? onComplaints;
 
   // TODO: move to AppColors once the team agrees on a background color.
   static const Color _background = Color(0xFFF8F9FC);
@@ -57,9 +69,16 @@ class DashboardView extends StatelessWidget {
     ),
   ];
 
-  // No fixed height: each card takes the height of its own content, so the
-  // text can never overflow. Both cards in a row have the same content
-  // layout, so they end up the same height.
+  void _openCreateQuiz(BuildContext context) {
+    if (onCreateQuiz != null) {
+      onCreateQuiz!();
+      return;
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const QuizFormView.create()),
+    );
+  }
+
   Widget _statsRow(DashboardStat a, DashboardStat b) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,24 +126,27 @@ class DashboardView extends StatelessWidget {
                 SizedBox(height: 12.h),
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: QuickActionTile(
                         iconName: 'plus',
                         label: 'Create quiz',
+                        onTap: () => _openCreateQuiz(context),
                       ),
                     ),
                     SizedBox(width: 8.w),
-                    const Expanded(
+                    Expanded(
                       child: QuickActionTile(
                         iconName: 'megaphone',
                         label: 'Broadcast',
+                        onTap: onBroadcast,
                       ),
                     ),
                     SizedBox(width: 8.w),
-                    const Expanded(
+                    Expanded(
                       child: QuickActionTile(
                         iconName: 'inbox',
                         label: 'Complaints',
+                        onTap: onComplaints,
                       ),
                     ),
                   ],
