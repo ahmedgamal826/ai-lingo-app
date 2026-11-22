@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_strings.dart';
-import '../../../core/widgets/custom_bottom_nav_bar.dart';
-import '../../../core/widgets/placeholder_tab_page.dart';
+import '../core/widgets/custom_bottom_nav_bar.dart';
+import '../core/widgets/placeholder_tab_page.dart';
 import '../../complaints/views/complaints_view.dart';
 
 /// Root admin shell with persistent bottom navigation.

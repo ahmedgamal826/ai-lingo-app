@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../core/widgets/custom_text.dart';
 import '../models/quiz_result_models.dart';
 
 class QuizResultsStatsRow extends StatelessWidget {

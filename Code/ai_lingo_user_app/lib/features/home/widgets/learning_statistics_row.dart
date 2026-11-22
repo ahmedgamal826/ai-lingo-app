@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../core/widgets/custom_text.dart';
 import '../models/home_models.dart';
 import 'home_scale.dart';
 

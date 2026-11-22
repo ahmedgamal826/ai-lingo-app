@@ -4,8 +4,8 @@ import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../core/widgets/custom_card.dart';
+import '../core/widgets/custom_text.dart';
 import '../models/leaderboard_models.dart';
 
 class LeaderboardPodiumCard extends StatelessWidget {

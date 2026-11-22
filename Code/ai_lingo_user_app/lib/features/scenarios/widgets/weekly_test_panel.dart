@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_button.dart';
+import '../core/widgets/custom_button.dart';
 import '../models/weekly_test_models.dart';
 import 'weekly_test_information_card.dart';
 import 'weekly_test_message_card.dart';

@@ -4,7 +4,7 @@ import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../core/widgets/custom_text.dart';
 
 class ScenariosLevelFilter extends StatelessWidget {
   const ScenariosLevelFilter({super.key, required this.levelBadge});
