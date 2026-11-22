@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/widgets/custom_bottom_nav_bar.dart';
-import '../../../core/widgets/custom_card.dart';
 import '../../vocabulary/views/vocabulary_view.dart';
+import '../widgets/progress_streak_card.dart';
+import '../widgets/weekly_activity_card.dart';
+import '../widgets/progress_stat_card.dart';
+import '../widgets/conversation_score_card.dart';
+import '../widgets/progress_level_caption.dart';
 
 /// Progress screen built with the project's existing shared widgets.
 class ProgressView extends StatefulWidget {
@@ -21,9 +24,6 @@ class _ProgressViewState extends State<ProgressView> {
 
   @override
   Widget build(BuildContext context) {
-    const activityValues = [22.0, 42.0, 30.0, 54.0, 36.0, 47.0, 18.0];
-    const activityLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
     return Theme(
       data: Theme.of(context).copyWith(
         navigationBarTheme: NavigationBarThemeData(
@@ -71,322 +71,33 @@ class _ProgressViewState extends State<ProgressView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                CustomCard.hero(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Expanded(
-                            child: Text(
-                              '7 days. One great habit.',
-                              style: TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 9,
-                              vertical: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.warningLight,
-                              borderRadius: BorderRadius.circular(
-                                AppDimensions.radiusFull,
-                              ),
-                            ),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.local_fire_department,
-                                  size: 13,
-                                  color: AppColors.warning,
-                                ),
-                                SizedBox(width: 3),
-                                Text(
-                                  'Streak',
-                                  style: TextStyle(
-                                    color: AppColors.warning,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'You practiced every day this week. Keep your\\nmomentum going!',
-                        style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 11,
-                          height: 1.45,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const ProgressStreakCard(),
                 const SizedBox(height: 12),
-                CustomCard(
-                  backgroundColor: AppColors.white,
-                  elevation: 0,
-                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          Expanded(
-                            child: Text(
-                              'Weekly activity',
-                              style: TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Nov 9–15',
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children:  [
-                          Text(
-                            '85 min',
-                            style: TextStyle(
-                              color: AppColors.textPrimary,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          SizedBox(width: 7),
-                          Transform.translate(
-                            offset: Offset(0, -4),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.arrow_upward,
-                                  size: 10,
-                                  color: AppColors.success,
-                                ),
-                                SizedBox(width: 2),
-                                Text(
-                                  '18% from last week',
-                                  style: TextStyle(
-                                    color: AppColors.success,
-                                    fontSize: 9,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        height: 91,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: List.generate(activityValues.length, (index) {
-                            final active = index == 3;
-                            return Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height: activityValues[index],
-                                    width: 15,
-                                    decoration: BoxDecoration(
-                                      color: active
-                                          ? AppColors.primary
-                                          : AppColors.primaryLight,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    activityLabels[index],
-                                    style: const TextStyle(
-                                      color: AppColors.textSecondary,
-                                      fontSize: 9,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const WeeklyActivityCard(),
                 const SizedBox(height: 12),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(
-                      child: CustomCard(
-                        backgroundColor: AppColors.white,
-                        elevation: 0,
-                        padding: const EdgeInsets.fromLTRB(12, 11, 10, 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              AppAssets.icon('chat_bubbles.svg'),
-                              width: 19,
-                              height: 19,
-                              colorFilter: const ColorFilter.mode(
-                                AppColors.primary,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            const SizedBox(height: 7),
-                            const Text(
-                              '24',
-                              style: TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            const Text(
-                              'Conversations completed',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: AppColors.textSecondary,
-                                fontSize: 9,
-                              ),
-                            ),
-                          ],
-                        ),
+                      child: ProgressStatCard(
+                        iconAsset: 'chat_bubbles.svg',
+                        value: '24',
+                        label: 'Conversations completed',
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10),
                     Expanded(
-                      child: CustomCard(
-                        backgroundColor: AppColors.white,
-                        elevation: 0,
-                        padding: const EdgeInsets.fromLTRB(12, 11, 10, 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              AppAssets.icon('book-open.svg'),
-                              width: 19,
-                              height: 19,
-                              colorFilter: const ColorFilter.mode(
-                                AppColors.primary,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            const SizedBox(height: 7),
-                            const Text(
-                              '128',
-                              style: TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            const Text(
-                              'Words learned',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: AppColors.textSecondary,
-                                fontSize: 9,
-                              ),
-                            ),
-                          ],
-                        ),
+                      child: ProgressStatCard(
+                        iconAsset: 'book-open.svg',
+                        value: '128',
+                        label: 'Words learned',
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                CustomCard(
-                  backgroundColor: AppColors.white,
-                  elevation: 0,
-                  padding: const EdgeInsets.fromLTRB(12, 11, 12, 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          Expanded(
-                            child: Text(
-                              'Average conversation score',
-                              style: TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            '86%',
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                          AppDimensions.radiusFull,
-                        ),
-                        child: const LinearProgressIndicator(
-                          value: 0.86,
-                          minHeight: 5,
-                          backgroundColor: AppColors.indicatorInactive,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            AppColors.primary,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Grammar 85 · Vocabulary 88 · Conversation 86',
-                        style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 9,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const ConversationScoreCard(),
                 const SizedBox(height: 14),
-                const Center(
-                  child: Text(
-                    'B1 Intermediate · Learning since Oct 12, 2026',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
+                const ProgressLevelCaption(),
               ],
             ),
           ),
