@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../constants/app_strings.dart';
-import '../theme/app_dimensions.dart';
-import '../../features/auth/widgets/custom_text.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/theme/app_dimensions.dart';
+import 'custom_text.dart';
 
 class CustomDialog {
   CustomDialog._();
