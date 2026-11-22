@@ -1,15 +1,14 @@
+import 'package:ai_lingo_admin_app/features/auth/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'core/constants/app_strings.dart';
-import 'features/shell/views/main_shell_view.dart';
+// import 'package:ai_lingo_admin_app/.../login_screen.dart';
 
 void main() {
-  runApp(const AiLingoAdminApp());
+  runApp(const MyApp());
 }
 
-class AiLingoAdminApp extends StatelessWidget {
-  const AiLingoAdminApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +18,10 @@ class AiLingoAdminApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          title: AppStrings.appName,
           debugShowCheckedModeBanner: false,
-          home: child,
+          home: const LoginScreen(),
         );
       },
-      child: const MainShellView(),
     );
   }
 }
