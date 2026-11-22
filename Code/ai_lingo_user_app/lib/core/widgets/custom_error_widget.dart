@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_strings.dart';
 import '../theme/app_dimensions.dart';
-import 'custom_button.dart';
-import 'custom_text.dart';
+import '../../features/auth/widgets/custom_button.dart';
+import '../../features/auth/widgets/custom_text.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({
@@ -25,10 +25,7 @@ class CustomErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.error_outline,
-              size: AppDimensions.iconLg * 1.5,
-            ),
+            const Icon(Icons.error_outline, size: AppDimensions.iconLg * 1.5),
             const SizedBox(height: AppDimensions.spaceMd),
             CustomText(
               text: message ?? AppStrings.somethingWentWrong,

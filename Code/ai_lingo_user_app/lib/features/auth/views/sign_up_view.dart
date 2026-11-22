@@ -1,9 +1,9 @@
 import 'package:ai_lingo_user_app/core/theme/app_colors.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_app_bar.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_button.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_dialog.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_text.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_text_field.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_app_bar.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_button.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_dialog.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_text.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_text_field.dart';
 import 'package:ai_lingo_user_app/features/auth/views/login_view.dart';
 import 'package:flutter/material.dart';
 

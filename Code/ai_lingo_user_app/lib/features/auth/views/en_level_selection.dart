@@ -1,8 +1,8 @@
 import 'package:ai_lingo_user_app/core/theme/app_colors.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_app_bar.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_button.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_app_bar.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_button.dart';
 import 'package:ai_lingo_user_app/core/widgets/custom_card.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_text.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class _Level {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../../auth/widgets/custom_text.dart';
 import '../viewmodels/home_cubit.dart';
 import '../viewmodels/home_state.dart';
 
@@ -32,9 +32,9 @@ class _HomeViewBody extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomText(text: state.title,),
+                  CustomText(text: state.title),
                   const SizedBox(height: AppDimensions.spaceMd),
-                  CustomText(text: state.subtitle,),
+                  CustomText(text: state.subtitle),
                 ],
               );
             },

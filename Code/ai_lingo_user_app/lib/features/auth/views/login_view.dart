@@ -1,7 +1,7 @@
 import 'package:ai_lingo_user_app/core/theme/app_colors.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_button.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_text.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_text_field.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_button.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_text.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_text_field.dart';
 import 'package:ai_lingo_user_app/features/auth/views/en_level_selection.dart';
 import 'package:ai_lingo_user_app/features/auth/views/forget_password_view.dart';
 import 'package:ai_lingo_user_app/features/auth/views/sign_up_view.dart';
