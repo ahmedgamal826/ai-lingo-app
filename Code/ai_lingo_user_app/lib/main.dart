@@ -5,6 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/app_strings.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: AppColors.white,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: AppColors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarDividerColor: AppColors.white,
+    ),
+  );
   runApp(const AiLingoApp());
 }
 

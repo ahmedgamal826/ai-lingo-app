@@ -22,25 +22,25 @@
 // class _HomeViewBody extends StatelessWidget {
 //   const _HomeViewBody();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SafeArea(
-//         child: Center(
-//           child: BlocBuilder<HomeCubit, HomeState>(
-//             builder: (context, state) {
-//               return Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   CustomText(state.title),
-//                   const SizedBox(height: AppDimensions.spaceMd),
-//                   CustomText(state.subtitle),
-//                 ],
-//               );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(text: state.title),
+                  const SizedBox(height: AppDimensions.spaceMd),
+                  CustomText(text: state.subtitle),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

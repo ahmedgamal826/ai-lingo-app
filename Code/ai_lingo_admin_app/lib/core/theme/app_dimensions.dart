@@ -28,7 +28,9 @@ class AppDimensions {
   static const double buttonHeight = 48;
   static const double textFieldHeight = 52;
   static const double appBarHeight = 56;
-  static const double bottomNavHeight = 64;
+  static const double bottomNavHeight = 65;
+  static const double screenPadding = 20;
+  static const double segmentedHeight = 44;
 
   // Icon sizes
   static const double iconSm = 16;

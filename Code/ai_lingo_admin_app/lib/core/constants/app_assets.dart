@@ -1,7 +1,4 @@
 /// Centralized asset path helpers.
-///
-/// Only declare paths for folders that exist. Add concrete files here
-/// when design assets are dropped into `assets/`.
 class AppAssets {
   AppAssets._();
 
@@ -15,4 +12,18 @@ class AppAssets {
   static String icon(String fileName) => '$iconsPath/$fileName';
   static String illustration(String fileName) => '$illustrationsPath/$fileName';
   static String animation(String fileName) => '$animationsPath/$fileName';
+
+  static const String search = '$iconsPath/search.svg';
+  static const String slidersHorizontal = '$iconsPath/sliders-horizontal.svg';
+  static const String layoutGrid = '$iconsPath/layout-grid.svg';
+  static const String clipboardCheck = '$iconsPath/clipboard-check.svg';
+  static const String messagesSquare = '$iconsPath/messages-square.svg';
+  static const String bell = '$iconsPath/bell.svg';
+  static const String userRound = '$iconsPath/user-round.svg';
+  static const String arrowLeft = '$iconsPath/arrow-left.svg';
+  static const String send = '$iconsPath/send.svg';
+  static const String chevronDown = '$iconsPath/chevron-down.svg';
+  static const String externalLink = '$iconsPath/external-link.svg';
+  static const String messageCheck = '$iconsPath/message-check.svg';
+  static const String checkCircle = '$iconsPath/check-circle.svg';
 }
