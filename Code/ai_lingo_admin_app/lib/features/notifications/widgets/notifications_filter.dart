@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../widgets_core/custom_text.dart';
 
 class NotificationsFilter extends StatelessWidget {
   const NotificationsFilter({

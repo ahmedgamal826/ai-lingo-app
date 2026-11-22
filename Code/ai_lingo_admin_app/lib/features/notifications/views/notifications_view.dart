@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../widgets/notification_card.dart';
 import '../widgets/notification_data.dart';
 import '../widgets/notification_section_header.dart';
 import '../widgets/notifications_filter.dart';
 import '../widgets/notifications_header.dart';
+import '../widgets_core/custom_bottom_nav_bar.dart';
 
 class NotificationsView extends StatefulWidget {
   const NotificationsView({super.key});
