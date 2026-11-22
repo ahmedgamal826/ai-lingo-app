@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../core/widgets/custom_text.dart';
 import '../models/weekly_test_models.dart';
 
 class WeeklyTestInformationCard extends StatelessWidget {

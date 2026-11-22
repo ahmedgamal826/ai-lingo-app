@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_strings.dart';
-import '../../../core/widgets/custom_bottom_nav_bar.dart';
-import '../../../core/widgets/placeholder_tab_page.dart';
+import '../core/widgets/custom_bottom_nav_bar.dart';
+import '../core/widgets/placeholder_tab_page.dart';
 import '../../scenarios/views/scenarios_view.dart';
 import 'home_view.dart';
 

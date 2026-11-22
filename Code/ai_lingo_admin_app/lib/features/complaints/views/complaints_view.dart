@@ -7,7 +7,7 @@ import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_loading.dart';
+import '../core/widgets/custom_loading.dart';
 import '../models/complaint_models.dart';
 import '../viewmodels/complaints_cubit.dart';
 import '../viewmodels/complaints_state.dart';
