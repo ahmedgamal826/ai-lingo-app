@@ -1,6 +1,6 @@
 import 'package:ai_lingo_user_app/core/theme/app_colors.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_button.dart';
-import 'package:ai_lingo_user_app/core/widgets/custom_card.dart';
+import 'package:ai_lingo_user_app/features/auth/widgets/custom_card.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_text.dart';
 import 'package:ai_lingo_user_app/features/auth/views/login_view.dart';
 import 'package:ai_lingo_user_app/features/auth/views/onboarding/page1.dart';

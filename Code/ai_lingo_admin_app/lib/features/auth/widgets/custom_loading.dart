@@ -1,7 +1,7 @@
+import 'package:ai_lingo_admin_app/core/constants/app_strings.dart';
+import 'package:ai_lingo_admin_app/core/theme/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/app_strings.dart';
-import '../theme/app_dimensions.dart';
 import 'custom_text.dart';
 
 class CustomLoading extends StatelessWidget {
@@ -25,10 +25,7 @@ class CustomLoading extends StatelessWidget {
           SizedBox(
             width: size,
             height: size,
-            child: CircularProgressIndicator(
-              strokeWidth: 2.5,
-              color: color,
-            ),
+            child: CircularProgressIndicator(strokeWidth: 2.5, color: color),
           ),
           if (message != null) ...[
             const SizedBox(height: AppDimensions.spaceMd),

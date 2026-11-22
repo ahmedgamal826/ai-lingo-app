@@ -1,7 +1,7 @@
+import 'package:ai_lingo_admin_app/core/constants/app_strings.dart';
+import 'package:ai_lingo_admin_app/core/theme/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/app_strings.dart';
-import '../theme/app_dimensions.dart';
 import 'custom_button.dart';
 import 'custom_text.dart';
 

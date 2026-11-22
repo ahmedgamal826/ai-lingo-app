@@ -1,7 +1,6 @@
+import 'package:ai_lingo_admin_app/core/theme/app_colors.dart';
+import 'package:ai_lingo_admin_app/core/theme/app_dimensions.dart';
 import 'package:flutter/material.dart';
-
-import '../theme/app_colors.dart';
-import '../theme/app_dimensions.dart';
 
 /// Reusable single-selection dropdown. Generic `T` so it works with
 /// String, enums, or any model.
@@ -62,12 +61,12 @@ class CustomDropDownMenu<T> extends StatelessWidget {
           hint: hint == null
               ? null
               : Text(
-            hint!,
-            style: const TextStyle(
-              fontSize: 14,
-              color: AppColors.textSecondary,
-            ),
-          ),
+                  hint!,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
           decoration: InputDecoration(
             filled: true,
             fillColor: AppColors.white,
@@ -84,16 +83,16 @@ class CustomDropDownMenu<T> extends StatelessWidget {
           items: items
               .map(
                 (item) => DropdownMenuItem<T>(
-              value: item,
-              child: Text(
-                itemLabel(item),
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: AppColors.textPrimary,
+                  value: item,
+                  child: Text(
+                    itemLabel(item),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
+              )
               .toList(),
           onChanged: enabled ? onChanged : null,
         ),

@@ -1,7 +1,6 @@
+import 'package:ai_lingo_admin_app/core/theme/app_colors.dart';
+import 'package:ai_lingo_admin_app/core/theme/app_dimensions.dart';
 import 'package:flutter/material.dart';
-
-import '../theme/app_colors.dart';
-import '../theme/app_dimensions.dart';
 
 /// Color tone shared by badges and info cards.
 enum CustomTone { neutral, info, success, warning, danger, purple }
@@ -57,7 +56,10 @@ class CustomCard extends StatelessWidget {
           const SizedBox(height: AppDimensions.spaceXs),
           Text(
             title,
-            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+            style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.textSecondary,
+            ),
           ),
           if (caption != null) ...[
             const SizedBox(height: AppDimensions.spaceXs),
@@ -124,7 +126,9 @@ class CustomCard extends StatelessWidget {
             leading,
             const SizedBox(width: AppDimensions.spaceMd),
           ],
-          Expanded(child: _TitleSubtitle(title: title, subtitle: subtitle)),
+          Expanded(
+            child: _TitleSubtitle(title: title, subtitle: subtitle),
+          ),
           if (selected)
             const Icon(
               Icons.check_circle_outline,
@@ -156,7 +160,9 @@ class CustomCard extends StatelessWidget {
             leading,
             const SizedBox(width: AppDimensions.spaceMd),
           ],
-          Expanded(child: _TitleSubtitle(title: title, subtitle: subtitle)),
+          Expanded(
+            child: _TitleSubtitle(title: title, subtitle: subtitle),
+          ),
           if (trailing != null) ...[
             const SizedBox(width: AppDimensions.spaceMd),
             trailing,
@@ -289,7 +295,10 @@ class _TitleSubtitle extends StatelessWidget {
           const SizedBox(height: AppDimensions.spaceXs),
           Text(
             subtitle!,
-            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+            style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.textSecondary,
+            ),
           ),
         ],
       ],
