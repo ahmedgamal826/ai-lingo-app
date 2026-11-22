@@ -1,8 +1,8 @@
+import 'package:ai_lingo_user_app/features/auth/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/app_strings.dart';
-import 'features/home/views/home_view.dart';
 
 void main() {
   runApp(const AiLingoApp());
@@ -18,7 +18,7 @@ class AiLingoApp extends StatelessWidget {
         return MaterialApp(
           title: AppStrings.appName,
           debugShowCheckedModeBanner: false,
-          home: const HomeView(),
+          home: const SplashScreen(),
         );
       },
     );
