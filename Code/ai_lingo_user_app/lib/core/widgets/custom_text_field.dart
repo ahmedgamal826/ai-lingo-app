@@ -23,6 +23,16 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.onSubmitted,
     this.autofillHints,
+    this.showLabel = true,
+    this.maxLines = 1,
+    this.minLines,
+    this.filled = false,
+    this.fillColor = AppColors.white,
+    this.contentPadding,
+    this.borderRadius = AppDimensions.radiusMd,
+    this.fontSize = AppFontSizes.font13,
+    this.textCapitalization = TextCapitalization.none,
+    this.onChanged,
   });
 
   final TextEditingController controller;
@@ -36,6 +46,16 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final VoidCallback? onSubmitted;
   final Iterable<String>? autofillHints;
+  final bool showLabel;
+  final int? maxLines;
+  final int? minLines;
+  final bool filled;
+  final Color fillColor;
+  final EdgeInsetsGeometry? contentPadding;
+  final double borderRadius;
+  final double fontSize;
+  final TextCapitalization textCapitalization;
+  final ValueChanged<String>? onChanged;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
