@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import '../../../core/theme/app_dimensions.dart';
-// import '../../../core/widgets/custom_text.dart';
-// import '../viewmodels/home_cubit.dart';
-// import '../viewmodels/home_state.dart';
+import '../../../core/theme/app_dimensions.dart';
+import '../../notifications/widgets_core/custom_text.dart';
+import '../viewmodels/home_cubit.dart';
+import '../viewmodels/home_state.dart';
 
 // /// Home screen View — UI only.
 // class HomeView extends StatelessWidget {
