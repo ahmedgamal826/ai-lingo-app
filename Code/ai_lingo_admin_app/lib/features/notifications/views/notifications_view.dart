@@ -96,6 +96,7 @@ class _NotificationsViewState extends State<NotificationsView> {
                         onTap: () => setState(() {
                           for (final item in _notifications) {
                             item.unread = false;
+                            item.type = 'Read';
                           }
                         }),
                         child: CustomText(
@@ -150,13 +151,14 @@ class _NotificationsViewState extends State<NotificationsView> {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => const BroadcastAnnouncementView(),
-              ),
-            ),
+            onTap: () => setState(() {
+              for (final item in _notifications) {
+                item.unread = false;
+                item.type = 'Read';
+              }
+            }),
             child: SvgPicture.asset(
-              AppAssets.icon('plus.svg'),
+              AppAssets.icon('check-check.svg'),
               width: 20.w,
               height: 20.w,
               colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
@@ -224,7 +226,7 @@ class _NotificationData {
   final String date;
   final String icon;
   bool unread;
-  final String type;
+  String type;
 }
 
 class _NotificationCard extends StatelessWidget {
