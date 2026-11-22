@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/app_strings.dart';
-import '../../../core/theme/app_dimensions.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/theme/app_dimensions.dart';
 import 'custom_button.dart';
 import 'custom_text.dart';
 
