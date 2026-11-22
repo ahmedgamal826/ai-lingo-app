@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/theme/app_colors.dart';
 import 'core/widgets/custom_bottom_nav_bar.dart';
 import 'features/dashboard/views/dashboard_view.dart';
-import 'features/quizzes/views/quizzes_view.dart';
+import 'features/quizzes/views/quizzes_flow.dart';
 
 // Local preview only: do NOT commit this file.
 void main() => runApp(const _AdminPreview());
@@ -63,7 +63,7 @@ class _PreviewShell extends StatefulWidget {
 class _PreviewShellState extends State<_PreviewShell> {
   int _index = 0;
 
-  static const List<Widget> _pages = [DashboardView(), QuizzesView()];
+  static const List<Widget> _pages = [DashboardView(), QuizzesFlow()];
 
   @override
   Widget build(BuildContext context) {

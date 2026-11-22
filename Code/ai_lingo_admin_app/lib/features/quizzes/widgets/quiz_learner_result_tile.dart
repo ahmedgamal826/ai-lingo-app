@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_card.dart';
+import 'custom_card.dart';
 import '../models/quiz_models.dart';
 import 'quiz_avatar.dart';
 import 'quiz_svg_icon.dart';

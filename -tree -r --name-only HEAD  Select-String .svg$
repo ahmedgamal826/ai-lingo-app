@@ -1,0 +1,52 @@
+[33mcommit a1dfa1b6fb15c80346b4cf4dc55759e9a376e4e6[m
+Author: Yasmin Emad Mahmoud <113386972+Yasmin-emad@users.noreply.github.com>
+Date:   Sat Nov 14 11:59:17 2026 +0200
+
+    Figma's icons for the admin app
+
+A	Code/ai_lingo_admin_app/assets/icons/Edit.svg
+A	Code/ai_lingo_admin_app/assets/icons/Unread indicator.svg
+A	Code/ai_lingo_admin_app/assets/icons/bell.svg
+A	Code/ai_lingo_admin_app/assets/icons/book-open.svg
+A	Code/ai_lingo_admin_app/assets/icons/calendar-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/calendar-days.svg
+A	Code/ai_lingo_admin_app/assets/icons/calendar.svg
+A	Code/ai_lingo_admin_app/assets/icons/check-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/chevron-down.svg
+A	Code/ai_lingo_admin_app/assets/icons/chevron-right.svg
+A	Code/ai_lingo_admin_app/assets/icons/circle-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/clipboard-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/clipboard-list.svg
+A	Code/ai_lingo_admin_app/assets/icons/clock.svg
+A	Code/ai_lingo_admin_app/assets/icons/download.svg
+A	Code/ai_lingo_admin_app/assets/icons/eye-off.svg
+A	Code/ai_lingo_admin_app/assets/icons/eye.svg
+A	Code/ai_lingo_admin_app/assets/icons/file-text.svg
+A	Code/ai_lingo_admin_app/assets/icons/globe.svg
+A	Code/ai_lingo_admin_app/assets/icons/graduation-cap.svg
+A	Code/ai_lingo_admin_app/assets/icons/inbox.svg
+A	Code/ai_lingo_admin_app/assets/icons/info.svg
+A	Code/ai_lingo_admin_app/assets/icons/key-round.svg
+A	Code/ai_lingo_admin_app/assets/icons/layout-dashboard.svg
+A	Code/ai_lingo_admin_app/assets/icons/life-buoy.svg
+A	Code/ai_lingo_admin_app/assets/icons/log-out.svg
+A	Code/ai_lingo_admin_app/assets/icons/mail.svg
+A	Code/ai_lingo_admin_app/assets/icons/megaphone.svg
+A	Code/ai_lingo_admin_app/assets/icons/message-square-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/message-square-warning.svg
+A	Code/ai_lingo_admin_app/assets/icons/messages-square.svg
+A	Code/ai_lingo_admin_app/assets/icons/pencil.svg
+A	Code/ai_lingo_admin_app/assets/icons/plus.svg
+A	Code/ai_lingo_admin_app/assets/icons/search.svg
+A	Code/ai_lingo_admin_app/assets/icons/send.svg
+A	Code/ai_lingo_admin_app/assets/icons/settings-2.svg
+A	Code/ai_lingo_admin_app/assets/icons/shield-alert.svg
+A	Code/ai_lingo_admin_app/assets/icons/shield-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/sliders-horizontal.svg
+A	Code/ai_lingo_admin_app/assets/icons/sparkles.svg
+A	Code/ai_lingo_admin_app/assets/icons/trash-2.svg
+A	Code/ai_lingo_admin_app/assets/icons/trophy.svg
+A	Code/ai_lingo_admin_app/assets/icons/user-round-check.svg
+A	Code/ai_lingo_admin_app/assets/icons/user-round-pen.svg
+A	Code/ai_lingo_admin_app/assets/icons/user-round.svg
+A	Code/ai_lingo_admin_app/assets/icons/users-round.svg
