@@ -32,7 +32,7 @@ class CustomLoading extends StatelessWidget {
           ),
           if (message != null) ...[
             const SizedBox(height: AppDimensions.spaceMd),
-            CustomText(message!),
+            CustomText(text: message!),
           ],
         ],
       ),

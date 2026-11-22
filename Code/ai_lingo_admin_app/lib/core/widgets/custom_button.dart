@@ -1,7 +1,7 @@
 import 'package:ai_lingo_admin_app/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/Core/shared/custom_text.dart';
-import 'package:ai_lingo_admin_app/core/Theme/app_colors.dart';
+import 'package:ai_lingo_admin_app/core/theme/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:nti_final/constants/app_colors.dart';
 // import 'package:nti_final/shared/custom_text.dart';
@@ -12,23 +12,38 @@ class CustomDarkButton extends StatelessWidget {
     this.onTap,
     required this.text,
     this.width,
+    this.icon,
+    this.iconWidget,
+    this.borderRadius = 12.0,
   });
   final VoidCallback? onTap;
   final String text;
   final double? width;
+  final IconData? icon;
+  final Widget? iconWidget;
+  final double borderRadius;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         height: 50.h,
-        width: 170 ?? 350,
+        width: width ?? 350,
         decoration: BoxDecoration(
           color: Color(0xff5B6CFF),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Center(
-          child: CustomText(text: text, color: Colors.white, fontSize: 14.sp),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (iconWidget != null || icon != null) ...[
+                iconWidget ?? Icon(icon, size: 16.w, color: Colors.white),
+                SizedBox(width: 8.w),
+              ],
+              CustomText(text: text, color: Colors.white, fontSize: 14.sp),
+            ],
+          ),
         ),
       ),
     );
