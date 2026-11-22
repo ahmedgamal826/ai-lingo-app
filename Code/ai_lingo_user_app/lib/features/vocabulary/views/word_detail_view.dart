@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../progress/widgets_core/custom_button.dart';
+import '../../progress/widgets_core/custom_card.dart';
+import '../../progress/widgets_core/custom_icon_button.dart';
 
 import 'edit_word_view.dart';
 import 'delete_word_confirmation_view.dart';
@@ -9,9 +12,6 @@ import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_font_sizes.dart';
-import '../../../core/widgets/custom_button.dart';
-import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_icon_button.dart';
 
 class WordDetailView extends StatefulWidget {
   const WordDetailView({

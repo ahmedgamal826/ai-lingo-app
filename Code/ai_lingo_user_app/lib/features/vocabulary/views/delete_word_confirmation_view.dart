@@ -6,9 +6,9 @@ import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_font_sizes.dart';
-import '../../../core/widgets/custom_button.dart';
-import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_icon_button.dart';
+import '../../progress/widgets_core/custom_button.dart';
+import '../../progress/widgets_core/custom_card.dart';
+import '../../progress/widgets_core/custom_icon_button.dart';
 
 /// Confirmation screen shown before removing a saved vocabulary word.
 class DeleteWordConfirmationView extends StatelessWidget {

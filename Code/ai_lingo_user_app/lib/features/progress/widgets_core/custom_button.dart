@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/Core/shared/custom_text.dart';
-import '../theme/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/theme/app_colors.dart';
 import 'custom_text.dart';
 // import 'package:nti_final/constants/app_colors.dart';
 // import 'package:nti_final/shared/custom_text.dart';
