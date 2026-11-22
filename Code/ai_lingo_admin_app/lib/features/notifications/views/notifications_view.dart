@@ -16,10 +16,6 @@ class NotificationsView extends StatefulWidget {
   State<NotificationsView> createState() => _NotificationsViewState();
 }
 
-
-
-
-
 class _NotificationsViewState extends State<NotificationsView> {
   int _selectedFilter = 0;
   int _selectedNav = 3;
