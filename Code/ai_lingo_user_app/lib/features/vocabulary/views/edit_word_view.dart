@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../core/constants/app_assets.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
@@ -211,12 +214,27 @@ class _EditWordViewState extends State<EditWordView> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    CustomIconButton(
-                      icon: _isFavorite ? Icons.star : Icons.star_border,
-                      color: AppColors.warning,
-                      size: 19,
+                    IconButton(
                       onPressed: () =>
                           setState(() => _isFavorite = !_isFavorite),
+                      icon: SvgPicture.asset(
+                        AppAssets.icon('Star.svg'),
+                        width: 19,
+                        height: 19,
+                        fit: BoxFit.contain,
+                        colorFilter: ColorFilter.mode(
+                          _isFavorite
+                              ? const Color(0xFFFFC107)
+                              : AppColors.textSecondary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(
+                        minWidth: 40,
+                        minHeight: 40,
+                      ),
+                      visualDensity: VisualDensity.compact,
                     ),
                     const SizedBox(width: 3),
                     const Text(

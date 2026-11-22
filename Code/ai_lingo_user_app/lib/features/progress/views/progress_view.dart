@@ -93,7 +93,7 @@ class _ProgressViewState extends State<ProgressView> {
                               vertical: 5,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFF4DF),
+                              color: AppColors.warningLight,
                               borderRadius: BorderRadius.circular(
                                 AppDimensions.radiusFull,
                               ),
@@ -104,13 +104,13 @@ class _ProgressViewState extends State<ProgressView> {
                                 Icon(
                                   Icons.local_fire_department,
                                   size: 13,
-                                  color: Color(0xFFFF9D24),
+                                  color: AppColors.warning,
                                 ),
                                 SizedBox(width: 3),
                                 Text(
                                   'Streak',
                                   style: TextStyle(
-                                    color: Color(0xFFB47A22),
+                                    color: AppColors.warning,
                                     fontSize: 10,
                                     fontWeight: FontWeight.w600,
                                   ),

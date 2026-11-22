@@ -7,7 +7,6 @@ import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_font_sizes.dart';
 import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_icon_button.dart';
 import '../../progress/views/progress_view.dart';
 import 'add_word_view.dart';
 import 'word_detail_view.dart';
@@ -276,7 +275,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: _showAddWordDialog,
+                                  onTap: _openAddWordPage,
                                   child: const Text(
                                     'Add word +',
                                     style: TextStyle(
@@ -527,14 +526,14 @@ class _VocabularyViewState extends State<VocabularyView> {
                       ),
                     ),
                   ),
-                  _smallIconButton(
-                    icon: Icons.volume_up_outlined,
+                  _smallAssetIconButton(
+                    assetName: 'Speaker.svg',
                     color: AppColors.primary,
                     onTap: () {},
                   ),
                   const SizedBox(width: 3),
-                  _smallIconButton(
-                    icon: word.favorite ? Icons.star : Icons.star_border,
+                  _smallAssetIconButton(
+                    assetName: 'Star.svg',
                     color: word.favorite
                         ? const Color(0xFFC58A28)
                         : AppColors.textSecondary,
@@ -582,19 +581,26 @@ class _VocabularyViewState extends State<VocabularyView> {
     );
   }
 
-  Widget _smallIconButton({
-    required IconData icon,
+  Widget _smallAssetIconButton({
+    required String assetName,
     required Color color,
     required VoidCallback onTap,
   }) {
-    return SizedBox(
-      width: 20,
-      height: 20,
-      child: CustomIconButton(
-        icon: icon,
-        onPressed: onTap,
-        color: color,
-        size: 14,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: SizedBox(
+        width: 24,
+        height: 24,
+        child: Center(
+          child: SvgPicture.asset(
+            AppAssets.icon(assetName),
+            width: 16,
+            height: 16,
+            fit: BoxFit.contain,
+            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+          ),
+        ),
       ),
     );
   }

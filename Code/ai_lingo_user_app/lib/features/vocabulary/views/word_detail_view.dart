@@ -162,11 +162,25 @@ class _WordDetailViewState extends State<WordDetailView> {
                         ),
                         Transform.translate(
                           offset: const Offset(0, -4),
-                          child: CustomIconButton(
-                            icon: Icons.volume_up_outlined,
-                            color: AppColors.primary,
-                            size: 21,
-                            onPressed: () {},
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {},
+                            child: SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  AppAssets.icon('Speaker.svg'),
+                                  width: 16,
+                                  height: 16,
+                                  fit: BoxFit.contain,
+                                  colorFilter: const ColorFilter.mode(
+                                    AppColors.primary,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
