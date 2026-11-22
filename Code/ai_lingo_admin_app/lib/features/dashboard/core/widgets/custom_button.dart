@@ -1,4 +1,4 @@
-﻿import 'package:ai_lingo_admin_app/features/quizzes/widgets/custom_text.dart';
+import 'package:ai_lingo_admin_app/features/dashboard/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/Core/shared/custom_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import 'custom_card.dart';
+import '../core/widgets/custom_card.dart';
 import '../models/dashboard_models.dart';
 import 'dashboard_svg_icon.dart';
 
