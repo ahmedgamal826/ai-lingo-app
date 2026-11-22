@@ -10,6 +10,8 @@ import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_drop_down_menu.dart';
 import '../../../core/widgets/custom_icon_button.dart';
 import '../../../core/widgets/custom_text_field.dart';
+import '../widgets/vocabulary_field_label.dart';
+import '../widgets/vocabulary_pronunciation_label.dart';
 
 class AddedVocabularyWord {
   const AddedVocabularyWord({
@@ -131,7 +133,7 @@ class _AddWordViewState extends State<AddWordView> {
                   ),
                 ),
                 const SizedBox(height: 13),
-                _fieldLabel('Word'),
+                VocabularyFieldLabel('Word'),
                 const SizedBox(height: 6),
                 CustomTextField(
                   controller: _wordController,
@@ -160,7 +162,7 @@ class _AddWordViewState extends State<AddWordView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          _pronunciationFieldLabel(),
+                          const VocabularyPronunciationLabel(),
                           const SizedBox(height: 6),
                           CustomTextField(
                             controller: _pronunciationController,
@@ -196,7 +198,7 @@ class _AddWordViewState extends State<AddWordView> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                _fieldLabel('Meaning'),
+                VocabularyFieldLabel('Meaning'),
                 const SizedBox(height: 6),
                 CustomTextField(
                   controller: _meaningController,
@@ -219,7 +221,7 @@ class _AddWordViewState extends State<AddWordView> {
                           : null,
                 ),
                 const SizedBox(height: 12),
-                _fieldLabel('Example sentence'),
+                VocabularyFieldLabel('Example sentence'),
                 const SizedBox(height: 6),
                 CustomTextField(
                   controller: _exampleController,
@@ -304,38 +306,4 @@ class _AddWordViewState extends State<AddWordView> {
     );
   }
 
-  Widget _pronunciationFieldLabel() {
-    return RichText(
-      text: TextSpan(
-        style: const TextStyle(
-          fontSize: AppFontSizes.font11,
-          fontWeight: FontWeight.w600,
-        ),
-        children: const [
-          TextSpan(
-            text: 'Pronunciation ',
-            style: TextStyle(color: AppColors.textPrimary),
-          ),
-          TextSpan(
-            text: '(optional)',
-            style: TextStyle(
-              color: AppColors.textSecondary,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _fieldLabel(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        color: AppColors.textPrimary,
-        fontSize: AppFontSizes.font11,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
 }

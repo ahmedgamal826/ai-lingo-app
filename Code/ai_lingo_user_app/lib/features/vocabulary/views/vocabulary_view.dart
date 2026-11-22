@@ -11,6 +11,9 @@ import '../../progress/views/progress_view.dart';
 import 'add_word_view.dart';
 import 'word_detail_view.dart';
 import 'edit_word_view.dart';
+import '../widgets/vocabulary_search_field.dart';
+import '../widgets/vocabulary_filter_tabs.dart';
+import '../widgets/vocabulary_word_card.dart';
 
 class VocabularyView extends StatefulWidget {
   const VocabularyView({super.key});
@@ -258,9 +261,9 @@ class _VocabularyViewState extends State<VocabularyView> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            _buildSearchField(),
+                            VocabularySearchField(controller: _searchController, onChanged: (_) => setState(() {})),
                             const SizedBox(height: 11),
-                            _buildFilterTabs(),
+                            VocabularyFilterTabs(selectedFilter: _selectedFilter, favoriteCount: _favoriteCount, onChanged: (index) => setState(() => _selectedFilter = index)),
                             const SizedBox(height: 11),
                             Row(
                               children: [
@@ -291,7 +294,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                         ),
                         Container(height: 16),
                         ..._visibleWords.map(
-                          (word) => _buildWordCard(word),
+                          (word) => VocabularyWordCard(word: word.word, phonetic: word.phonetic, meaning: word.meaning, example: word.example, isFavorite: word.favorite, onTap: () => _openWordDetail(word), onFavoriteTap: () => setState(() => word.favorite = !word.favorite)),
                         ),
                         if (_visibleWords.isEmpty)
                           const Padding(
@@ -352,97 +355,6 @@ class _VocabularyViewState extends State<VocabularyView> {
     );
   }
 
-  Widget _buildSearchField() {
-    return Container(
-      height: 42,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-      ),
-      child: TextField(
-        controller: _searchController,
-        onChanged: (_) => setState(() {}),
-        style: const TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: AppFontSizes.font13,
-        ),
-        decoration: InputDecoration(
-          hintText: 'Search your saved words',
-          hintStyle: const TextStyle(
-            color: AppColors.textSecondary,
-            fontSize: AppFontSizes.font11,
-          ),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.only(left: 11, right: 8),
-            child: SvgPicture.asset(
-              AppAssets.icon('search.svg'),
-              width: 14,
-              height: 14,
-              colorFilter: const ColorFilter.mode(
-                AppColors.textSecondary,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          prefixIconConstraints: const BoxConstraints(minWidth: 34),
-          contentPadding: const EdgeInsets.symmetric(vertical: 10),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-            borderSide: BorderSide.none,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-            borderSide: const BorderSide(color: AppColors.primarySoft),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFilterTabs() {
-    return Container(
-      height: 34,
-      padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(
-        color: AppColors.indicatorInactive,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          Expanded(child: _filterTab('All words · 128', 0)),
-          Expanded(child: _filterTab('Favorites · $_favoriteCount', 1)),
-        ],
-      ),
-    );
-  }
-
-  Widget _filterTab(String label, int index) {
-    final selected = _selectedFilter == index;
-    return GestureDetector(
-      onTap: () => setState(() => _selectedFilter = index),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 160),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: selected ? AppColors.white : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: selected ? AppColors.primary : AppColors.textSecondary,
-            fontSize: AppFontSizes.font11,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-
   void _openWordDetail(_VocabularyWord word) {
     // Keep the richer Figma copy for the reference word; all other entries
     // use the data already stored in their Vocabulary card.
@@ -495,115 +407,7 @@ class _VocabularyViewState extends State<VocabularyView> {
     );
   }
 
-  Widget _buildWordCard(_VocabularyWord word) {
-    // Figma card frame: 350 x 102. The height includes the card's padding.
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: SizedBox(
-        height: 102,
-        child: CustomCard(
-          backgroundColor: AppColors.white,
-          elevation: 0,
-          borderRadius: BorderRadius.circular(13),
-          onTap: () => _openWordDetail(word),
-          padding: const EdgeInsets.fromLTRB(12, 8, 10, 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      word.word,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: AppFontSizes.font16,
-                        height: 1.15,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  _smallAssetIconButton(
-                    assetName: 'Speaker.svg',
-                    color: AppColors.primary,
-                    onTap: () {},
-                  ),
-                  const SizedBox(width: 3),
-                  _smallAssetIconButton(
-                    assetName: 'Star.svg',
-                    color: word.favorite
-                        ? const Color(0xFFC58A28)
-                        : AppColors.textSecondary,
-                    onTap: () => setState(() => word.favorite = !word.favorite),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 2),
-              Text(
-                word.phonetic,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: AppFontSizes.font11,
-                  height: 1.15,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                word.meaning,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.textPrimary,
-                  fontSize: AppFontSizes.font13,
-                  height: 1.15,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                word.example,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: AppFontSizes.font11,
-                  height: 1.15,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget _smallAssetIconButton({
-    required String assetName,
-    required Color color,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: SizedBox(
-        width: 24,
-        height: 24,
-        child: Center(
-          child: SvgPicture.asset(
-            AppAssets.icon(assetName),
-            width: 16,
-            height: 16,
-            fit: BoxFit.contain,
-            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 class _VocabularyWord {

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'edit_word_view.dart';
 import 'delete_word_confirmation_view.dart';
+import '../widgets/vocabulary_pill.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
@@ -196,15 +197,15 @@ class _WordDetailViewState extends State<WordDetailView> {
                     const SizedBox(height: 9),
                     Row(
                       children: [
-                        _pill(
-                          _partOfSpeech,
+                        VocabularyPill(
+                          label: _partOfSpeech,
                           background: AppColors.primaryLight,
                           foreground: AppColors.primary,
                         ),
                         const SizedBox(width: 8),
                         if (_isFavorite)
-                          _pill(
-                            '★ Favorite',
+                          VocabularyPill(
+                            label: '★ Favorite',
                             background: AppColors.warningLight,
                             foreground: AppColors.warning,
                           ),
@@ -291,8 +292,8 @@ class _WordDetailViewState extends State<WordDetailView> {
                 runSpacing: 7,
                 children: widget.relatedExpressions
                     .map(
-                      (expression) => _pill(
-                        expression,
+                      (expression) => VocabularyPill(
+                        label: expression,
                         background: AppColors.primaryLight,
                         foreground: AppColors.primary,
                       ),
@@ -347,25 +348,4 @@ class _WordDetailViewState extends State<WordDetailView> {
     );
   }
 
-  Widget _pill(
-    String label, {
-    required Color background,
-    required Color foreground,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: foreground,
-          fontSize: AppFontSizes.font9,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
 }

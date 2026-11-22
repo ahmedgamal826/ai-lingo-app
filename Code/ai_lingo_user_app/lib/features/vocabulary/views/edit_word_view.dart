@@ -10,6 +10,8 @@ import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_drop_down_menu.dart';
 import '../../../core/widgets/custom_icon_button.dart';
 import '../../../core/widgets/custom_text_field.dart';
+import '../widgets/vocabulary_field_label.dart';
+import '../widgets/vocabulary_text_field.dart';
 
 class EditedVocabularyWord {
   const EditedVocabularyWord({
@@ -142,9 +144,9 @@ class _EditWordViewState extends State<EditWordView> {
                   ),
                 ),
                 const SizedBox(height: 13),
-                _fieldLabel('Word'),
+                VocabularyFieldLabel('Word'),
                 const SizedBox(height: 6),
-                _textField(
+                VocabularyTextField(
                   controller: _wordController,
                   label: 'Word',
                   hint: 'Enter a word',
@@ -161,9 +163,9 @@ class _EditWordViewState extends State<EditWordView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          _fieldLabel('Pronunciation'),
+                          VocabularyFieldLabel('Pronunciation'),
                           const SizedBox(height: 6),
-                          _textField(
+                          VocabularyTextField(
                             controller: _pronunciationController,
                             label: 'Pronunciation',
                             hint: '/əˈkɒmədeɪt/',
@@ -188,9 +190,9 @@ class _EditWordViewState extends State<EditWordView> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                _fieldLabel('Meaning'),
+                VocabularyFieldLabel('Meaning'),
                 const SizedBox(height: 6),
-                _textField(
+                VocabularyTextField(
                   controller: _meaningController,
                   label: 'Meaning',
                   hint: 'Write the meaning',
@@ -201,9 +203,9 @@ class _EditWordViewState extends State<EditWordView> {
                       : null,
                 ),
                 const SizedBox(height: 12),
-                _fieldLabel('Example sentence'),
+                VocabularyFieldLabel('Example sentence'),
                 const SizedBox(height: 6),
-                _textField(
+                VocabularyTextField(
                   controller: _exampleController,
                   label: 'Example sentence',
                   hint: 'Write an example sentence',
@@ -277,39 +279,4 @@ class _EditWordViewState extends State<EditWordView> {
     );
   }
 
-  Widget _textField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    int? maxLines = 1,
-    int? minLines,
-    TextCapitalization capitalization = TextCapitalization.none,
-    String? Function(String?)? validator,
-  }) {
-    return CustomTextField(
-      controller: controller,
-      label: label,
-      showLabel: false,
-      hint: hint,
-      maxLines: maxLines,
-      minLines: minLines,
-      textCapitalization: capitalization,
-      textInputAction:
-          maxLines == 1 ? TextInputAction.next : TextInputAction.newline,
-      filled: true,
-      fillColor: AppColors.white,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
-      fontSize: AppFontSizes.font12,
-      validator: validator,
-    );
-  }
-
-  Widget _fieldLabel(String text) => Text(
-        text,
-        style: const TextStyle(
-          color: AppColors.textPrimary,
-          fontSize: AppFontSizes.font11,
-          fontWeight: FontWeight.w600,
-        ),
-      );
 }
