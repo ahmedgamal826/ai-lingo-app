@@ -28,7 +28,7 @@ class CustomTextField extends StatefulWidget {
   final Iterable<String>? autofillHints;
 
   @override
-  State<CustomTextField> createState() => _CustomTextField();
+State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
