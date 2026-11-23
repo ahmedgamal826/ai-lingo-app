@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/learner_profile_model.dart';
+// import '../models/learner_profile_model.dart';
 import 'learner_profile_state.dart';
 
 class LearnerProfileCubit extends Cubit<LearnerProfileState> {
@@ -11,6 +12,8 @@ class LearnerProfileCubit extends Cubit<LearnerProfileState> {
   void updateLanguage(String value) => _updateProfile(language: value);
   void updateStudyGoal(String value) => _updateProfile(studyGoal: value);
   void updateDailyGoal(String value) => _updateProfile(dailyGoal: value);
+  void toggleDailyReminder(bool value) => emit(state.copyWith(profile: state.profile.copyWith(dailyReminderEnabled: value)));
+  void updateDailyReminderTime(String value) => emit(state.copyWith(profile: state.profile.copyWith(dailyReminderTime: value)));
 
   void _updateProfile({
     String? fullName, String? email, String? university,
