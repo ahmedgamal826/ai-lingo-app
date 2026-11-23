@@ -5,7 +5,11 @@ import '../viewmodels/learner_profile_state.dart';
 import '../widgets/profile_components.dart';
 
 class LearnerProfileView extends StatelessWidget {
-  const LearnerProfileView({super.key});
+  const LearnerProfileView({super.key, this.showBottomNav = true});
+
+  /// When false, the root [MainShellView] owns the bottom navigation bar.
+  final bool showBottomNav;
+
   @override
   Widget build(BuildContext context) => BlocBuilder<LearnerProfileCubit, LearnerProfileState>(
     builder: (context, state) {
@@ -38,7 +42,7 @@ class LearnerProfileView extends StatelessWidget {
             child: const Text('Logout', style: TextStyle(color: Color(0xFFEF718B), fontSize: 12, fontWeight: FontWeight.w700)),
           )),
         ]))),
-        const BottomLearnerNav(),
+        if (showBottomNav) const BottomLearnerNav(),
       ]));
     },
   );

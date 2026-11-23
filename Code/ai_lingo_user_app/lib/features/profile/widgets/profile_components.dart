@@ -88,16 +88,19 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         width: double.infinity,
-        padding: padding,
         decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(11),
             border: Border.all(color: ProfileColors.line.withOpacity(.8)),
             boxShadow: const [
               BoxShadow(
                   color: Color(0x08000000), blurRadius: 8, offset: Offset(0, 2))
             ]),
-        child: child,
+        child: Material(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(11),
+          clipBehavior: Clip.antiAlias,
+          child: Padding(padding: padding, child: child),
+        ),
       );
 }
 

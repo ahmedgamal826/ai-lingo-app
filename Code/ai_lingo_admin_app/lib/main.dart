@@ -1,26 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/constants/app_strings.dart';
 import 'features/profile/admin_profile_feature.dart';
 import 'features/profile/widgets/profile_components.dart';
+import 'features/shell/views/main_shell_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const AdminProfileFeatureProvider(child: AdminProfileApp()));
+  runApp(
+    const AdminProfileFeatureProvider(
+      child: MyApp(),
+    ),
+  );
 }
 
-class AdminProfileApp extends StatelessWidget {
-  const AdminProfileApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Admin Profile',
-    theme: ThemeData(
-      useMaterial3: true,
-      scaffoldBackgroundColor: AdminColors.background,
-      colorScheme: ColorScheme.fromSeed(seedColor: AdminColors.primary, primary: AdminColors.primary),
-      fontFamily: 'Roboto',
-      appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: AdminColors.ink),
-    ),
-    initialRoute: '/admin/profile',
-    routes: adminProfileRoutes(),
-  );
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      designSize: const Size(360, 800),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: AppStrings.appName,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            useMaterial3: true,
+            scaffoldBackgroundColor: AdminColors.background,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: AdminColors.primary,
+              primary: AdminColors.primary,
+            ),
+            fontFamily: 'Roboto',
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+              foregroundColor: AdminColors.ink,
+            ),
+          ),
+          home: child,
+          routes: {
+            ...adminProfileRoutes(),
+          },
+        );
+      },
+      child: const MainShellView(),
+    );
+  }
 }

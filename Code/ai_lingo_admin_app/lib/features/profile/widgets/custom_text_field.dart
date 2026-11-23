@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
@@ -28,7 +27,7 @@ class CustomTextField extends StatefulWidget {
   final Iterable<String>? autofillHints;
 
   @override
-State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {

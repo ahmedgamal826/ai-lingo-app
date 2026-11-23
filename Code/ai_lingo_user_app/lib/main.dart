@@ -1,39 +1,51 @@
-
+import 'package:ai_lingo_user_app/features/auth/views/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/constants/app_strings.dart';
+import 'core/theme/app_colors.dart';
 import 'features/profile/profile_feature.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: AppColors.white,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: AppColors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarDividerColor: AppColors.white,
+    ),
+  );
   runApp(
     const ProfileFeatureProvider(
-      child: MyApp(),
+      child: AiLingoApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AiLingoApp extends StatelessWidget {
+  const AiLingoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Learner Profile',
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF8F9FD),
-        primaryColor: const Color(0xFF5B65FF),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF5B65FF),
-          primary: const Color(0xFF5B65FF),
-        ),
-        fontFamily: 'Roboto',
-      ),
-      initialRoute: '/profile',
-      routes: {
-        ...learnerProfileRoutes(),
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: AppStrings.appName,
+          debugShowCheckedModeBanner: false,
+          home: child,
+          routes: {
+            ...learnerProfileRoutes(),
+          },
+        );
       },
+      child: const SplashScreen(),
     );
   }
 }
