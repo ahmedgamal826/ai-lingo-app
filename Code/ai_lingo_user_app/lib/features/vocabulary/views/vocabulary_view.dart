@@ -424,4 +424,3 @@ class _VocabularyWord {
   String example;
   bool favorite;
 }
-

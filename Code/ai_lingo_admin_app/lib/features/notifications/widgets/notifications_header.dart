@@ -43,4 +43,3 @@ class NotificationsHeader extends StatelessWidget {
     );
   }
 }
-

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_strings.dart';
+import '../../complaints/views/complaints_view.dart';
+import '../../dashboard/views/dashboard_view.dart';
+import '../../profile/views/admin_profile_view.dart';
+import '../../quizzes/views/quizzes_view.dart';
 import '../core/widgets/custom_bottom_nav_bar.dart';
 import '../core/widgets/placeholder_tab_page.dart';
-import '../../complaints/views/complaints_view.dart';
 
 /// Root admin shell with persistent bottom navigation.
 class MainShellView extends StatefulWidget {
@@ -38,11 +41,11 @@ class _MainShellViewState extends State<MainShellView> {
   int _selectedIndex = 2;
 
   late final List<Widget> _pages = [
-    const PlaceholderTabPage(title: AppStrings.navDashboard),
-    const PlaceholderTabPage(title: AppStrings.navQuizzes),
+    const DashboardView(),
+    const QuizzesView(),
     const ComplaintsView(),
     const PlaceholderTabPage(title: AppStrings.navNotifications),
-    const PlaceholderTabPage(title: AppStrings.navProfile),
+    const AdminProfileView(),
   ];
 
   void _selectTab(int index) {

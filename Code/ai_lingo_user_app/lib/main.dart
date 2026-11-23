@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/app_strings.dart';
 import 'core/theme/app_colors.dart';
+import 'features/profile/profile_feature.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,11 @@ void main() {
       systemNavigationBarDividerColor: AppColors.white,
     ),
   );
-  runApp(const AiLingoApp());
+  runApp(
+    const ProfileFeatureProvider(
+      child: AiLingoApp(),
+    ),
+  );
 }
 
 class AiLingoApp extends StatelessWidget {
@@ -35,6 +40,9 @@ class AiLingoApp extends StatelessWidget {
           title: AppStrings.appName,
           debugShowCheckedModeBanner: false,
           home: child,
+          routes: {
+            ...learnerProfileRoutes(),
+          },
         );
       },
       child: const SplashScreen(),
