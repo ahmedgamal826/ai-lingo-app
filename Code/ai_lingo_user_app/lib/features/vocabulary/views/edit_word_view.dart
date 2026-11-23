@@ -6,9 +6,9 @@ import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_font_sizes.dart';
-import '../../progress/widgets_core/custom_button.dart';
-import '../../progress/widgets_core/custom_drop_down_menu.dart';
-import '../../progress/widgets_core/custom_icon_button.dart';
+import '../widgets_core/custom_button.dart';
+import '../widgets_core/custom_drop_down_menu.dart';
+import '../widgets_core/custom_icon_button.dart';
 import '../widgets/vocabulary_field_label.dart';
 import '../widgets/vocabulary_text_field.dart';
 
@@ -167,7 +167,7 @@ class _EditWordViewState extends State<EditWordView> {
                           VocabularyTextField(
                             controller: _pronunciationController,
                             label: 'Pronunciation',
-                            hint: '/əˈkɒmədeɪt/',
+                            hint: '/╔Ö╦êk╔Æm╔Öde╔¬t/',
                           ),
                         ],
                       ),

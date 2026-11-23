@@ -37,7 +37,7 @@ class CustomText extends StatelessWidget {
         text,
         style: TextStyle(
           fontFamily: 'Inter',
-          color: Colors.black ?? Color(0xff777E96),
+          color: color ?? Colors.black,
           fontSize: responsiveFontSize,
           fontWeight: fontWeight,
         ),

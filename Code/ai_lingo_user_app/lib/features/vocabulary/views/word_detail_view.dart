@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../progress/widgets_core/custom_button.dart';
-import '../../progress/widgets_core/custom_card.dart';
-import '../../progress/widgets_core/custom_icon_button.dart';
+import '../widgets_core/custom_button.dart';
+import '../widgets_core/custom_card.dart';
+import '../widgets_core/custom_icon_button.dart';
 
 import 'edit_word_view.dart';
 import 'delete_word_confirmation_view.dart';
@@ -17,11 +17,11 @@ class WordDetailView extends StatefulWidget {
   const WordDetailView({
     super.key,
     this.word = 'Accommodate',
-    this.phonetic = '/əˈkɒmədeɪt/',
+    this.phonetic = '/╔Ö╦êk╔Æm╔Öde╔¬t/',
     this.partOfSpeech = 'Verb',
     this.meaning = 'To provide someone with a place to stay, or to meet their needs.',
-    this.example = '“The restaurant can accommodate a group of twelve.”',
-    this.source = 'Saved from Restaurant · Nov 9, 2026',
+    this.example = 'ΓÇ£The restaurant can accommodate a group of twelve.ΓÇ¥',
+    this.source = 'Saved from Restaurant ┬╖ Nov 9, 2026',
     this.relatedExpressions = const ['Make room for', 'Provide for', 'Host'],
     this.isFavorite = true,
     this.onWordUpdated, this.onWordDeleted,
@@ -205,7 +205,7 @@ class _WordDetailViewState extends State<WordDetailView> {
                         const SizedBox(width: 8),
                         if (_isFavorite)
                           VocabularyPill(
-                            label: '★ Favorite',
+                            label: 'Γÿà Favorite',
                             background: AppColors.warningLight,
                             foreground: AppColors.warning,
                           ),

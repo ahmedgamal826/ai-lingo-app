@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../vocabulary/widgets_core/custom_card.dart';
+import '../widgets_core/custom_card.dart';
 
 class ConversationScoreCard extends StatelessWidget {
   const ConversationScoreCard({super.key});
@@ -50,7 +50,7 @@ class ConversationScoreCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'Grammar 85 · Vocabulary 88 · Conversation 86',
+            'Grammar 85 ┬╖ Vocabulary 88 ┬╖ Conversation 86',
             style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 9,

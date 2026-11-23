@@ -28,7 +28,7 @@ class NotificationsFilter extends StatelessWidget {
       child: Row(
         children: [
           _filterOption('All', 0),
-          _filterOption('Unread · $unreadCount', 1),
+          _filterOption('Unread ┬╖ $unreadCount', 1),
         ],
       ),
     );

@@ -74,7 +74,7 @@ class AnnouncementSentView extends StatelessWidget {
                     ),
                     SizedBox(height: 12.h),
                     CustomText(
-                      text: '“$title” has been sent to all \n 1,248 learners.',
+                      text: 'ΓÇ£$titleΓÇ¥ has been sent to all \n 1,248 learners.',
                       fontSize: 12.sp,
                       color: AppColors.textSecondary,
                       textAlign: TextAlign.center,

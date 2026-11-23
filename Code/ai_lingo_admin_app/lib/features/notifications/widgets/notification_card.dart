@@ -64,7 +64,7 @@ class NotificationCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5.h),
                 CustomText(
-                  text: '${data.date} · ${data.unread ? 'Unread' : data.type == 'Important' ? 'Important' : 'Read'}',
+                  text: '${data.date} ┬╖ ${data.unread ? 'Unread' : data.type == 'Important' ? 'Important' : 'Read'}',
                   fontSize: 9.sp,
                   color: AppColors.textSecondary,
                 ),

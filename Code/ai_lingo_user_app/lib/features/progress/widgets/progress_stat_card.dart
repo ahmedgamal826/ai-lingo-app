@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../vocabulary/widgets_core/custom_card.dart';
+import '../widgets_core/custom_card.dart';
 
 class ProgressStatCard extends StatelessWidget {
   const ProgressStatCard({

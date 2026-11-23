@@ -168,14 +168,14 @@ class _BroadcastAnnouncementViewState extends State<BroadcastAnnouncementView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: 'All learners · 1,248 recipients',
+                                  text: 'All learners ┬╖ 1,248 recipients',
                                   fontSize: 10.5.sp,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.textPrimary,
                                 ),
                                 SizedBox(height: 4.h),
                                 CustomText(
-                                  text: 'This announcement will appear in every learner’s notifications.',
+                                  text: 'This announcement will appear in every learnerΓÇÖs notifications.',
                                   fontSize: 9.sp,
                                   color: AppColors.textSecondary,
                                   maxLines: 2,

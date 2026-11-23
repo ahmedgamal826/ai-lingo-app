@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 import '../../../core/theme/app_font_sizes.dart';
-import '../../progress/widgets_core/custom_text_field.dart';
+import '../widgets_core/custom_text_field.dart';
 
 class VocabularyTextField extends StatelessWidget {
   const VocabularyTextField({

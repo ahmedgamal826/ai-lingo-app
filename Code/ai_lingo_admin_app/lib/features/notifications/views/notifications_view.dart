@@ -22,40 +22,40 @@ class _NotificationsViewState extends State<NotificationsView> {
   final List<NotificationData> _notifications = [
     NotificationData(
       title: 'New complaint from Alex Carter',
-      category: '#C-1042 · Quiz & scoring',
+      category: '#C-1042 ┬╖ Quiz & scoring',
       description:
           "Weekly test score looks incorrect. Review the learner's question 8 result.",
-      date: 'Nov 15 · 8:12 PM',
+      date: 'Nov 15 ┬╖ 8:12 PM',
       icon: 'message-square-warning.svg',
       unread: true,
       type: 'Unread',
     ),
     NotificationData(
       title: '48 new learners this week',
-      category: 'User activity · Weekly summary',
+      category: 'User activity ┬╖ Weekly summary',
       description:
           '1,248 learners are now part of AI-Lingo. 846 have been active this week.',
-      date: 'Nov 16 · 8:00 AM',
+      date: 'Nov 16 ┬╖ 8:00 AM',
       icon: 'users-round.svg',
       unread: true,
       type: 'Unread',
     ),
     NotificationData(
       title: 'Scheduled maintenance',
-      category: 'System alert · Important',
+      category: 'System alert ┬╖ Important',
       description:
-          'Audio services will be updated Nov 18, 2:00–2:15 AM UTC.',
-      date: 'Nov 16 · 7:30 AM',
+          'Audio services will be updated Nov 18, 2:00ΓÇô2:15 AM UTC.',
+      date: 'Nov 16 ┬╖ 7:30 AM',
       icon: 'shield-alert.svg',
       unread: true,
       type: 'Important',
     ),
     NotificationData(
       title: 'Week 46 test has closed',
-      category: 'Everyday English · 182 submissions',
+      category: 'Everyday English ┬╖ 182 submissions',
       description:
           'Results are ready for review. The average score is 78%.',
-      date: 'Nov 15 · 8:00 PM',
+      date: 'Nov 15 ┬╖ 8:00 PM',
       icon: 'clipboard-check.svg',
       unread: false,
       type: 'Read',

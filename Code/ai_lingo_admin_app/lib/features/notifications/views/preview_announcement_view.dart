@@ -125,7 +125,7 @@ class PreviewAnnouncementView extends StatelessWidget {
                           ),
                           SizedBox(height: 12.h),
                           CustomText(
-                            text: 'AI-Lingo · $category · Nov 12, 9:00 AM',
+                            text: 'AI-Lingo ┬╖ $category ┬╖ Nov 12, 9:00 AM',
                             fontSize: 9.sp,
                             color: AppColors.textSecondary,
                             maxLines: 2,
@@ -168,7 +168,7 @@ class PreviewAnnouncementView extends StatelessWidget {
                                   children: [
                                     CustomText(text: 'Send immediately', fontSize: 12.sp, fontWeight: FontWeight.w600),
                                     SizedBox(height: 3.h),
-                                    CustomText(text: 'In-app notification · $priority priority', fontSize: 10.sp, color: AppColors.textSecondary, maxLines: 2),
+                                    CustomText(text: 'In-app notification ┬╖ $priority priority', fontSize: 10.sp, color: AppColors.textSecondary, maxLines: 2),
                                   ],
                                 ),
                               ),

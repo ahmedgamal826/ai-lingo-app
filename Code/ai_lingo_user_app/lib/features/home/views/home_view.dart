@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../vocabulary/views/vocabulary_view.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_dimensions.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../core/widgets/custom_app_bar.dart';
+import '../core/widgets/custom_bottom_nav_bar.dart';
+import '../viewmodels/home_cubit.dart';
+import '../viewmodels/home_state.dart';
+import '../../leaderboard/views/leaderboard_view.dart';
+import '../widgets/daily_momentum_card.dart';
+import '../widgets/home_scale.dart';
+import '../widgets/home_section_header.dart';
+import '../widgets/learner_overview_header.dart';
+import '../widgets/learning_statistics_row.dart';
+import '../widgets/saved_word_preview_card.dart';
+import '../widgets/scenario_suggestion_card.dart';
+import 'main_shell_view.dart';
 
-/// App entry screen currently displays the Vocabulary screen.
+/// Home screen View ΓÇö UI only.
 class HomeView extends StatelessWidget {
   const HomeView({super.key, this.showBottomNav = true});
 

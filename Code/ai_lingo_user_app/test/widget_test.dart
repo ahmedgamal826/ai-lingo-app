@@ -1,11 +1,23 @@
+import 'package:ai_lingo_user_app/features/home/views/main_shell_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ai_lingo_user_app/main.dart';
-
 void main() {
+  Future<void> pumpShell(WidgetTester tester) async {
+    await tester.pumpWidget(
+      ScreenUtilInit(
+        designSize: const Size(390, 844),
+        builder: (context, child) {
+          return const MaterialApp(home: MainShellView());
+        },
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
   testWidgets('shows home chrome and content', (WidgetTester tester) async {
-    await tester.pumpWidget(const AiLingoApp());
+    await pumpShell(tester);
 
     expect(find.text('AI-Lingo.'), findsOneWidget);
     expect(find.text('Hey, Alex 👋'), findsOneWidget);
@@ -21,20 +33,18 @@ void main() {
   testWidgets('bottom navigation updates selected tab', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const AiLingoApp());
+    await pumpShell(tester);
 
     await tester.tap(find.text('Practice'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    // Home content remains until other features are implemented.
-    expect(find.text('Hey, Alex 👋'), findsOneWidget);
-    expect(find.text('Practice'), findsOneWidget);
+    expect(find.text('Practice'), findsWidgets);
   });
 
   testWidgets('opens leaderboard from home rank shortcut', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const AiLingoApp());
+    await pumpShell(tester);
 
     await tester.tap(find.text('#12'));
     await tester.pumpAndSettle();
