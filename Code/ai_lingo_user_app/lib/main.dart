@@ -1,25 +1,38 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'core/constants/app_strings.dart';
-import 'features/home/views/home_view.dart';
+import 'package:flutter/material.dart';
+
+import 'features/profile/profile_feature.dart';
 
 void main() {
-  runApp(const AiLingoApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const ProfileFeatureProvider(
+      child: MyApp(),
+    ),
+  );
 }
 
-class AiLingoApp extends StatelessWidget {
-  const AiLingoApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (context, child) {
-        return MaterialApp(
-          title: AppStrings.appName,
-          debugShowCheckedModeBanner: false,
-          home: const HomeView(),
-        );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Learner Profile',
+      theme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: const Color(0xFFF8F9FD),
+        primaryColor: const Color(0xFF5B65FF),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF5B65FF),
+          primary: const Color(0xFF5B65FF),
+        ),
+        fontFamily: 'Roboto',
+      ),
+      initialRoute: '/profile',
+      routes: {
+        ...learnerProfileRoutes(),
       },
     );
   }

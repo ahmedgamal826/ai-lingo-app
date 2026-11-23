@@ -33,7 +33,7 @@ class NotificationsView extends StatelessWidget {
     margin: const EdgeInsets.only(bottom: 10), padding: const EdgeInsets.all(13),
     decoration: BoxDecoration(color: ProfileColors.primaryLight.withOpacity(.65), borderRadius: BorderRadius.circular(11)),
     child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(width: 34, height: 34, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)), child: SvgAssetIcon(icon, size: 17, color: ProfileColors.primary)),
+      Container(width: 28, height: 28, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)), child: SvgAssetIcon(icon, size: 14, color: ProfileColors.primary)),
       const SizedBox(width: 10), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(title, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: ProfileColors.ink)),
         const SizedBox(height: 5), Text(body, style: const TextStyle(fontSize: 10, height: 1.45, color: ProfileColors.muted)),

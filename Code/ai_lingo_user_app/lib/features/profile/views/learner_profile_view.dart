@@ -18,6 +18,8 @@ class LearnerProfileView extends StatelessWidget {
           Text(p.fullName, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: ProfileColors.ink)),
           const SizedBox(height: 4),
           Text(p.university, style: const TextStyle(fontSize: 11, color: ProfileColors.muted)),
+          const SizedBox(height: 6),
+          _LevelBadge(level: p.level),
           const SizedBox(height: 22),
           ProfileCard(child: Column(children: [
             MenuTile(assetIcon: 'user-round-pen', title: 'Edit Profile', onTap: () => Navigator.pushNamed(context, '/profile/edit')),
@@ -39,5 +41,20 @@ class LearnerProfileView extends StatelessWidget {
         const BottomLearnerNav(),
       ]));
     },
+  );
+}
+
+class _LevelBadge extends StatelessWidget {
+  const _LevelBadge({required this.level});
+  final String level;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+    decoration: BoxDecoration(color: ProfileColors.primaryLight, borderRadius: BorderRadius.circular(20)),
+    child: Row(mainAxisSize: MainAxisSize.min, children: [
+      const SvgAssetIcon('trophy', size: 12, color: ProfileColors.primary),
+      const SizedBox(width: 5),
+      Text('$level level', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: ProfileColors.primary)),
+    ]),
   );
 }

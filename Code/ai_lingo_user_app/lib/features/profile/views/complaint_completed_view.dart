@@ -38,7 +38,7 @@ class _ComplaintTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ProfileCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Row(children: [Expanded(child: Text(title, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: ProfileColors.ink))),
-      Text(status, style: TextStyle(fontSize: 9, color: color, fontWeight: FontWeight.w600))]),
+      Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3), decoration: BoxDecoration(color: color.withOpacity(.13), borderRadius: BorderRadius.circular(20)), child: Text(status, style: TextStyle(fontSize: 8, color: color, fontWeight: FontWeight.w700)))]),
     const SizedBox(height: 7),
     Text('Request #$id  •  Submitted recently', style: const TextStyle(fontSize: 9, color: ProfileColors.muted)),
   ]));

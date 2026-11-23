@@ -4,6 +4,9 @@ class LearnerProfileModel {
     this.email = 'alex.carter@gmail.com',
     this.university = 'University of Technology',
     this.avatarInitials = 'AC',
+    this.level = 'Intermediate',
+    this.dailyReminderEnabled = true,
+    this.dailyReminderTime = '08:00 AM',
     this.language = 'English',
     this.studyGoal = 'Improve my skills',
     this.dailyGoal = '30 min',
@@ -17,6 +20,9 @@ class LearnerProfileModel {
   final String email;
   final String university;
   final String avatarInitials;
+  final String level;
+  final bool dailyReminderEnabled;
+  final String dailyReminderTime;
   final String language;
   final String studyGoal;
   final String dailyGoal;
@@ -30,6 +36,9 @@ class LearnerProfileModel {
     String? email,
     String? university,
     String? avatarInitials,
+    String? level,
+    bool? dailyReminderEnabled,
+    String? dailyReminderTime,
     String? language,
     String? studyGoal,
     String? dailyGoal,
@@ -42,6 +51,9 @@ class LearnerProfileModel {
     email: email ?? this.email,
     university: university ?? this.university,
     avatarInitials: avatarInitials ?? this.avatarInitials,
+    level: level ?? this.level,
+    dailyReminderEnabled: dailyReminderEnabled ?? this.dailyReminderEnabled,
+    dailyReminderTime: dailyReminderTime ?? this.dailyReminderTime,
     language: language ?? this.language,
     studyGoal: studyGoal ?? this.studyGoal,
     dailyGoal: dailyGoal ?? this.dailyGoal,

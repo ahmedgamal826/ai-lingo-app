@@ -12,7 +12,9 @@ class EditProfileView extends StatelessWidget {
       final p = state.profile; final cubit = context.read<LearnerProfileCubit>();
       return ProfilePage(title: 'Edit Profile', child: ProfileBody(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Center(child: Column(children: [
-          const AvatarCircle(initials: 'AC', size: 66),
+          AvatarCircle(initials: p.avatarInitials, size: 66),
+          const SizedBox(height: 6),
+          Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: ProfileColors.primaryLight, borderRadius: BorderRadius.circular(20)), child: Row(mainAxisSize: MainAxisSize.min, children: [const SvgAssetIcon('trophy', size: 12, color: ProfileColors.primary), const SizedBox(width: 5), Text('${p.level} level', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: ProfileColors.primary))])),
           TextButton(onPressed: () {}, child: const Text('Change Photo', style: TextStyle(fontSize: 11, color: ProfileColors.primary))),
         ])),
         const SizedBox(height: 12),

@@ -8,8 +8,8 @@ class LogoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ProfilePage(title: 'Logout', child: Center(child: Padding(
     padding: const EdgeInsets.all(24), child: Column(mainAxisSize: MainAxisSize.min, children: [
-      Container(width: 64, height: 64, decoration: BoxDecoration(color: ProfileColors.primaryLight, borderRadius: BorderRadius.circular(18)),
-        child: const SvgAssetIcon('log-out', color: ProfileColors.primary, size: 29)),
+      Container(width: 56, height: 56, decoration: BoxDecoration(color: ProfileColors.primaryLight, borderRadius: BorderRadius.circular(18)),
+        child: const SvgAssetIcon('log-out', color: ProfileColors.primary, size: 23)),
       const SizedBox(height: 20),
       const Text('See you soon, Alex!', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: ProfileColors.ink)),
       const SizedBox(height: 8),

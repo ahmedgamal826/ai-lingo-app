@@ -30,10 +30,15 @@ class SettingsView extends StatelessWidget {
     },
   );
 
-  static Widget _switch(String title, String subtitle, bool value, ValueChanged<bool> onChanged) => SwitchListTile(
-    contentPadding: EdgeInsets.zero, dense: true, value: value, onChanged: onChanged,
-    activeColor: ProfileColors.primary,
-    title: Text(title, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: ProfileColors.ink)),
-    subtitle: Text(subtitle, style: const TextStyle(fontSize: 9, color: ProfileColors.muted)),
+  static Widget _switch(String title, String subtitle, bool value, ValueChanged<bool> onChanged) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 3),
+    child: Row(children: [
+      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(title, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: ProfileColors.ink)),
+        const SizedBox(height: 3),
+        Text(subtitle, style: const TextStyle(fontSize: 9, color: ProfileColors.muted)),
+      ])),
+      Transform.scale(scale: .78, child: Switch(value: value, onChanged: onChanged, activeColor: ProfileColors.primary, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap)),
+    ]),
   );
 }

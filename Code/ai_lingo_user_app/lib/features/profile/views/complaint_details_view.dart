@@ -5,7 +5,7 @@ class ComplaintDetailsView extends StatelessWidget {
   const ComplaintDetailsView({super.key});
   @override
   Widget build(BuildContext context) => ProfilePage(title: 'Request #BC-1042', child: ProfileBody(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    const Align(alignment: Alignment.centerLeft, child: Chip(label: Text('Pending', style: TextStyle(fontSize: 9, color: Color(0xFF269D79))), backgroundColor: ProfileColors.green, side: BorderSide.none)),
+    Align(alignment: Alignment.centerLeft, child: Container(padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4), decoration: BoxDecoration(color: const Color(0xFFFFF3DF), borderRadius: BorderRadius.circular(20)), child: const Text('Pending', style: TextStyle(fontSize: 9, color: Color(0xFFE5A13D), fontWeight: FontWeight.w700)))),
     const SizedBox(height: 8),
     const Text('Weekly test score looks incorrect', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: ProfileColors.ink)),
     const SizedBox(height: 6),
