@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-
-import 'core/constants/app_strings.dart';
-import 'features/home/views/home_view.dart';
+import 'features/profile/admin_profile_feature.dart';
+import 'features/profile/widgets/profile_components.dart';
 
 void main() {
-  runApp(const AiLingoAdminApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const AdminProfileFeatureProvider(child: AdminProfileApp()));
 }
 
-class AiLingoAdminApp extends StatelessWidget {
-  const AiLingoAdminApp({super.key});
-
+class AdminProfileApp extends StatelessWidget {
+  const AdminProfileApp({super.key});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppStrings.appName,
-      debugShowCheckedModeBanner: false,
-      home: const HomeView(),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'Admin Profile',
+    theme: ThemeData(
+      useMaterial3: true,
+      scaffoldBackgroundColor: AdminColors.background,
+      colorScheme: ColorScheme.fromSeed(seedColor: AdminColors.primary, primary: AdminColors.primary),
+      fontFamily: 'Roboto',
+      appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: AdminColors.ink),
+    ),
+    initialRoute: '/admin/profile',
+    routes: adminProfileRoutes(),
+  );
 }
