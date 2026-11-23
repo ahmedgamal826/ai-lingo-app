@@ -1,4 +1,5 @@
 import 'package:ai_lingo_user_app/features/home/views/main_shell_view.dart';
+import 'package:ai_lingo_user_app/features/profile/profile_feature.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,11 +7,13 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   Future<void> pumpShell(WidgetTester tester) async {
     await tester.pumpWidget(
-      ScreenUtilInit(
-        designSize: const Size(390, 844),
-        builder: (context, child) {
-          return const MaterialApp(home: MainShellView());
-        },
+      ProfileFeatureProvider(
+        child: ScreenUtilInit(
+          designSize: const Size(390, 844),
+          builder: (context, child) {
+            return const MaterialApp(home: MainShellView());
+          },
+        ),
       ),
     );
     await tester.pumpAndSettle();

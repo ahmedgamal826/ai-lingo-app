@@ -17,4 +17,3 @@ class NotificationData {
   bool unread;
   String type;
 }
-

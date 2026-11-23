@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_strings.dart';
+import '../../profile/views/learner_profile_view.dart';
+import '../../scenarios/views/scenarios_view.dart';
 import '../core/widgets/custom_bottom_nav_bar.dart';
 import '../core/widgets/placeholder_tab_page.dart';
-import '../../scenarios/views/scenarios_view.dart';
 import 'home_view.dart';
 
 /// Lets pushed screens (e.g. Leaderboard) request a main-tab change after pop.
@@ -60,7 +61,7 @@ class _MainShellViewState extends State<MainShellView> {
     const ScenariosView(showBottomNav: false),
     const PlaceholderTabPage(title: AppStrings.navVocabulary),
     const PlaceholderTabPage(title: AppStrings.navProgress),
-    const PlaceholderTabPage(title: AppStrings.navProfile),
+    const LearnerProfileView(showBottomNav: false),
   ];
 
   void _selectTab(int index) {
