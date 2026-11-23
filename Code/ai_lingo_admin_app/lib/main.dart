@@ -1,3 +1,4 @@
+import 'package:ai_lingo_admin_app/features/auth/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,11 +9,7 @@ import 'features/shell/views/main_shell_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    const AdminProfileFeatureProvider(
-      child: MyApp(),
-    ),
-  );
+  runApp(const AdminProfileFeatureProvider(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -42,12 +39,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
           home: child,
-          routes: {
-            ...adminProfileRoutes(),
-          },
+          routes: {...adminProfileRoutes()},
         );
       },
-      child: const MainShellView(),
+      child: const LoginScreen(),
     );
   }
 }
