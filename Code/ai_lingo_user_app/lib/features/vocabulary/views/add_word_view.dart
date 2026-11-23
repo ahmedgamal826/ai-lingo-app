@@ -4,12 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/constants/app_assets.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_font_sizes.dart';
-import '../../../core/widgets/custom_button.dart';
-import '../../../core/widgets/custom_drop_down_menu.dart';
-import '../../../core/widgets/custom_icon_button.dart';
-import '../../../core/widgets/custom_text_field.dart';
+
+import '../widgets_core/custom_button.dart';
+import '../widgets_core/custom_drop_down_menu.dart';
+import '../widgets_core/custom_icon_button.dart';
+import '../widgets_core/custom_text_field.dart';
 import '../widgets/vocabulary_field_label.dart';
 import '../widgets/vocabulary_pronunciation_label.dart';
 
@@ -168,7 +168,7 @@ class _AddWordViewState extends State<AddWordView> {
                             controller: _pronunciationController,
                             label: 'Pronunciation',
                             showLabel: false,
-                            hint: '/ˈrɪzɪliənt/',
+                            hint: '/╦êr╔¬z╔¬li╔Önt/',
                             textInputAction: TextInputAction.next,
                             filled: true,
                             fillColor: AppColors.white,

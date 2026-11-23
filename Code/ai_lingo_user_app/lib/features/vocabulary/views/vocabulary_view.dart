@@ -5,9 +5,8 @@ import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_font_sizes.dart';
-import '../../../core/widgets/custom_bottom_nav_bar.dart';
-import '../../../core/widgets/custom_card.dart';
 import '../../progress/views/progress_view.dart';
+import '../widgets_core/custom_bottom_nav_bar.dart';
 import 'add_word_view.dart';
 import 'word_detail_view.dart';
 import 'edit_word_view.dart';
@@ -28,30 +27,30 @@ class _VocabularyViewState extends State<VocabularyView> {
   final List<_VocabularyWord> _words = [
     _VocabularyWord(
       word: 'Accommodate',
-      phonetic: '/əˈkɒmədeɪt/ · verb',
+      phonetic: '/╔Ö╦êk╔Æm╔Öde╔¬t/ ┬╖ verb',
       meaning: 'To provide what someone needs',
-      example: '“Can you accommodate two more guests?”',
+      example: 'ΓÇ£Can you accommodate two more guests?ΓÇ¥',
       favorite: true,
     ),
     _VocabularyWord(
       word: 'Reservation',
-      phonetic: '/ˌrezəˈveɪʃən/ · noun',
+      phonetic: '/╦îrez╔Ö╦êve╔¬╩â╔Ön/ ┬╖ noun',
       meaning: 'An arrangement to keep a place',
-      example: '“I have a reservation for seven.”',
+      example: 'ΓÇ£I have a reservation for seven.ΓÇ¥',
       favorite: true,
     ),
     _VocabularyWord(
       word: 'Recommend',
-      phonetic: '/ˌrekəˈmend/ · verb',
+      phonetic: '/╦îrek╔Ö╦êmend/ ┬╖ verb',
       meaning: 'To suggest a good choice',
-      example: '“What dish would you recommend?”',
+      example: 'ΓÇ£What dish would you recommend?ΓÇ¥',
       favorite: false,
     ),
     _VocabularyWord(
       word: 'Confident',
-      phonetic: '/ˈkɒnfɪdənt/ · adjective',
+      phonetic: '/╦êk╔Ænf╔¬d╔Önt/ ┬╖ adjective',
       meaning: 'Feeling sure about your ability',
-      example: '“I feel more confident speaking.”',
+      example: 'ΓÇ£I feel more confident speaking.ΓÇ¥',
       favorite: false,
     ),
   ];
@@ -93,7 +92,7 @@ class _VocabularyViewState extends State<VocabularyView> {
           word: result.word,
           phonetic: result.phonetic.isEmpty
               ? result.partOfSpeech.toLowerCase()
-              : '${result.phonetic} · ${result.partOfSpeech.toLowerCase()}',
+              : '${result.phonetic} ┬╖ ${result.partOfSpeech.toLowerCase()}',
           meaning: result.meaning,
           example: result.example,
           favorite: result.isFavorite,
@@ -144,7 +143,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                   0,
                   _VocabularyWord(
                     word: newWord,
-                    phonetic: '· new word',
+                    phonetic: '┬╖ new word',
                     meaning: meaning,
                     example: 'Tap to add an example sentence.',
                   ),
@@ -216,7 +215,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                 ),
                 SizedBox(height: 3),
                 Text(
-                  '128 WORDS · A GROWING WORLD',
+                  '128 WORDS ┬╖ A GROWING WORLD',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: AppFontSizes.font9,
@@ -359,9 +358,9 @@ class _VocabularyViewState extends State<VocabularyView> {
     // Keep the richer Figma copy for the reference word; all other entries
     // use the data already stored in their Vocabulary card.
     final isAccommodate = word.word.toLowerCase() == 'accommodate';
-    final phoneticParts = word.phonetic.split('·');
+    final phoneticParts = word.phonetic.split('┬╖');
     final phonetic = isAccommodate
-        ? '/əˈkɒmədeɪt/'
+        ? '/╔Ö╦êk╔Æm╔Öde╔¬t/'
         : phoneticParts.first.trim();
     final partOfSpeech = isAccommodate
         ? 'Verb'
@@ -378,10 +377,10 @@ class _VocabularyViewState extends State<VocabularyView> {
               ? 'To provide someone with a place to stay, or to meet their needs.'
               : word.meaning,
           example: isAccommodate
-              ? '“The restaurant can accommodate a group of twelve.”'
+              ? 'ΓÇ£The restaurant can accommodate a group of twelve.ΓÇ¥'
               : word.example,
           source: isAccommodate
-              ? 'Saved from Restaurant · Nov 9, 2026'
+              ? 'Saved from Restaurant ┬╖ Nov 9, 2026'
               : 'Saved to Vocabulary',
           isFavorite: word.favorite,
           relatedExpressions: isAccommodate
@@ -391,7 +390,7 @@ class _VocabularyViewState extends State<VocabularyView> {
             setState(() {
               word.word = updated.word;
               word.phonetic =
-                  '${updated.phonetic} · ${updated.partOfSpeech.toLowerCase()}';
+                  '${updated.phonetic} ┬╖ ${updated.partOfSpeech.toLowerCase()}';
               word.meaning = updated.meaning;
               word.example = updated.example;
               word.favorite = updated.isFavorite;

@@ -5,9 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_bottom_nav_bar.dart';
-import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../widgets_core/custom_bottom_nav_bar.dart';
+import '../widgets_core/custom_card.dart';
+import '../widgets_core/custom_text.dart';
 import 'broadcast_announcement_view.dart';
 
 class NotificationsView extends StatefulWidget {
@@ -23,40 +23,40 @@ class _NotificationsViewState extends State<NotificationsView> {
   final List<_NotificationData> _notifications = [
     _NotificationData(
       title: 'New complaint from Alex Carter',
-      category: '#C-1042 · Quiz & scoring',
+      category: '#C-1042 ┬╖ Quiz & scoring',
       description:
           "Weekly test score looks incorrect. Review the learner's question 8 result.",
-      date: 'Nov 15 · 8:12 PM',
+      date: 'Nov 15 ┬╖ 8:12 PM',
       icon: 'message-square-warning.svg',
       unread: true,
       type: 'Unread',
     ),
     _NotificationData(
       title: '48 new learners this week',
-      category: 'User activity · Weekly summary',
+      category: 'User activity ┬╖ Weekly summary',
       description:
           '1,248 learners are now part of AI-Lingo. 846 have been active this week.',
-      date: 'Nov 16 · 8:00 AM',
+      date: 'Nov 16 ┬╖ 8:00 AM',
       icon: 'users-round.svg',
       unread: true,
       type: 'Unread',
     ),
     _NotificationData(
       title: 'Scheduled maintenance',
-      category: 'System alert · Important',
+      category: 'System alert ┬╖ Important',
       description:
-          'Audio services will be updated Nov 18, 2:00–2:15 AM UTC.',
-      date: 'Nov 16 · 7:30 AM',
+          'Audio services will be updated Nov 18, 2:00ΓÇô2:15 AM UTC.',
+      date: 'Nov 16 ┬╖ 7:30 AM',
       icon: 'shield-alert.svg',
       unread: true,
       type: 'Important',
     ),
     _NotificationData(
       title: 'Week 46 test has closed',
-      category: 'Everyday English · 182 submissions',
+      category: 'Everyday English ┬╖ 182 submissions',
       description:
           'Results are ready for review. The average score is 78%.',
-      date: 'Nov 15 · 8:00 PM',
+      date: 'Nov 15 ┬╖ 8:00 PM',
       icon: 'clipboard-check.svg',
       unread: false,
       type: 'Read',
@@ -178,7 +178,7 @@ class _NotificationsViewState extends State<NotificationsView> {
       child: Row(
         children: [
           _filterOption('All', 0),
-          _filterOption('Unread · $_unreadCount', 1),
+          _filterOption('Unread ┬╖ $_unreadCount', 1),
         ],
       ),
     );
@@ -279,7 +279,7 @@ class _NotificationCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5.h),
                 CustomText(
-                  text: '${data.date} · ${data.unread ? 'Unread' : data.type == 'Important' ? 'Important' : 'Read'}',
+                  text: '${data.date} ┬╖ ${data.unread ? 'Unread' : data.type == 'Important' ? 'Important' : 'Read'}',
                   fontSize: 9.sp,
                   color: AppColors.textSecondary,
                 ),

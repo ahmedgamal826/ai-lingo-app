@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/theme/app_colors.dart';
-import 'core/widgets/custom_bottom_nav_bar.dart';
+import 'features/auth/widgets/custom_bottom_nav_bar.dart';
 import 'features/dashboard/views/dashboard_view.dart';
 import 'features/quizzes/views/quizzes_flow.dart';
 

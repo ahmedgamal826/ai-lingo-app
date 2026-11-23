@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_card.dart';
+import '../widgets_core/custom_card.dart';
 
 class ProgressStreakCard extends StatelessWidget {
   const ProgressStreakCard({super.key});

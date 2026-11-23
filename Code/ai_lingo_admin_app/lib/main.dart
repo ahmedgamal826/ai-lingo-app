@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/app_strings.dart';
-import 'features/notifications/views/notifications_view.dart';
+import 'features/shell/views/main_shell_view.dart';
 
 void main() {
-  runApp(const AiLingoAdminApp());
+  runApp(const MyApp());
 }
 
-class AiLingoAdminApp extends StatelessWidget {
-  const AiLingoAdminApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AiLingoAdminApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const NotificationsView(),
+      child: const MainShellView(),
     );
   }
 }

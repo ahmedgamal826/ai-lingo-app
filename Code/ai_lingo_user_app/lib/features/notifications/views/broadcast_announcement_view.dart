@@ -5,10 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_text.dart';
-import '../../../core/widgets/custom_drop_down_menu.dart';
-import '../../../core/widgets/custom_button.dart';
+import '../widgets_core/custom_button.dart';
+import '../widgets_core/custom_card.dart';
+import '../widgets_core/custom_drop_down_menu.dart';
+import '../widgets_core/custom_text.dart';
 
 class BroadcastAnnouncementView extends StatefulWidget {
   const BroadcastAnnouncementView({super.key});
@@ -167,14 +167,14 @@ class _BroadcastAnnouncementViewState extends State<BroadcastAnnouncementView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: 'All learners · 1,248 recipients',
+                                  text: 'All learners ┬╖ 1,248 recipients',
                                   fontSize: 10.5.sp,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.textPrimary,
                                 ),
                                 SizedBox(height: 4.h),
                                 CustomText(
-                                  text: 'This announcement will appear in every learner’s notifications.',
+                                  text: 'This announcement will appear in every learnerΓÇÖs notifications.',
                                   fontSize: 9.sp,
                                   color: AppColors.textSecondary,
                                   maxLines: 2,
@@ -190,7 +190,11 @@ class _BroadcastAnnouncementViewState extends State<BroadcastAnnouncementView> {
                       width: double.infinity,
                       child: CustomDarkButton(
                         text: 'Preview Announcement',
-                        icon: Icons.visibility_outlined,
+                        leading: const Icon(
+                          Icons.visibility_outlined,
+                          color: Colors.white,
+                          size: 18,
+                        ),
                         width: double.infinity,
                         onTap: _showPreview,
                       ),
@@ -224,7 +228,7 @@ class _BroadcastAnnouncementViewState extends State<BroadcastAnnouncementView> {
             SizedBox(height: 8.h),
             CustomText(text: _messageController.text, fontSize: 12.sp, color: AppColors.textSecondary),
             SizedBox(height: 10.h),
-            CustomText(text: '$_category · $_priority', fontSize: 10.sp, color: AppColors.primary),
+            CustomText(text: '$_category ┬╖ $_priority', fontSize: 10.sp, color: AppColors.primary),
           ],
         ),
         actions: [

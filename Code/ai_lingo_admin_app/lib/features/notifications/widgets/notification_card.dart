@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/widgets/custom_card.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../widgets_core/custom_card.dart';
+import '../widgets_core/custom_text.dart';
 import 'notification_data.dart';
 
 class NotificationCard extends StatelessWidget {
@@ -64,7 +64,7 @@ class NotificationCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5.h),
                 CustomText(
-                  text: '${data.date} · ${data.unread ? 'Unread' : data.type == 'Important' ? 'Important' : 'Read'}',
+                  text: '${data.date} ┬╖ ${data.unread ? 'Unread' : data.type == 'Important' ? 'Important' : 'Read'}',
                   fontSize: 9.sp,
                   color: AppColors.textSecondary,
                 ),

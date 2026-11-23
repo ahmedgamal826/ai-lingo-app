@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/widgets/custom_text.dart';
+import '../widgets_core/custom_text.dart';
 
 class NotificationsHeader extends StatelessWidget {
   const NotificationsHeader({

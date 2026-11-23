@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
-import '../../../core/widgets/custom_card.dart';
+import '../widgets_core/custom_card.dart';
 
 class WeeklyActivityCard extends StatelessWidget {
   const WeeklyActivityCard({super.key});
@@ -32,7 +32,7 @@ class WeeklyActivityCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Nov 9–15',
+                'Nov 9ΓÇô15',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontSize: 10,
