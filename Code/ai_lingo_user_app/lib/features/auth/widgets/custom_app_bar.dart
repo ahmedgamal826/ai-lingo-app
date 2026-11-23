@@ -43,6 +43,7 @@ class AuthAppBar extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.onBack,
+    this.child,
   });
 
   final String title;
@@ -50,6 +51,7 @@ class AuthAppBar extends StatelessWidget {
   /// Small caps line under the title (e.g. "ACCOUNT CREATED · LAST STEP").
   final String? subtitle;
   final VoidCallback? onBack;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +67,13 @@ class AuthAppBar extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: onBack ?? () => Navigator.maybePop(context),
-                child: const Icon(
-                  Icons.arrow_back,
-                  size: 24,
-                  color: AppColors.textPrimary,
-                ),
+                child:
+                    child ??
+                    Icon(
+                      Icons.arrow_back,
+                      size: 24,
+                      color: AppColors.textPrimary,
+                    ),
               ),
               const SizedBox(width: 12),
               Expanded(
