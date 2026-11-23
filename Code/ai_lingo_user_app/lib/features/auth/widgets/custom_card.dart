@@ -205,7 +205,7 @@ class CustomCard extends StatelessWidget {
   }
 }
 
-/// Small pill: Pending / Resolved / Closed / "B1 · Intermediate" ...
+/// Small pill: Pending / Resolved / Closed / "B1 ┬╖ Intermediate" ...
 class CustomStatusBadge extends StatelessWidget {
   const CustomStatusBadge({
     super.key,

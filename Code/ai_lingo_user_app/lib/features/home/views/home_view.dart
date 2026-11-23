@@ -19,7 +19,7 @@ import '../widgets/saved_word_preview_card.dart';
 import '../widgets/scenario_suggestion_card.dart';
 import 'main_shell_view.dart';
 
-/// Home screen View — UI only.
+/// Home screen View ΓÇö UI only.
 class HomeView extends StatelessWidget {
   const HomeView({super.key, this.showBottomNav = true});
 

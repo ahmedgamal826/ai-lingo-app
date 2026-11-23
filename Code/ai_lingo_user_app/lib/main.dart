@@ -1,8 +1,10 @@
 import 'package:ai_lingo_user_app/features/auth/views/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/app_strings.dart';
+import 'core/theme/app_colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,13 +27,17 @@ class AiLingoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
           title: AppStrings.appName,
           debugShowCheckedModeBanner: false,
-          home: const SplashScreen(),
+          home: child,
         );
       },
+      child: const SplashScreen(),
     );
   }
 }
