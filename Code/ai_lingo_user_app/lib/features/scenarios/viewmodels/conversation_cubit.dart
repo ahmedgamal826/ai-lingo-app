@@ -36,19 +36,19 @@ class ConversationCubit extends Cubit<ConversationState> {
     required ScenarioItem scenario,
     required ScenarioConversationProfile profile,
     required String levelLabel,
-    required this._aiService,
-    required this._evaluationService,
+    required this.aiService,
+    required this.evaluationService,
   }) : super(
          ConversationState.initial(
            scenario: scenario,
            profile: profile,
            levelLabel: levelLabel,
-           partnerAvailability: _aiService.availability,
+           partnerAvailability: aiService.availability,
          ),
        );
 
-  final ConversationAiService _aiService;
-  final ConversationEvaluationService _evaluationService;
+  final ConversationAiService aiService;
+  final ConversationEvaluationService evaluationService;
   bool _isEvaluating = false;
 
   Future<void> _bootstrap() async {
@@ -60,7 +60,7 @@ class ConversationCubit extends Cubit<ConversationState> {
       ),
     );
     try {
-      final opening = await _aiService.createOpeningMessage(
+      final opening = await aiService.createOpeningMessage(
         scenario: state.scenario,
         profile: state.profile,
       );
@@ -108,7 +108,7 @@ class ConversationCubit extends Cubit<ConversationState> {
     );
 
     try {
-      final reply = await _aiService.generateReply(
+      final reply = await aiService.generateReply(
         scenario: state.scenario,
         profile: state.profile,
         history: history,
@@ -143,7 +143,7 @@ class ConversationCubit extends Cubit<ConversationState> {
     );
 
     try {
-      final result = await _evaluationService.evaluate(
+      final result = await evaluationService.evaluate(
         scenario: state.scenario,
         profile: state.profile,
         levelLabel: state.levelLabel,
