@@ -378,7 +378,7 @@ class _ComplaintsList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.only(bottom: 20),
       itemCount: state.items.length + 1,
-      separatorBuilder: (_, _) => const SizedBox(height: AppDimensions.spaceLg),
+      separatorBuilder: (context, index) => const SizedBox(height: AppDimensions.spaceLg),
       itemBuilder: (context, index) {
         if (index == state.items.length) {
           return _LoadMoreFooter(state: state, onLoadMore: cubit.loadMore);

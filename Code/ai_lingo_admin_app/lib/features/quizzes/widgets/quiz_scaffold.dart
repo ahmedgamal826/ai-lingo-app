@@ -75,7 +75,7 @@ class QuizScaffold extends StatelessWidget {
                         ],
                       ),
                     ),
-                    ?trailing,
+                    if (trailing != null) trailing!,
                   ],
                 ),
               ),

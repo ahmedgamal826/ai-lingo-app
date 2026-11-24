@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../quizzes/views/quiz_form_view.dart';
+import '../../notifications/views/notifications_view.dart';
 import '../models/dashboard_models.dart';
 import '../widgets/dashboard_header.dart';
 import '../widgets/dashboard_section_title.dart';
@@ -19,6 +20,7 @@ class DashboardView extends StatelessWidget {
     this.onCreateQuiz,
     this.onBroadcast,
     this.onComplaints,
+    this.onNotifications,
   });
 
   /// Optional overrides. If [onCreateQuiz] is null, the dashboard opens the
@@ -26,6 +28,7 @@ class DashboardView extends StatelessWidget {
   final VoidCallback? onCreateQuiz;
   final VoidCallback? onBroadcast;
   final VoidCallback? onComplaints;
+  final VoidCallback? onNotifications;
 
   // TODO: move to AppColors once the team agrees on a background color.
   static const Color _background = Color(0xFFF8F9FC);
@@ -104,7 +107,16 @@ class DashboardView extends StatelessWidget {
               bottom: false,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 12.h),
-                child: const DashboardHeader(),
+                child: DashboardHeader(
+                  onBellTap: onNotifications ??
+                      () {
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const NotificationsView(),
+                          ),
+                        );
+                      },
+                ),
               ),
             ),
           ),
