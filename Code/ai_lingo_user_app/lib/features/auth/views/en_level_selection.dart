@@ -3,6 +3,7 @@ import 'package:ai_lingo_user_app/features/auth/widgets/custom_app_bar.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_button.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_card.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_text.dart';
+import 'package:ai_lingo_user_app/features/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 class _Level {
@@ -19,14 +20,6 @@ const _levels = [
   _Level('C1–C2', 'Advanced', 'I want to refine my fluency.'),
 ];
 
-/// Learner · English level selection  (Frame: 390 x 844)
-///   App bar (title + small caps subtitle)
-///   Screen content: padding horizontal 20, top 20
-///     ├─ Title (Fill x Hug, 26 bold, line height 140%)
-///     ├─ Subtitle
-///     ├─ 4 x Level option (gap 16)
-///     ├─ Flexible space
-///     └─ Button (Start My Journey)
 class LevelSelectionScreen extends StatefulWidget {
   const LevelSelectionScreen({super.key});
 
@@ -37,8 +30,18 @@ class LevelSelectionScreen extends StatefulWidget {
 class _LevelSelectionScreenState extends State<LevelSelectionScreen> {
   int _selected = 1; // Intermediate (as in the design)
 
-  void _start() {
-    // TODO: save the selected level (_levels[_selected]) then go Home
+  void _start() async {
+    final selectedLevel = _levels[_selected];
+
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.setString('selectedLevel', selectedLevel);
+
+    if (!mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeView()),
+    );
   }
 
   Widget _badge(String text, bool selected) {
@@ -67,6 +70,7 @@ class _LevelSelectionScreenState extends State<LevelSelectionScreen> {
       body: Column(
         children: [
           const AuthAppBar(
+            child: SizedBox(),
             title: 'Make it yours',
             subtitle: 'ACCOUNT CREATED · LAST STEP',
           ),

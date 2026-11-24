@@ -1,10 +1,12 @@
 import 'package:ai_lingo_admin_app/core/theme/app_colors.dart';
+import 'package:ai_lingo_admin_app/features/dashboard/views/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_text_field.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -133,7 +135,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(height: 14),
 
                         // ---------------- Login button ----------------
-                        CustomDarkButton(text: 'Login', isLoading: _loading),
+                        CustomDarkButton(
+                          text: 'Login',
+                          isLoading: _loading,
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DashboardView(),
+                              ),
+                            );
+                          },
+                        ),
                         const SizedBox(height: 18),
                       ],
                     ),

@@ -9,7 +9,7 @@ import 'complaint_details_state.dart';
 class ComplaintDetailsCubit extends Cubit<ComplaintDetailsState> {
   ComplaintDetailsCubit({
     required this.complaintId,
-    this._initialComplaint,
+    this.initialComplaint,
     ComplaintsService? service,
   }) : _service = service ?? MockComplaintsService.instance,
        super(ComplaintDetailsState.initial()) {
@@ -17,12 +17,12 @@ class ComplaintDetailsCubit extends Cubit<ComplaintDetailsState> {
   }
 
   final String complaintId;
-  final ComplaintItem? _initialComplaint;
+  final ComplaintItem? initialComplaint;
   final ComplaintsService _service;
   bool _submitLocked = false;
 
   Future<void> _load() async {
-    final seed = _initialComplaint;
+    final seed = initialComplaint;
     if (seed != null && seed.id == complaintId) {
       emit(
         state.copyWith(
