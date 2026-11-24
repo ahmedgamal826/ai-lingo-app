@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../models/quiz_models.dart';
+import '../viewmodels/quizzes_cubit.dart';
 import '../widgets/quiz_action_button.dart';
 import '../widgets/quiz_chip.dart';
 import '../widgets/quiz_dropdown.dart';
@@ -35,26 +37,25 @@ class _QuizFormViewState extends State<QuizFormView> {
   late final TextEditingController _week;
   late final TextEditingController _duration;
   late final TextEditingController _attempts;
-  String _level = 'B1';
+  late String _level;
+
+  /// Set after the first save in create mode, so tapping "Continue" twice
+  /// updates the same quiz instead of creating a duplicate.
+  Quiz? _created;
+  bool _busy = false;
 
   @override
   void initState() {
     super.initState();
     final quiz = widget.quiz;
-    // Temporary sample values (match Figma). The Cubit will provide real data.
-    _title = TextEditingController(
-      text: quiz?.title ?? 'Travel with Confidence',
-    );
-    _description = TextEditingController(
-      text: widget.isEdit
-          ? 'Grammar, vocabulary, and expressions for real-life conversations.'
-          : 'Practical English for airports, hotels, and exploring new places.',
-    );
+    _title = TextEditingController(text: quiz?.title ?? '');
+    _description = TextEditingController(text: quiz?.description ?? '');
     _week = TextEditingController(
-      text: quiz == null ? '47' : quiz.week.replaceFirst('Week ', ''),
+      text: quiz == null ? _nextWeek() : quiz.week.replaceFirst('Week ', ''),
     );
-    _duration = TextEditingController(text: '20');
-    _attempts = TextEditingController(text: '1');
+    _duration = TextEditingController(text: '${quiz?.durationMinutes ?? 20}');
+    _attempts = TextEditingController(text: '${quiz?.attempts ?? 1}');
+    _level = _levels.contains(quiz?.level) ? quiz!.level : 'B1';
   }
 
   @override
@@ -65,6 +66,27 @@ class _QuizFormViewState extends State<QuizFormView> {
     _duration.dispose();
     _attempts.dispose();
     super.dispose();
+  }
+
+  /// The week after the latest existing quiz.
+  String _nextWeek() {
+    var max = 0;
+    for (final quiz in context.read<QuizzesCubit>().state.quizzes) {
+      final n = int.tryParse(quiz.week.replaceFirst('Week ', ''));
+      if (n != null && n > max) max = n;
+    }
+    return '${max + 1}';
+  }
+
+  void _toast(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  Quiz? _fail(String message) {
+    _toast(message);
+    return null;
   }
 
   Future<void> _pickWeek() async {
@@ -90,15 +112,109 @@ class _QuizFormViewState extends State<QuizFormView> {
     if (picked != null) setState(() => _week.text = '$picked');
   }
 
-  void _continueToQuestions() {
+  /// Validates the form and builds the quiz. Returns null (and shows a
+  /// message) when something is wrong.
+  Quiz? _readForm() {
+    final title = _title.text.trim();
+    final description = _description.text.trim();
+    final week = int.tryParse(_week.text.trim());
+    final duration = int.tryParse(_duration.text.trim());
+    final attempts = int.tryParse(_attempts.text.trim());
+
+    if (title.isEmpty) return _fail('Enter the quiz title.');
+    if (week == null) return _fail('Choose the week.');
+    if (duration == null || duration <= 0) {
+      return _fail('Duration must be a positive number.');
+    }
+    if (attempts == null || attempts <= 0) {
+      return _fail('Allowed attempts must be a positive number.');
+    }
+
+    final base = widget.quiz ?? _created;
+    if (base != null) {
+      return base.copyWith(
+        week: 'Week $week',
+        title: title,
+        description: description,
+        level: _level,
+        durationMinutes: duration,
+        attempts: attempts,
+      );
+    }
+    return Quiz(
+      week: 'Week $week',
+      title: title,
+      status: QuizStatus.draft,
+      schedule: 'No schedule set',
+      summary: '',
+      description: description,
+      level: _level,
+      durationMinutes: duration,
+      attempts: attempts,
+    );
+  }
+
+  /// Creates the quiz (as a draft) or updates it. Returns null on failure.
+  Future<Quiz?> _persist() async {
+    final form = _readForm();
+    if (form == null) return null;
+    final cubit = context.read<QuizzesCubit>();
+    try {
+      if (form.id.isEmpty) {
+        _created = await cubit.createQuiz(form);
+        return _created;
+      }
+      await cubit.updateQuiz(form);
+      return form;
+    } catch (_) {
+      if (mounted) _toast('Could not save the quiz. Please try again.');
+      return null;
+    }
+  }
+
+  Future<void> _continueToQuestions() async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    final quiz = await _persist();
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (quiz == null) return;
+
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => QuizQuestionView.preview(
-          week: 'Week ${_week.text}',
-          title: _title.text,
+          quizId: quiz.id,
+          week: quiz.week,
+          title: quiz.title,
         ),
       ),
     );
+  }
+
+  Future<void> _saveChanges() async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    final quiz = await _persist();
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (quiz == null) return;
+
+    final messenger = ScaffoldMessenger.of(context);
+    Navigator.of(context).pop();
+    messenger.showSnackBar(const SnackBar(content: Text('Changes saved')));
+  }
+
+  Future<void> _saveAsDraft() async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    final quiz = await _persist();
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (quiz == null) return;
+
+    final messenger = ScaffoldMessenger.of(context);
+    Navigator.of(context).pop();
+    messenger.showSnackBar(const SnackBar(content: Text('Draft saved')));
   }
 
   @override
@@ -118,11 +234,16 @@ class _QuizFormViewState extends State<QuizFormView> {
             child: QuizChip(chipLabel, letterSpacing: 0.5),
           ),
           SizedBox(height: 16.h),
-          QuizTextField(label: 'Quiz title', controller: _title),
+          QuizTextField(
+            label: 'Quiz title',
+            controller: _title,
+            hint: 'e.g. Travel with Confidence',
+          ),
           SizedBox(height: 16.h),
           QuizTextField(
             label: 'Description',
             controller: _description,
+            hint: 'What will learners practice in this quiz?',
             minLines: 3,
             maxLines: 4,
           ),
@@ -173,11 +294,12 @@ class _QuizFormViewState extends State<QuizFormView> {
           ),
           SizedBox(height: 16.h),
           if (isEdit)
-            const QuizInfoBox(
+            QuizInfoBox(
               iconName: 'shield-check',
               title: 'Edit with care',
-              message:
-              'This test has 182 submissions. Changes are recorded in the activity log.',
+              message: widget.quiz!.submissions > 0
+                  ? 'This test has ${widget.quiz!.submissions} submissions. Changes are recorded in the activity log.'
+                  : 'Changes are recorded in the activity log.',
             )
           else
             const QuizInfoBox(
@@ -189,10 +311,12 @@ class _QuizFormViewState extends State<QuizFormView> {
           SizedBox(height: 24.h),
           QuizActionButton.primary(
             label: isEdit ? 'Save Changes' : 'Continue to Questions',
-            onTap: isEdit ? () {} : _continueToQuestions,
+            onTap: isEdit ? _saveChanges : _continueToQuestions,
           ),
-          SizedBox(height: 12.h),
-          QuizActionButton.light(label: 'Save as Draft', onTap: () {}),
+          if (!isEdit) ...[
+            SizedBox(height: 12.h),
+            QuizActionButton.light(label: 'Save as Draft', onTap: _saveAsDraft),
+          ],
         ],
       ),
     );
