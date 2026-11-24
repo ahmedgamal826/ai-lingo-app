@@ -33,12 +33,21 @@ class AiLingoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
-      minTextAdapt: true,
+      // Width-based text scale so Android aspect ratios don't shrink
+      // Inter sizes below the Figma 390pt design.
+      minTextAdapt: false,
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
           title: AppStrings.appName,
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: 'Inter',
+            textTheme: ThemeData.light().textTheme.apply(
+                  fontFamily: 'Inter',
+                ),
+          ),
           home: child,
           routes: {
             ...learnerProfileRoutes(),

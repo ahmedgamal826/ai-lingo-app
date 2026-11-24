@@ -5,11 +5,13 @@ import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../leaderboard/views/leaderboard_view.dart';
+import '../../scenarios/views/ai_conversation_view.dart';
 import '../core/widgets/custom_app_bar.dart';
 import '../core/widgets/custom_bottom_nav_bar.dart';
+import '../models/home_models.dart';
 import '../viewmodels/home_cubit.dart';
 import '../viewmodels/home_state.dart';
-import '../../leaderboard/views/leaderboard_view.dart';
 import '../widgets/daily_momentum_card.dart';
 import '../widgets/home_scale.dart';
 import '../widgets/home_section_header.dart';
@@ -19,7 +21,7 @@ import '../widgets/saved_word_preview_card.dart';
 import '../widgets/scenario_suggestion_card.dart';
 import 'main_shell_view.dart';
 
-/// Home screen View ΓÇö UI only.
+/// Home screen View — UI + navigation wiring into Practice / Vocabulary.
 class HomeView extends StatelessWidget {
   const HomeView({super.key, this.showBottomNav = true});
 
@@ -39,6 +41,55 @@ class _HomeViewBody extends StatelessWidget {
   const _HomeViewBody({required this.showBottomNav});
 
   final bool showBottomNav;
+
+  void _openPracticeTab(BuildContext context) {
+    MainShellController.maybeOf(context)?.selectTab(1);
+  }
+
+  void _openVocabularyTab(BuildContext context) {
+    MainShellController.maybeOf(context)?.selectTab(2);
+  }
+
+  void _openNotifications(BuildContext context) {
+    Navigator.of(context).pushNamed('/profile/notifications');
+  }
+
+  Future<void> _openLeaderboard(BuildContext context) async {
+    final tab = await Navigator.of(context).push<int>(
+      MaterialPageRoute<int>(
+        builder: (_) => const LeaderboardView(),
+      ),
+    );
+    if (!context.mounted || tab == null) return;
+    MainShellController.maybeOf(context)?.selectTab(tab);
+  }
+
+  void _openScenario(BuildContext context, ScenarioSuggestion suggestion) {
+    final scenario = context.read<HomeCubit>().resolveScenario(suggestion);
+    if (scenario == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('This scenario is not available yet.')),
+      );
+      return;
+    }
+    Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => AiConversationView(scenario: scenario),
+      ),
+    );
+  }
+
+  void _onPronounce(BuildContext context, SavedWordPreview preview) {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          'Pronunciation for “${preview.word}” is not available yet.',
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,15 +129,8 @@ class _HomeViewBody extends StatelessWidget {
                       levelLabel: state.levelLabel,
                       rankLabel: state.rankLabel,
                       unreadCount: state.unreadCount,
-                      onLeaderboardTap: () async {
-                        final tab = await Navigator.of(context).push<int>(
-                          MaterialPageRoute<int>(
-                            builder: (_) => const LeaderboardView(),
-                          ),
-                        );
-                        if (!context.mounted || tab == null) return;
-                        MainShellController.maybeOf(context)?.selectTab(tab);
-                      },
+                      onNotificationsTap: () => _openNotifications(context),
+                      onLeaderboardTap: () => _openLeaderboard(context),
                     ),
                     SizedBox(height: sectionGap),
                     DailyMomentumCard(
@@ -94,11 +138,13 @@ class _HomeViewBody extends StatelessWidget {
                       progressLabel: state.progressLabel,
                       progressPercentLabel: state.progressPercentLabel,
                       progress: state.progressPercent / 100,
+                      onStartPracticing: () => _openPracticeTab(context),
                     ),
                     SizedBox(height: sectionGap),
-                    const HomeSectionHeader(
+                    HomeSectionHeader(
                       title: AppStrings.suggestedPracticeTitle,
                       actionLabel: AppStrings.viewAll,
+                      onActionTap: () => _openPracticeTab(context),
                     ),
                     SizedBox(height: homeScale(context, 10)),
                     Row(
@@ -109,18 +155,24 @@ class _HomeViewBody extends StatelessWidget {
                           Expanded(
                             child: ScenarioSuggestionCard(
                               scenario: state.scenarios[i],
+                              onTap: () =>
+                                  _openScenario(context, state.scenarios[i]),
                             ),
                           ),
                         ],
                       ],
                     ),
                     SizedBox(height: sectionGap),
-                    const HomeSectionHeader(
+                    HomeSectionHeader(
                       title: AppStrings.vocabularyTitle,
                       actionLabel: AppStrings.seeAll,
+                      onActionTap: () => _openVocabularyTab(context),
                     ),
                     SizedBox(height: homeScale(context, AppDimensions.spaceSm)),
-                    SavedWordPreviewCard(preview: state.savedWord),
+                    SavedWordPreviewCard(
+                      preview: state.savedWord,
+                      onPlayTap: () => _onPronounce(context, state.savedWord),
+                    ),
                     SizedBox(height: sectionGap),
                     LearningStatisticsRow(stats: state.stats),
                   ],
@@ -132,7 +184,10 @@ class _HomeViewBody extends StatelessWidget {
               ? CustomBottomNavBar(
                   currentIndex: state.selectedNavIndex,
                   items: MainShellView.navItems,
-                  onTap: context.read<HomeCubit>().selectTab,
+                  onTap: (index) {
+                    context.read<HomeCubit>().selectTab(index);
+                    MainShellController.maybeOf(context)?.selectTab(index);
+                  },
                 )
               : null,
         );
