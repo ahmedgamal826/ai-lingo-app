@@ -8,3 +8,9 @@
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
+# Ignore Android folder
+/android/
+
+# Ignore pubspec files
+/pubspec.yaml
+/pubspec.lock
