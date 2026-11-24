@@ -247,7 +247,8 @@ class _AiConversationBodyState extends State<_AiConversationBody> {
                       controller: _scrollController,
                       itemCount:
                           state.messages.length + (state.isAiTyping ? 1 : 0),
-                      separatorBuilder: (_, _) =>
+                      separatorBuilder: (context, index) =>
+                      // separatorBuilder: (_, _) =>
                           const SizedBox(height: AppDimensions.spaceMd),
                       itemBuilder: (context, index) {
                         if (index >= state.messages.length) {
