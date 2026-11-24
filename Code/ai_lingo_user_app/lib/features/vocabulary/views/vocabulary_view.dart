@@ -15,7 +15,9 @@ import '../widgets/vocabulary_filter_tabs.dart';
 import '../widgets/vocabulary_word_card.dart';
 
 class VocabularyView extends StatefulWidget {
-  const VocabularyView({super.key});
+  const VocabularyView({super.key, this.showBottomNav = true});
+
+  final bool showBottomNav;
 
   @override
   State<VocabularyView> createState() => _VocabularyViewState();
@@ -316,7 +318,7 @@ class _VocabularyViewState extends State<VocabularyView> {
             },
           ),
         ),
-        bottomNavigationBar: CustomBottomNavBar(
+        bottomNavigationBar: (widget.showBottomNav ? CustomBottomNavBar(
           currentIndex: 2,
           onTap: (index) {
             if (index == 3) {
@@ -349,7 +351,7 @@ class _VocabularyViewState extends State<VocabularyView> {
               iconAsset: AppAssets.icon('user-round.svg'),
             ),
           ],
-        ),
+        ) : null),
       ),
     );
   }

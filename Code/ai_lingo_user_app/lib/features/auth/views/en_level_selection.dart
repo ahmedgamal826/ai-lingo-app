@@ -3,7 +3,7 @@ import 'package:ai_lingo_user_app/features/auth/widgets/custom_app_bar.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_button.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_card.dart';
 import 'package:ai_lingo_user_app/features/auth/widgets/custom_text.dart';
-import 'package:ai_lingo_user_app/features/home/views/home_view.dart';
+import 'package:ai_lingo_user_app/features/home/views/main_shell_view.dart';
 import 'package:flutter/material.dart';
 
 class _Level {
@@ -40,7 +40,7 @@ class _LevelSelectionScreenState extends State<LevelSelectionScreen> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeView()),
+      MaterialPageRoute(builder: (context) => const MainShellView()),
     );
   }
 

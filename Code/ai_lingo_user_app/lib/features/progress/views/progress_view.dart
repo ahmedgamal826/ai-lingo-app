@@ -13,7 +13,9 @@ import '../widgets/progress_level_caption.dart';
 
 /// Progress screen built with the project's existing shared widgets.
 class ProgressView extends StatefulWidget {
-  const ProgressView({super.key});
+  const ProgressView({super.key, this.showBottomNav = true});
+
+  final bool showBottomNav;
 
   @override
   State<ProgressView> createState() => _ProgressViewState();
@@ -102,7 +104,7 @@ class _ProgressViewState extends State<ProgressView> {
             ),
           ),
         ),
-        bottomNavigationBar: CustomBottomNavBar(
+        bottomNavigationBar: (widget.showBottomNav ? CustomBottomNavBar(
           currentIndex: _selectedIndex,
           onTap: (index) {
             if (index == 2) {
@@ -142,7 +144,7 @@ class _ProgressViewState extends State<ProgressView> {
               iconAsset: AppAssets.icon('user-round.svg'),
             ),
           ],
-        ),
+        ) : null),
       ),
     );
   }
