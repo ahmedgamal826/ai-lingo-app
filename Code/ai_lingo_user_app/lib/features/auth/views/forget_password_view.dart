@@ -9,16 +9,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'reset_email_sent_screen.dart';
 
-/// Learner · Forgot password  (Frame: 390 x 844)
-///   App bar
-///   Screen content: padding horizontal 20, top 20
-///     ├─ Key icon box (56 x 56)
-///     ├─ Title (2 lines)  /  subtitle
-///     ├─ Email field
-///     ├─ Send Reset Link button
-///     ├─ Reassurance card
-///     ├─ Flexible space
-///     └─ Back to Login link
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
@@ -46,8 +36,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) =>
-            ResetEmailSentScreen(email: _emailController.text.trim()),
+        builder: (_) => ResetEmailSentScreen(
+            // email: _emailController.text.trim()
+            ),
       ),
     );
   }
@@ -129,8 +120,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 textInputAction: TextInputAction.done,
                                 autofillHints: const [AutofillHints.email],
                                 onSubmitted: _send,
-                                validator: (v) =>
-                                    (v == null ||
+                                validator: (v) => (v == null ||
                                         !v.contains('@') ||
                                         !v.contains('.'))
                                     ? 'Enter a valid email'
@@ -141,7 +131,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               // ---------------- Button ----------------
                               CustomDarkButton(
                                 text: 'Send Reset Link',
-                                onTap: _send,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ResetEmailSentScreen(
+                                          // email: _emailController.text.trim()
+                                          ),
+                                    ),
+                                  );
+                                },
                                 isLoading: _loading,
                               ),
                               const SizedBox(height: 16),

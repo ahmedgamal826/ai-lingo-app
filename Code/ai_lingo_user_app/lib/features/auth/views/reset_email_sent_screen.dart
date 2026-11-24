@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ResetEmailSentScreen extends StatelessWidget {
-  const ResetEmailSentScreen({super.key, required this.email});
+  const ResetEmailSentScreen({
+    super.key,
+  });
 
-  final String email;
+  // final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,7 @@ class ResetEmailSentScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 12),
                             CustomText(
-                              text: 'We sent a password reset link to\n$email.',
+                              text: 'We sent a password reset link to\n email.',
                               fontSize: 13,
                               height: 1.5,
                               color: AppColors.textSecondary,
