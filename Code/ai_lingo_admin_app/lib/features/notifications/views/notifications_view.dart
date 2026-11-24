@@ -10,7 +10,9 @@ import '../widgets/notifications_header.dart';
 import '../widgets_core/custom_bottom_nav_bar.dart';
 
 class NotificationsView extends StatefulWidget {
-  const NotificationsView({super.key});
+  const NotificationsView({super.key, this.showBottomNavigationBar = true});
+
+  final bool showBottomNavigationBar;
 
   @override
   State<NotificationsView> createState() => _NotificationsViewState();
@@ -111,7 +113,9 @@ class _NotificationsViewState extends State<NotificationsView> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(
+      bottomNavigationBar: widget.showBottomNavigationBar
+      // bottomNavigationBar: showBottomNavigationBar
+          ? CustomBottomNavBar(
         currentIndex: _selectedNav,
         onTap: (index) => setState(() => _selectedNav = index),
         items: const [
@@ -121,7 +125,8 @@ class _NotificationsViewState extends State<NotificationsView> {
           BottomNavItem(label: 'Notifications', icon: Icons.notifications_none, iconAsset: 'assets/icons/bell.svg'),
           BottomNavItem(label: 'Profile', icon: Icons.person_outline, iconAsset: 'assets/icons/user-round.svg'),
         ],
-      ),
+      )
+          : null,
     );
   }
 }

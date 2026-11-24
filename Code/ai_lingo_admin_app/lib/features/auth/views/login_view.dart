@@ -1,5 +1,5 @@
 import 'package:ai_lingo_admin_app/core/theme/app_colors.dart';
-import 'package:ai_lingo_admin_app/features/dashboard/views/dashboard_view.dart';
+import 'package:ai_lingo_admin_app/features/shell/views/main_shell_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DashboardView(),
+                                builder: (context) => const MainShellView(),
                               ),
                             );
                           },
