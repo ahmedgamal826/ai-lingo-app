@@ -81,13 +81,10 @@ class WeeklyTestService {
         : AppStrings.weeklyTestClosedMessageTitle;
 
     return WeeklyTestInfo(
-      testId: testId,
       title: AppStrings.weeklyTestTitle,
       description: AppStrings.weeklyTestDescription,
       opensAt: opensAt,
       closesAt: closesAt,
-      maxAttempts: maxAttempts,
-      attemptsUsed: attemptsUsed,
       scheduleTitle: _formatOpenTitle(opensAt),
       scheduleSubtitle: 'Closes ${_formatCloseSubtitle(closesAt)}',
       durationTitle:

@@ -84,6 +84,9 @@ class AppStrings {
   static const String weeklyTestClosedMessageTitle = 'Your result is ready';
   static const String weeklyTestClosedMessageBody =
       'You scored 90/100 and earned 100 points.';
+  static const String weeklyTestClosedNoResultTitle = 'This week’s test has ended';
+  static const String weeklyTestClosedNoResultBody =
+      'You didn’t take this week’s test. Practice scenarios and try again next week.';
   static const String weeklyTestLockedButton = 'Available Nov 13 · 9:00 AM';
   static const String weeklyTestActiveButton = 'Start Weekly Test';
   static const String weeklyTestClosedButton = 'View My Results';
