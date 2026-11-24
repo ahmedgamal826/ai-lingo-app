@@ -10,16 +10,9 @@ import '../widgets/notifications_header.dart';
 import '../widgets_core/custom_bottom_nav_bar.dart';
 
 class NotificationsView extends StatefulWidget {
-<<<<<<< Updated upstream
   const NotificationsView({super.key, this.showBottomNavigationBar = true});
 
   final bool showBottomNavigationBar;
-=======
-  const NotificationsView({super.key, this.showBottomNav = true});
-
-  /// The admin shell already has a bottom navigation, so it passes `false`.
-  final bool showBottomNav;
->>>>>>> Stashed changes
 
   @override
   State<NotificationsView> createState() => _NotificationsViewState();
@@ -120,13 +113,9 @@ class _NotificationsViewState extends State<NotificationsView> {
           ],
         ),
       ),
-<<<<<<< Updated upstream
       bottomNavigationBar: widget.showBottomNavigationBar
       // bottomNavigationBar: showBottomNavigationBar
           ? CustomBottomNavBar(
-=======
-      bottomNavigationBar: !widget.showBottomNav ? null : CustomBottomNavBar(
->>>>>>> Stashed changes
         currentIndex: _selectedNav,
         onTap: (index) => setState(() => _selectedNav = index),
         items: const [
