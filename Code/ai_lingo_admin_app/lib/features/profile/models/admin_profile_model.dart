@@ -17,9 +17,20 @@ class AdminProfileModel {
   final bool userActivity;
   final bool systemAlerts;
 
-  AdminProfileModel copyWith({String? name, String? email, String? role, String? language,
-    bool? newComplaints, bool? userActivity, bool? systemAlerts}) => AdminProfileModel(
-      name: name ?? this.name, email: email ?? this.email, role: role ?? this.role,
-      language: language ?? this.language, newComplaints: newComplaints ?? this.newComplaints,
-      userActivity: userActivity ?? this.userActivity, systemAlerts: systemAlerts ?? this.systemAlerts);
+  AdminProfileModel copyWith(
+          {String? name,
+          String? email,
+          String? role,
+          String? language,
+          bool? newComplaints,
+          bool? userActivity,
+          bool? systemAlerts}) =>
+      AdminProfileModel(
+          name: name ?? this.name,
+          email: email ?? this.email,
+          role: role ?? this.role,
+          language: language ?? this.language,
+          newComplaints: newComplaints ?? this.newComplaints,
+          userActivity: userActivity ?? this.userActivity,
+          systemAlerts: systemAlerts ?? this.systemAlerts);
 }

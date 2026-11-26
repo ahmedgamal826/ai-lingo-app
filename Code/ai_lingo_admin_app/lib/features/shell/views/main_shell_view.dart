@@ -7,6 +7,11 @@ import '../../dashboard/views/dashboard_view.dart';
 import '../../profile/views/admin_profile_view.dart';
 import '../../notifications/views/notifications_view.dart';
 import '../../quizzes/views/quizzes_view.dart';
+import '../../quizzes/services/mock_quizzes_service.dart';
+import '../../quizzes/viewmodels/quizzes_cubit.dart';
+import '../../quizzes/views/quiz_form_view.dart';
+import '../../quizzes/views/quiz_overview_view.dart';
+import '../../quizzes/views/quizzes_flow.dart';
 import '../core/widgets/custom_bottom_nav_bar.dart';
 
 /// Root admin shell with persistent bottom navigation.
@@ -30,7 +35,10 @@ class MainShellView extends StatefulWidget {
       label: AppStrings.navNotifications,
       iconAsset: AppAssets.bell,
     ),
-    BottomNavItem(label: AppStrings.navProfile, iconAsset: AppAssets.userRound),
+    BottomNavItem(
+      label: AppStrings.navProfile,
+      iconAsset: AppAssets.userRound,
+    ),
   ];
 
   @override
@@ -51,6 +59,7 @@ class _MainShellViewState extends State<MainShellView> {
   void _selectTab(int index) {
     if (index == _selectedIndex) return;
     if (index < 0 || index >= _pages.length) return;
+
     setState(() => _selectedIndex = index);
   }
 

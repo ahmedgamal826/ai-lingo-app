@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../viewmodels/learner_profile_cubit.dart';
 import '../viewmodels/learner_profile_state.dart';
 import '../widgets/profile_components.dart';
+import '../../../core/theme/app_dimensions.dart';
+import '../../../core/theme/app_font_sizes.dart';
+import '../../../core/theme/app_colors.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});
@@ -14,20 +17,20 @@ class EditProfileView extends StatelessWidget {
         Center(child: Column(children: [
           AvatarCircle(initials: p.avatarInitials, size: 66),
           const SizedBox(height: 6),
-          Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: ProfileColors.primaryLight, borderRadius: BorderRadius.circular(20)), child: Row(mainAxisSize: MainAxisSize.min, children: [const SvgAssetIcon('trophy', size: 12, color: ProfileColors.primary), const SizedBox(width: 5), Text('${p.level} level', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: ProfileColors.primary))])),
-          TextButton(onPressed: () {}, child: const Text('Change Photo', style: TextStyle(fontSize: 11, color: ProfileColors.primary))),
+          Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(20)), child: Row(mainAxisSize: MainAxisSize.min, children: [const SvgAssetIcon('trophy', size: 12, color: AppColors.primary), const SizedBox(width: 5), Text('${p.level} level', style: const TextStyle(fontSize: AppFontSizes.font9, fontWeight: FontWeight.w700, color: AppColors.primary))])),
+          TextButton(onPressed: () {}, child: const Text('Change Photo', style: TextStyle(fontSize: AppFontSizes.font11, color: AppColors.primary))),
         ])),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppDimensions.spaceMd),
         ProfileField(label: 'Full Name', value: p.fullName, onChanged: cubit.updateName),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppDimensions.spaceLg),
         ProfileField(label: 'Email', value: p.email, onChanged: cubit.updateEmail),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppDimensions.spaceLg),
         ProfileField(label: 'University', value: p.university, onChanged: cubit.updateUniversity),
         const SizedBox(height: 30),
         PrimaryButton(label: 'Save Changes', onPressed: () { cubit.saveProfile(); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile changes saved'))); }),
         const SizedBox(height: 10),
         SizedBox(width: double.infinity, height: 42, child: TextButton(onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel', style: TextStyle(color: ProfileColors.muted, fontSize: 12)))),
+          child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary, fontSize: AppFontSizes.font12)))),
       ])));
     },
   );
