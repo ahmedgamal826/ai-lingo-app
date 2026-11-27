@@ -9,6 +9,9 @@ import '../../notifications/views/notifications_view.dart';
 import '../../quizzes/models/quiz_models.dart';
 import '../../quizzes/viewmodels/quizzes_cubit.dart';
 import '../../quizzes/views/quiz_form_view.dart';
+// import '../../quizzes/models/quiz_models.dart';
+// import '../../quizzes/views/quiz_form_view.dart';
+// import '../../notifications/views/notifications_view.dart';
 import '../../quizzes/views/quiz_overview_view.dart';
 import '../models/dashboard_models.dart';
 import '../widgets/dashboard_header.dart';
@@ -28,12 +31,14 @@ class DashboardView extends StatelessWidget {
     this.onBroadcast,
     this.onComplaints,
     this.onNotifications,
+    this.onSeeAll,
   });
 
   final VoidCallback? onCreateQuiz;
   final VoidCallback? onBroadcast;
   final VoidCallback? onComplaints;
   final VoidCallback? onNotifications;
+  final VoidCallback? onSeeAll;
 
   // TODO: move to AppColors once the team agrees on a background color.
   static const Color _background = Color(0xFFF8F9FC);

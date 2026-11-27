@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.label,
+    this.initialValue,
+    this.onChanged,
+    this.readOnly = false,
+    this.maxLines = 1,
+    this.textStyle,
+    this.inputDecoration,
     this.hint,
     this.icon,
     this.obscureText = false,
@@ -15,8 +21,14 @@ class CustomTextField extends StatefulWidget {
     this.autofillHints,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String label;
+  final String? initialValue;
+  final ValueChanged<String>? onChanged;
+  final bool readOnly;
+  final int maxLines;
+  final TextStyle? textStyle;
+  final InputDecoration? inputDecoration;
   final String? hint;
   final IconData? icon;
   final bool obscureText;
@@ -37,6 +49,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      initialValue: widget.controller == null ? widget.initialValue : null,
+      onChanged: widget.onChanged,
+      readOnly: widget.readOnly,
+      maxLines: widget.maxLines,
+      style: widget.textStyle,
       obscureText: _obscure,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
@@ -44,7 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       autofillHints: widget.autofillHints,
       onFieldSubmitted:
           widget.onSubmitted == null ? null : (_) => widget.onSubmitted!(),
-      decoration: InputDecoration(
+      decoration: widget.inputDecoration ?? InputDecoration(
         labelText: widget.label,
         hintText: widget.hint,
         prefixIcon: widget.icon == null ? null : Icon(widget.icon),
