@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/app_assets.dart';
@@ -57,6 +60,49 @@ class _VocabularyViewState extends State<VocabularyView> {
     ),
   ];
 
+  static const String _storageKey = 'saved_vocabulary_words_v1';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadWords();
+  }
+
+  Future<void> _loadWords() async {
+    final preferences = await SharedPreferences.getInstance();
+    final storedWords = preferences.getString(_storageKey);
+
+    if (!mounted) return;
+    if (storedWords == null) {
+      await _saveWords();
+      return;
+    }
+
+    try {
+      final decoded = jsonDecode(storedWords) as List<dynamic>;
+      setState(() {
+        _words
+          ..clear()
+          ..addAll(decoded.map(
+            (item) => _VocabularyWord.fromJson(
+              Map<String, dynamic>.from(item as Map),
+            ),
+          ));
+      });
+    } catch (_) {
+      // Keep the existing starter words if stored data is invalid.
+      await _saveWords();
+    }
+  }
+
+  Future<void> _saveWords() async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setString(
+      _storageKey,
+      jsonEncode(_words.map((word) => word.toJson()).toList()),
+    );
+  }
+
   List<_VocabularyWord> get _visibleWords {
     final query = _searchController.text.trim().toLowerCase();
     return _words.where((word) {
@@ -104,6 +150,7 @@ class _VocabularyViewState extends State<VocabularyView> {
       _selectedFilter = 0;
       _searchController.clear();
     });
+    await _saveWords();
   }
 
 
@@ -153,6 +200,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                 _selectedFilter = 0;
                 _searchController.clear();
               });
+              _saveWords();
               Navigator.pop(dialogContext);
             },
             child: const Text('Add'),
@@ -295,7 +343,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                         ),
                         Container(height: 16),
                         ..._visibleWords.map(
-                          (word) => VocabularyWordCard(word: word.word, phonetic: word.phonetic, meaning: word.meaning, example: word.example, isFavorite: word.favorite, onTap: () => _openWordDetail(word), onFavoriteTap: () => setState(() => word.favorite = !word.favorite)),
+                          (word) => VocabularyWordCard(word: word.word, phonetic: word.phonetic, meaning: word.meaning, example: word.example, isFavorite: word.favorite, onTap: () => _openWordDetail(word), onFavoriteTap: () { setState(() => word.favorite = !word.favorite); _saveWords(); }),
                         ),
                         if (_visibleWords.isEmpty)
                           const Padding(
@@ -397,11 +445,13 @@ class _VocabularyViewState extends State<VocabularyView> {
               word.example = updated.example;
               word.favorite = updated.isFavorite;
             });
+            _saveWords();
           },
           onWordDeleted: () {
             setState(() {
               _words.remove(word);
             });
+            _saveWords();
           },
         ),
       ),
@@ -425,4 +475,22 @@ class _VocabularyWord {
   String meaning;
   String example;
   bool favorite;
+
+  Map<String, dynamic> toJson() => {
+        'word': word,
+        'phonetic': phonetic,
+        'meaning': meaning,
+        'example': example,
+        'favorite': favorite,
+      };
+
+  factory _VocabularyWord.fromJson(Map<String, dynamic> json) {
+    return _VocabularyWord(
+      word: json['word'] as String? ?? '',
+      phonetic: json['phonetic'] as String? ?? '',
+      meaning: json['meaning'] as String? ?? '',
+      example: json['example'] as String? ?? '',
+      favorite: json['favorite'] as bool? ?? false,
+    );
+  }
 }

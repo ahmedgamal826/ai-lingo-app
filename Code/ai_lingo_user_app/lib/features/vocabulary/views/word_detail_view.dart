@@ -50,6 +50,20 @@ class _WordDetailViewState extends State<WordDetailView> {
   late String _meaning = widget.meaning;
   late String _example = widget.example;
 
+  void _toggleFavorite() {
+    setState(() => _isFavorite = !_isFavorite);
+    widget.onWordUpdated?.call(
+      EditedVocabularyWord(
+        word: _word,
+        phonetic: _phonetic,
+        partOfSpeech: _partOfSpeech,
+        meaning: _meaning,
+        example: _example,
+        isFavorite: _isFavorite,
+      ),
+    );
+  }
+
   Future<void> _editWord() async {
     final updated = await Navigator.push<EditedVocabularyWord>(
       context,
@@ -127,7 +141,7 @@ class _WordDetailViewState extends State<WordDetailView> {
             icon: _isFavorite ? Icons.star : Icons.star_border,
             color: AppColors.primary,
             size: 23,
-            onPressed: () => setState(() => _isFavorite = !_isFavorite),
+            onPressed: _toggleFavorite,
           ),
           const SizedBox(width: 12),
         ],
