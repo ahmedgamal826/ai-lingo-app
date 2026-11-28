@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/app_assets.dart';
@@ -28,6 +29,7 @@ class VocabularyView extends StatefulWidget {
 
 class _VocabularyViewState extends State<VocabularyView> {
   final TextEditingController _searchController = TextEditingController();
+  final FlutterTts _flutterTts = FlutterTts();
   int _selectedFilter = 0;
   final List<_VocabularyWord> _words = [
     _VocabularyWord(
@@ -65,7 +67,19 @@ class _VocabularyViewState extends State<VocabularyView> {
   @override
   void initState() {
     super.initState();
+    _configureSpeech();
     _loadWords();
+  }
+
+  Future<void> _configureSpeech() async {
+    await _flutterTts.setLanguage('en-US');
+    await _flutterTts.setSpeechRate(0.45);
+    await _flutterTts.setPitch(1.0);
+  }
+
+  Future<void> _speakWord(String word) async {
+    await _flutterTts.stop();
+    await _flutterTts.speak(word);
   }
 
   Future<void> _loadWords() async {
@@ -114,12 +128,14 @@ class _VocabularyViewState extends State<VocabularyView> {
     }).toList();
   }
 
-  int get _favoriteCount =>
-      16 + _words.where((word) => word.favorite).length - 2;
+  int get _allWordsCount => _words.length;
+
+  int get _favoriteCount => _words.where((word) => word.favorite).length;
 
   @override
   void dispose() {
     _searchController.dispose();
+    _flutterTts.stop();
     super.dispose();
   }
 
@@ -312,7 +328,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                           children: [
                             VocabularySearchField(controller: _searchController, onChanged: (_) => setState(() {})),
                             const SizedBox(height: 11),
-                            VocabularyFilterTabs(selectedFilter: _selectedFilter, favoriteCount: _favoriteCount, onChanged: (index) => setState(() => _selectedFilter = index)),
+                            VocabularyFilterTabs(selectedFilter: _selectedFilter, allWordsCount: _allWordsCount, favoriteCount: _favoriteCount, onChanged: (index) => setState(() => _selectedFilter = index)),
                             const SizedBox(height: 11),
                             Row(
                               children: [
@@ -343,7 +359,7 @@ class _VocabularyViewState extends State<VocabularyView> {
                         ),
                         Container(height: 16),
                         ..._visibleWords.map(
-                          (word) => VocabularyWordCard(word: word.word, phonetic: word.phonetic, meaning: word.meaning, example: word.example, isFavorite: word.favorite, onTap: () => _openWordDetail(word), onFavoriteTap: () { setState(() => word.favorite = !word.favorite); _saveWords(); }),
+                          (word) => VocabularyWordCard(word: word.word, phonetic: word.phonetic, meaning: word.meaning, example: word.example, isFavorite: word.favorite, onTap: () => _openWordDetail(word), onFavoriteTap: () { setState(() => word.favorite = !word.favorite); _saveWords(); }, onSpeakerTap: () => _speakWord(word.word)),
                         ),
                         if (_visibleWords.isEmpty)
                           const Padding(

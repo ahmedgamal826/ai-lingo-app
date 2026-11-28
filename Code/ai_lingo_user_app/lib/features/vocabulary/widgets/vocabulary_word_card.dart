@@ -16,6 +16,7 @@ class VocabularyWordCard extends StatelessWidget {
     required this.isFavorite,
     required this.onTap,
     required this.onFavoriteTap,
+    required this.onSpeakerTap,
   });
 
   final String word;
@@ -25,6 +26,7 @@ class VocabularyWordCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback onTap;
   final VoidCallback onFavoriteTap;
+  final VoidCallback onSpeakerTap;
 
   Widget _iconButton(String assetName, Color color, VoidCallback onPressed) {
     return GestureDetector(
@@ -77,7 +79,7 @@ class VocabularyWordCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  _iconButton('Speaker.svg', AppColors.primary, () {}),
+                  _iconButton('Speaker.svg', AppColors.primary, onSpeakerTap),
                   const SizedBox(width: 3),
                   _iconButton(
                     'Star.svg',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets_core/custom_button.dart';
 import '../widgets_core/custom_card.dart';
@@ -43,6 +44,31 @@ class WordDetailView extends StatefulWidget {
 }
 
 class _WordDetailViewState extends State<WordDetailView> {
+  final FlutterTts _flutterTts = FlutterTts();
+
+  @override
+  void initState() {
+    super.initState();
+    _configureSpeech();
+  }
+
+  Future<void> _configureSpeech() async {
+    await _flutterTts.setLanguage('en-US');
+    await _flutterTts.setSpeechRate(0.45);
+    await _flutterTts.setPitch(1.0);
+  }
+
+  Future<void> _speakWord() async {
+    await _flutterTts.stop();
+    await _flutterTts.speak(_word);
+  }
+
+  @override
+  void dispose() {
+    _flutterTts.stop();
+    super.dispose();
+  }
+
   late bool _isFavorite = widget.isFavorite;
   late String _word = widget.word;
   late String _phonetic = widget.phonetic;
@@ -179,7 +205,7 @@ class _WordDetailViewState extends State<WordDetailView> {
                           offset: const Offset(0, -4),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: () {},
+                            onTap: _speakWord,
                             child: SizedBox(
                               width: 24,
                               height: 24,

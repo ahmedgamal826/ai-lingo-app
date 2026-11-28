@@ -8,11 +8,13 @@ class VocabularyFilterTabs extends StatelessWidget {
     super.key,
     required this.selectedFilter,
     required this.favoriteCount,
+    required this.allWordsCount,
     required this.onChanged,
   });
 
   final int selectedFilter;
   final int favoriteCount;
+  final int allWordsCount;
   final ValueChanged<int> onChanged;
 
   @override
@@ -26,7 +28,7 @@ class VocabularyFilterTabs extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(child: _tab('All words · 128', 0)),
+          Expanded(child: _tab('All words · $allWordsCount', 0)),
           Expanded(child: _tab('Favorites · $favoriteCount', 1)),
         ],
       ),
